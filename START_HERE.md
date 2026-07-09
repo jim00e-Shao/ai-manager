@@ -44,22 +44,28 @@ The repository is the knowledge base. Documents define product behavior,
 architecture contracts, resource models, provider capabilities, decision
 governance, and roadmap order before implementation begins.
 
-## Current Prototype Direction
+## Current Prototype: Resource Briefing CLI
 
-The next implementation direction is the
-[Resource Briefing CLI prototype](docs/prototypes/RESOURCE_BRIEFING_CLI.md).
+PR #11 implements the first executable prototype for the
+[Resource Briefing CLI](docs/prototypes/RESOURCE_BRIEFING_CLI.md).
 
-This prototype is planned to validate the first AI Executive Office closed loop:
+This prototype validates the first AI Executive Office closed loop:
 
 ```text
 Observe → Think → Advise → Remind
 ```
 
-It should read a manual AI resource snapshot, generate a daily resource
-briefing, recommend AI usage for a task, and show reset, cost, quota, and context
-continuity reminders. It is intentionally CLI-first and must not introduce UI,
-frameworks, provider automation, scraping, or package tooling before the plan is
-reviewed.
+**Requirements**: Node.js ≥ 18. No install needed — zero third-party dependencies.
+
+```sh
+node bin/ai-manager.js status
+node bin/ai-manager.js brief
+node bin/ai-manager.js recommend "我要修 React bug"
+node bin/ai-manager.js reminders
+```
+
+Edit `data/resources.example.json` to reflect your current AI resource state.
+Set `AI_MANAGER_SNAPSHOT` to point to a different file.
 
 ## 5-Minute Reading Path
 
@@ -155,8 +161,8 @@ repository documents.
 ## What Not to Do Right Now
 
 - Do not directly start writing UI.
-- Do not add `package.json`.
-- Do not add React, Node, Vite, or any framework.
+- Do not add React, Vite, or any frontend framework.
+- Do not add third-party npm packages to the CLI.
 - Do not skip documentation.
 - Do not treat Router as the Decision Engine.
 - Do not treat Quota Manager as the Resource Manager.

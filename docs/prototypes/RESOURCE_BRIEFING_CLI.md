@@ -458,3 +458,68 @@ The prototype plan is ready for implementation when:
 - non-goals prevent Dashboard, provider automation, and framework creep;
 - manual testing expectations are documented;
 - implementation can begin without redefining product intent.
+
+## Implementation (PR #11)
+
+PR #11 implements the prototype as specified in this document.
+
+### Files Added
+
+| File | Purpose |
+| --- | --- |
+| `package.json` | Minimal Node.js manifest. No third-party dependencies. |
+| `bin/ai-manager.js` | CLI entry point implementing all four commands. |
+| `data/resources.example.json` | Example snapshot with ChatGPT, Claude, Codex, Gemini, Antigravity. |
+
+### Usage
+
+**Requirements**: Node.js ≥ 18. No `npm install` needed.
+
+```sh
+# Show resource status
+node bin/ai-manager.js status
+
+# Daily briefing
+node bin/ai-manager.js brief
+
+# Recommend for a task
+node bin/ai-manager.js recommend "我要修 React bug"
+node bin/ai-manager.js recommend "review architecture design"
+node bin/ai-manager.js recommend "write documentation"
+node bin/ai-manager.js recommend "research AI providers"
+
+# Show reminders
+node bin/ai-manager.js reminders
+```
+
+Set `AI_MANAGER_SNAPSHOT` to use a custom snapshot file:
+
+```sh
+AI_MANAGER_SNAPSHOT=./my-resources.json node bin/ai-manager.js brief
+```
+
+### Implementation Decisions
+
+- **No third-party packages**: all logic uses `fs`, `path`, and `process` only.
+- **Rule-based scoring**: each resource receives a numeric score based on status,
+  quota, reset timing, task category match, context owner, and cost. No LLM API
+  calls.
+- **Task classification**: keyword patterns detect coding, architecture,
+  documentation, research, and general task types (Chinese and English).
+- **Status icons**: `✓` available, `⚠` warning/limited, `✗` exhausted/disabled,
+  `⏳` cooling_down, `?` unknown.
+- **`AI_MANAGER_SNAPSHOT` env var**: allows pointing to a different snapshot
+  without changing source code.
+
+### Validation Results
+
+All four commands executed successfully against `data/resources.example.json`:
+
+- `status` — displayed all 5 resources with correct fields and icons.
+- `brief` — generated daily briefing with Available, Watch, Not Available,
+  Advice, and Reminders sections.
+- `recommend "我要修 React bug"` — classified as `coding`, recommended
+  Antigravity (context owner, quota 90) first, correctly disqualified Codex
+  (cooling_down).
+- `reminders` — surfaced Claude low quota, Codex cooling_down, and both
+  context-owner continuity notes.

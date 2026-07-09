@@ -132,6 +132,39 @@ and decision documents.
 Start with [START_HERE.md](START_HERE.md) and
 [PROJECT_MAP.md](PROJECT_MAP.md) to navigate the repository.
 
+## Resource Briefing CLI Prototype
+
+The first executable prototype validates the AI Executive Office closed loop:
+
+```text
+Observe → Think → Advise → Remind
+```
+
+**Requirements**: Node.js ≥ 18. No `npm install` needed — zero third-party
+dependencies.
+
+```sh
+# Show current AI resource status
+node bin/ai-manager.js status
+
+# Daily resource briefing
+node bin/ai-manager.js brief
+
+# Recommend AI for a specific task
+node bin/ai-manager.js recommend "我要修 React bug"
+node bin/ai-manager.js recommend "review architecture design"
+
+# Show active reminders
+node bin/ai-manager.js reminders
+```
+
+The snapshot file is `data/resources.example.json`. Copy and edit it to reflect
+your current AI resource state. Set `AI_MANAGER_SNAPSHOT` to point to a
+different file.
+
+See [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md) for
+the full prototype specification.
+
 ## Development Philosophy
 
 > **Documentation is the Product Specification.**
