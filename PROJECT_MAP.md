@@ -10,11 +10,13 @@ repository.**
 ## Repository Navigation
 
 ```text
-PROJECT_MAP (start here)
-        ↓
 README
         ↓
+PROJECT_MAP
+        ↓
 PRODUCT
+        ↓
+PRINCIPLES
         ↓
 VISION
         ↓
@@ -29,28 +31,34 @@ ADRs
 CONTRIBUTING
 ```
 
-This path moves from orientation, through product intent and architecture, to
-delivery sequence, supporting evidence, accepted decisions, and contribution
-rules. A task may require only part of the path after initial orientation, but
-the agent must identify and read every authoritative document affected by its
-work.
+README provides initial orientation, but PROJECT_MAP is the required navigation
+step before deeper repository work. The path then moves through product
+definition, decision principles, long-term direction, architecture, delivery
+sequence, supporting evidence, and accepted decisions. A task may require only
+part of the path after initial orientation, but the agent must identify and read
+every authoritative document affected by its work.
 
 ## Recommended Reading Order
 
 1. [README.md](README.md) — understand the project at a glance.
-2. [PRODUCT.md](docs/product/PRODUCT.md) — understand users, problems, and scope.
-3. [VISION.md](docs/product/VISION.md) — understand the intended future.
-4. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
+2. [PROJECT_MAP.md](PROJECT_MAP.md) — identify authoritative context and the
+   required navigation path.
+3. [PRODUCT.md](docs/product/PRODUCT.md) — understand users, problems, MVP, and
+   boundaries.
+4. [PRINCIPLES.md](docs/product/PRINCIPLES.md) — understand the rules used to
+   evaluate product tradeoffs.
+5. [VISION.md](docs/product/VISION.md) — understand the intended future.
+6. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
    system boundary and major flows.
-5. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
+7. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
    responsibilities.
-6. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand delivery phases.
-7. Research documents — inspect assumptions and open questions for each core
+8. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages.
+9. Research documents — inspect assumptions and open questions for each core
    module.
-8. Decision records — understand accepted, superseded, or rejected decisions.
-9. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
+10. Decision records — understand accepted, superseded, or rejected decisions.
+11. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
    changing the repository.
-10. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
+12. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
 
 ## Document Directory
 
@@ -68,6 +76,7 @@ work.
 | Document | Purpose |
 | --- | --- |
 | [PRODUCT.md](docs/product/PRODUCT.md) | Defines target users, problems, outcomes, scope, and success measures. |
+| [PRINCIPLES.md](docs/product/PRINCIPLES.md) | Defines durable principles for product behavior and tradeoffs. |
 | [VISION.md](docs/product/VISION.md) | Describes the long-term direction and guiding principles. |
 
 ### Architecture
@@ -99,12 +108,14 @@ work.
 
 ## Document Relationships
 
-The README provides orientation. The product definition establishes the problem,
-users, scope, and outcomes. The vision describes the future that product work
-serves. Architecture defines system boundaries and component responsibilities.
-The roadmap sequences accepted work. Research supplies evidence and alternatives.
-ADRs record accepted decisions. Contributing rules govern how changes move from
-specification to implementation. The changelog records what actually changed.
+The README provides orientation, and PROJECT_MAP locates the authoritative next
+document. The product definition establishes the problem, users, MVP, and
+boundaries. Product principles govern tradeoffs. The vision describes the future
+that product work serves. Architecture defines system boundaries and component
+responsibilities. The roadmap sequences accepted work. Research supplies
+evidence and alternatives. ADRs record accepted decisions. Contributing rules
+govern how changes move from specification to implementation. The changelog
+records what actually changed.
 
 When documents conflict, the most recently accepted ADR governs the decision,
 and affected product, architecture, research, or roadmap documents must be
