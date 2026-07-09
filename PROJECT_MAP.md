@@ -45,6 +45,8 @@ CONFLICT_RESOLUTION
   ↓
 ROADMAP
   ↓
+PROTOTYPES
+  ↓
 PROVIDERS
   ↓
 RESOURCE_MANAGER
@@ -61,9 +63,9 @@ CONTRIBUTING
 ```
 
 This path moves from entry orientation to document authority, product identity,
-strategy, governance, execution sequence, external capability facts, resource
-details, accepted decisions, and contribution rules. Every affected
-authoritative document must be identified before work begins.
+strategy, governance, execution sequence, prototype validation, external
+capability facts, resource details, accepted decisions, and contribution rules.
+Every affected authoritative document must be identified before work begins.
 
 ## Required Reading Order
 
@@ -96,51 +98,55 @@ authoritative document must be identified before work begins.
 16. [CONFLICT_RESOLUTION.md](docs/architecture/CONFLICT_RESOLUTION.md) —
     understand how Decision Engine reconciles advisor conflicts.
 17. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N9 capability order.
-18. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand Provider Registry
+18. [PROTOTYPE_ROADMAP.md](docs/prototypes/PROTOTYPE_ROADMAP.md) — understand
+    prototype validation stages separate from production roadmap stages.
+19. [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md) —
+    understand the next CLI prototype plan before implementation.
+20. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand Provider Registry
     kinds and authority.
-19. [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) —
+21. [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) —
     understand adapters, discovery, health, and versioning.
-20. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand model and
+22. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand model and
     capability hierarchy.
-21. [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) — inspect the
+23. [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) — inspect the
     sourced provider baseline.
-22. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
+24. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
     understand initial task-fit guidance.
-23. [RESOURCE_MANAGER.md](docs/architecture/RESOURCE_MANAGER.md) — understand
+25. [RESOURCE_MANAGER.md](docs/architecture/RESOURCE_MANAGER.md) — understand
     the primary Resource Layer authority and relationships.
-24. [RESOURCE_MANAGER_MVP.md](docs/product/RESOURCE_MANAGER_MVP.md) — understand
+26. [RESOURCE_MANAGER_MVP.md](docs/product/RESOURCE_MANAGER_MVP.md) — understand
     the manual read-only resource boundary.
-25. [RESOURCE_DATA_MODEL.md](docs/architecture/RESOURCE_DATA_MODEL.md) —
+27. [RESOURCE_DATA_MODEL.md](docs/architecture/RESOURCE_DATA_MODEL.md) —
     understand conceptual resource identities, observations, snapshots, and
     events.
-26. [RESOURCE_STATE_MODEL.md](docs/architecture/RESOURCE_STATE_MODEL.md) —
+28. [RESOURCE_STATE_MODEL.md](docs/architecture/RESOURCE_STATE_MODEL.md) —
     understand normalized resource states and transitions.
-27. [CONTEXT_CONTINUITY.md](docs/architecture/CONTEXT_CONTINUITY.md) — understand
+29. [CONTEXT_CONTINUITY.md](docs/architecture/CONTEXT_CONTINUITY.md) — understand
     context ownership, preservation, portability, and rebuild decisions.
-28. [COST_AND_BUDGET.md](docs/architecture/COST_AND_BUDGET.md) — understand
+30. [COST_AND_BUDGET.md](docs/architecture/COST_AND_BUDGET.md) — understand
     direct cost, opportunity cost, budget policy, and routing constraints.
-29. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
+31. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
     legacy manual quota boundary now contained by Resource Manager MVP.
-30. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
+32. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
     types, constraints, and research.
-31. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
+33. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
     the quota sub-capability, fallback, and observability.
-32. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
+34. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
     conceptual quota entities.
-33. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
+35. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
     understand quota-state transitions.
-34. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
-35. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
+36. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
+37. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
     understand component ownership and failure contracts.
-36. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
+38. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
     manager scope from external systems.
-37. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
+39. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
     movement.
-38. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
-39. Research documents — inspect open questions for remaining modules.
-40. Decision records — understand accepted, superseded, or rejected decisions.
-41. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
-42. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
+40. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
+41. Research documents — inspect open questions for remaining modules.
+42. Decision records — understand accepted, superseded, or rejected decisions.
+43. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
+44. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
 
 ## Role-Based Reading Paths
 
@@ -199,6 +205,13 @@ authority for:
 | [AI_AGENT_ONBOARDING.md](docs/knowledge/AI_AGENT_ONBOARDING.md) | Defines required handoff, validation, and prohibited actions for AI agents. |
 | [READING_PATHS.md](docs/knowledge/READING_PATHS.md) | Provides role-based reading paths for common contributors and implementers. |
 | [SOURCE_OF_TRUTH.md](docs/knowledge/SOURCE_OF_TRUTH.md) | Maps topics to authoritative documents and conflict rules. |
+
+### Prototypes
+
+| Document | Purpose |
+| --- | --- |
+| [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md) | Defines the first CLI prototype plan for Observe → Think → Advise → Remind. |
+| [PROTOTYPE_ROADMAP.md](docs/prototypes/PROTOTYPE_ROADMAP.md) | Defines prototype validation stages separate from the production roadmap. |
 
 ### Product
 

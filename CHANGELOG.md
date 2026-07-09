@@ -26,6 +26,8 @@ pre-release.
   Resource Manager MVP.
 - Knowledge navigation entry point, AI-agent onboarding guide, role-based
   reading paths, and source-of-truth authority map.
+- Resource Briefing CLI prototype plan, command contract, resource snapshot
+  format, deterministic decision rules, reminder rules, and prototype roadmap.
 
 ### Changed
 
@@ -47,3 +49,5 @@ pre-release.
   continuity, cost and budget, and Decision Engine integration stages.
 - Strengthened repository navigation from an index into a knowledge-base
   navigation contract for humans and AI agents.
+- Added a prototype track that separates implementation-learning loops from
+  production roadmap stages.
