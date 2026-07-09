@@ -36,7 +36,13 @@ ROADMAP
   ↓
 PROVIDERS
   ↓
-QUOTA / RESOURCE DOCUMENTS
+RESOURCE_MANAGER
+  ↓
+RESOURCE DATA + STATE
+  ↓
+CONTEXT CONTINUITY + COST
+  ↓
+QUOTA SUB-CAPABILITY
   ↓
 ADRs
   ↓
@@ -79,28 +85,41 @@ Every affected authoritative document must be identified before work begins.
     sourced provider baseline.
 17. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
     understand initial task-fit guidance.
-18. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
-    manual read-only quota boundary.
-19. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
+18. [RESOURCE_MANAGER.md](docs/architecture/RESOURCE_MANAGER.md) — understand
+    the primary Resource Layer authority and relationships.
+19. [RESOURCE_MANAGER_MVP.md](docs/product/RESOURCE_MANAGER_MVP.md) — understand
+    the manual read-only resource boundary.
+20. [RESOURCE_DATA_MODEL.md](docs/architecture/RESOURCE_DATA_MODEL.md) —
+    understand conceptual resource identities, observations, snapshots, and
+    events.
+21. [RESOURCE_STATE_MODEL.md](docs/architecture/RESOURCE_STATE_MODEL.md) —
+    understand normalized resource states and transitions.
+22. [CONTEXT_CONTINUITY.md](docs/architecture/CONTEXT_CONTINUITY.md) — understand
+    context ownership, preservation, portability, and rebuild decisions.
+23. [COST_AND_BUDGET.md](docs/architecture/COST_AND_BUDGET.md) — understand
+    direct cost, opportunity cost, budget policy, and routing constraints.
+24. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
+    legacy manual quota boundary now contained by Resource Manager MVP.
+25. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
     types, constraints, and research.
-20. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
-    quota decisions, fallback, and observability.
-21. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
+26. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
+    the quota sub-capability, fallback, and observability.
+27. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
     conceptual quota entities.
-22. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
+28. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
     understand quota-state transitions.
-23. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
-24. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
+29. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
+30. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
     understand component ownership and failure contracts.
-25. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
+31. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
     manager scope from external systems.
-26. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
+32. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
     movement.
-27. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
-28. Research documents — inspect open questions for remaining modules.
-29. Decision records — understand accepted, superseded, or rejected decisions.
-30. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
-31. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
+33. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
+34. Research documents — inspect open questions for remaining modules.
+35. Decision records — understand accepted, superseded, or rejected decisions.
+36. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
+37. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
 
 ## Document Directory
 
@@ -122,6 +141,7 @@ Every affected authoritative document must be identified before work begins.
 | [PRINCIPLES.md](docs/product/PRINCIPLES.md) | Defines durable product principles. |
 | [VISION.md](docs/product/VISION.md) | Defines time horizons and long-term positioning. |
 | [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) | Defines the manual quota-dashboard boundary. |
+| [RESOURCE_MANAGER_MVP.md](docs/product/RESOURCE_MANAGER_MVP.md) | Defines the manual read-only Resource Dashboard boundary. |
 
 ### Strategy and Governance Architecture
 
@@ -142,7 +162,12 @@ Every affected authoritative document must be identified before work begins.
 
 | Document | Purpose |
 | --- | --- |
-| [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) | Defines Quota Manager behavior and fallback. |
+| [RESOURCE_MANAGER.md](docs/architecture/RESOURCE_MANAGER.md) | Defines the primary Resource Layer component, managed resources, and relationships. |
+| [RESOURCE_DATA_MODEL.md](docs/architecture/RESOURCE_DATA_MODEL.md) | Defines conceptual resource entities, snapshots, and events. |
+| [RESOURCE_STATE_MODEL.md](docs/architecture/RESOURCE_STATE_MODEL.md) | Defines normalized resource states and event-driven transitions. |
+| [CONTEXT_CONTINUITY.md](docs/architecture/CONTEXT_CONTINUITY.md) | Defines context continuity as a first-class resource. |
+| [COST_AND_BUDGET.md](docs/architecture/COST_AND_BUDGET.md) | Defines direct, opportunity, waiting, and rebuild cost policy. |
+| [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) | Defines the quota sub-capability behavior and fallback. |
 | [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) | Defines conceptual quota entities and relationships. |
 | [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) | Defines quota status transitions. |
 
@@ -176,9 +201,11 @@ Every affected authoritative document must be identified before work begins.
 AI Executive Office defines product identity. Product and Principles define what
 must remain true. Strategy Council supplies specialized advice. Decision
 Governance turns advice, resources, and knowledge into a proposed plan.
-Scheduler and Execution carry out approved work. Provider and quota documents
-supply external and resource truth. ADRs record accepted cross-cutting
-decisions.
+Resource Manager composes Provider Registry and Model Catalog references with
+quota, credits, rate limits, cost, health, tools, context continuity, and local
+compute. Quota Manager remains authoritative only for quota-specific
+normalization beneath Resource Manager. Scheduler and Execution carry out
+approved work. ADRs record accepted cross-cutting decisions.
 
 When documents conflict, the most recently accepted ADR governs, and affected
 documents must be updated in the same change. Implementation is never an

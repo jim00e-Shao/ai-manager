@@ -84,29 +84,169 @@ Resource Orchestration Platform.
 Provide a trustworthy operating picture of AI resources for decisions,
 scheduling, and continuous work.
 
-### Scope
+### N2.1 — Resource Manager Specification
 
-- Quota Manager states, history, reset, and cooldown.
-- Provider Registry and Model Catalog.
-- Credits, cost class, capability, adapter health, and tool availability.
-- Manual read-only resource records.
-- Source, freshness, confidence, and uncertainty.
-- Resource snapshots and reservation concepts.
+#### Goal
 
-### Non-Goals
+Define Resource Manager authority, conceptual entities, normalized states,
+relationships, and failure behavior.
 
-- Final plan selection.
-- Model quality ranking.
-- Automatic provider login, scraping, or web automation.
+#### Scope
+
+- Resource Manager contract and Resource Layer boundaries.
+- Quota as a Resource Manager sub-capability.
+- Resource data and state models.
+- Provider Registry and Model Catalog relationships.
+- Source, freshness, confidence, uncertainty, snapshots, and events.
+
+#### Non-Goals
+
+- Storage or API schema.
+- Provider automation.
+- Final plan selection or execution.
+
+#### Exit Criteria
+
+- Every managed resource has an explicit owner and meaning.
+- State transitions and required events are reviewable.
+- Quota, credits, rate limits, health, cost, continuity, and compute remain
+  distinct.
+- Decision Engine and Scheduler inputs do not expand Resource Manager authority.
+
+### N2.2 — Manual Resource Dashboard
+
+#### Goal
+
+Give a solo developer one read-only operating picture of manually maintained
+resources.
+
+#### Scope
+
+- Provider, model, and account resource display.
+- Manual resource entry and correction.
+- Quota, reset, cost estimate, availability, and context owner.
+- Source, freshness, confidence, and unknown-state presentation.
+
+#### Non-Goals
+
+- Automatic login, scraping, provider bypass, or automatic web control.
+- Dispatch, purchasing, or subscription changes.
+- Framework or implementation selection in this roadmap.
+
+#### Exit Criteria
+
+- Manual resource records remain attributable and scoped.
+- Read-only views distinguish confirmed, estimated, manual, stale, and unknown.
+- No Dashboard action directly controls a provider.
+- MVP boundaries in `RESOURCE_MANAGER_MVP.md` are satisfied.
+
+### N2.3 — Resource Snapshot History
+
+#### Goal
+
+Make resource changes and the facts used by decisions reproducible.
+
+#### Scope
+
+- Immutable snapshots and supersession.
+- Resource events and state-transition history.
+- Decision, schedule, and execution correlation.
+- Conflicting observation and correction history.
+
+#### Non-Goals
+
+- Predictive capacity planning.
+- Billing-grade accounting.
+- Indefinite storage policy.
+
+#### Exit Criteria
+
+- A decision can identify its exact resource snapshot.
+- Every state change has a source and reason.
+- Corrections preserve prior audit history.
+- Expired snapshots cannot be presented as current silently.
+
+### N2.4 — Context Continuity Tracking
+
+#### Goal
+
+Treat task, PR, conversation, and project continuity as a first-class resource.
+
+#### Scope
+
+- Context owner and continuity metadata.
+- Preservation, portability, access, freshness, and rebuild requirement.
+- PR and task handoff references.
+- Knowledge Manager / Hermes relationship.
+
+#### Non-Goals
+
+- Storing every conversation.
+- Provider-owned memory as product truth.
+- Automatic cross-boundary context transfer.
+
+#### Exit Criteria
+
+- Resource snapshots expose context owner and continuity risk.
+- Handoffs identify authoritative sources and open work.
+- Rebuild-required and inaccessible context remain explicit.
+- Decision Engine can compare continuity value without overriding hard policy.
+
+### N2.5 — Cost and Budget Tracking
+
+#### Goal
+
+Expose the complete cost implications of resource use without claiming false
+billing precision.
+
+#### Scope
+
+- API and subscription cost.
+- Credit balances, cost ceilings, and budget policy.
+- Opportunity, waiting, and context-rebuilding cost.
+- Estimates, confidence, thresholds, and observed outcome reconciliation.
+
+#### Non-Goals
+
+- Payment processing or purchasing.
 - Enterprise financial accounting.
+- Provider-specific routing mandates.
 
-### Exit Criteria
+#### Exit Criteria
 
-- Mission Control can read a provider-neutral resource inventory.
-- Every dynamic fact exposes source and freshness.
-- Unknown and stale facts cannot become eligible silently.
-- Quota, provider health, capability, cost, and reset remain distinct.
-- Resource snapshot can be attached to a later decision record.
+- Cost facts retain unit, scope, source, and pricing version.
+- Estimates are distinguishable from billing observations.
+- Hard ceilings and approval thresholds are enforceable as decision inputs.
+- Low-cost and high-cost choices can be explained using total tradeoffs.
+
+### N2.6 — Decision Engine Integration
+
+#### Goal
+
+Supply Decision Engine and Scheduler with versioned, demand-sensitive resource
+facts.
+
+#### Scope
+
+- Task resource-demand requests.
+- Eligibility, constraint, continuity, and cost results.
+- Snapshot attachment to decisions.
+- Scheduler recovery, reservation, and reevaluation conditions.
+- Outcome feedback into resource history.
+
+#### Non-Goals
+
+- Moving plan selection into Resource Manager.
+- Autonomous reservation, routing, or provider execution.
+- Treating unknown resources as eligible.
+
+#### Exit Criteria
+
+- Decision Engine receives one versioned snapshot per evaluated scope.
+- Resource constraints and unknowns appear in decision explanation.
+- Scheduler can reevaluate at explicit recovery or state-change conditions.
+- Execution outcomes update resources without rewriting historical snapshots.
+- Resource Manager never selects or dispatches the final plan.
 
 ## N3 — Strategy Council and Decision Governance
 
