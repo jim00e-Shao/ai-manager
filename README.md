@@ -1,5 +1,12 @@
 # ai-manager
 
+Start here: [START_HERE.md](START_HERE.md).
+
+ai-manager is maintained as a **Knowledge First** repository. The documentation
+is not only a project description; it is the navigable knowledge base that human
+contributors and AI agents use to understand product intent, architecture
+authority, source-of-truth documents, and safe handoff paths.
+
 ## Project Introduction
 
 ai-manager is an **AI Executive Office** and emerging **AI Operating System** for
@@ -61,7 +68,8 @@ See [VISION.md](docs/product/VISION.md) for the long-term direction.
   execution paths.
 
 Start with
-[AI_EXECUTIVE_OFFICE.md](docs/product/AI_EXECUTIVE_OFFICE.md) and then follow
+[START_HERE.md](START_HERE.md), then
+[AI_EXECUTIVE_OFFICE.md](docs/product/AI_EXECUTIVE_OFFICE.md), and then follow
 [PROJECT_MAP.md](PROJECT_MAP.md).
 
 ## Product Principles
@@ -77,6 +85,13 @@ Read the PR #2 product-definition set:
 - [Vision](docs/product/VISION.md)
 - [System Overview](docs/architecture/SYSTEM_OVERVIEW.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
+
+Knowledge-navigation documents:
+
+- [Knowledge Navigation](docs/knowledge/KNOWLEDGE_NAVIGATION.md)
+- [AI Agent Onboarding](docs/knowledge/AI_AGENT_ONBOARDING.md)
+- [Reading Paths](docs/knowledge/READING_PATHS.md)
+- [Source of Truth](docs/knowledge/SOURCE_OF_TRUTH.md)
 
 ## Core Modules
 
@@ -97,6 +112,7 @@ and decision documents.
 ├── docs/
 │   ├── product/        # Product definition, principles, and vision
 │   ├── architecture/   # System boundaries and component design
+│   ├── knowledge/      # Navigation, reading paths, and agent onboarding
 │   ├── providers/      # Provider registry and capability facts
 │   ├── roadmap/        # Delivery phases and priorities
 │   ├── research/       # Module research and open questions
@@ -107,7 +123,8 @@ and decision documents.
 └── README.md           # Project introduction
 ```
 
-Start with [PROJECT_MAP.md](PROJECT_MAP.md) to navigate the repository.
+Start with [START_HERE.md](START_HERE.md) and
+[PROJECT_MAP.md](PROJECT_MAP.md) to navigate the repository.
 
 ## Development Philosophy
 

@@ -7,7 +7,8 @@ requests. The same rules apply to every contributor.
 
 Before implementation:
 
-1. Read [PROJECT_MAP.md](PROJECT_MAP.md) and the documents relevant to the task.
+1. Read [START_HERE.md](START_HERE.md), [PROJECT_MAP.md](PROJECT_MAP.md), and
+   the documents relevant to the task.
 2. Update the product, architecture, research, roadmap, or decision document that
    defines the intended change.
 3. Request review of the documented intent and constraints.
@@ -31,9 +32,12 @@ documentation first.
 
 AI agents must:
 
-- read [PROJECT_MAP.md](PROJECT_MAP.md) before planning or changing the
-  repository;
+- read [START_HERE.md](START_HERE.md), [PROJECT_MAP.md](PROJECT_MAP.md), and
+  [AI_AGENT_ONBOARDING.md](docs/knowledge/AI_AGENT_ONBOARDING.md) before
+  planning or changing the repository;
 - identify the authoritative documents before changing the repository;
+- use [SOURCE_OF_TRUTH.md](docs/knowledge/SOURCE_OF_TRUTH.md) to resolve
+  document authority and conflicts;
 - state assumptions and unresolved questions explicitly;
 - keep documentation and implementation consistent;
 - write enough context for another agent with no prior conversation history to
@@ -72,6 +76,8 @@ merge only after review and required checks pass.
 
 ## Pull Request Checklist
 
+- [ ] AI agents read START_HERE, PROJECT_MAP, and AI_AGENT_ONBOARDING before
+      making changes.
 - [ ] Authoritative documentation was updated before implementation.
 - [ ] The change is small and coherent.
 - [ ] The diff contains no unrelated files.
