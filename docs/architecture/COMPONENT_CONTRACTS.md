@@ -873,6 +873,87 @@ decisions, schedule, and execution while preserving final authority.
 - notifications;
 - localization and accessibility expansion.
 
+## 13. AI Continuity Layer
+
+### Purpose
+
+Maintain active agent working state, govern AI-to-AI task handoffs, anticipate
+agent boundaries proactively, and define safe resume paths for incoming agents.
+
+### Responsibilities
+
+- maintain Working Memory for the active agent session and task;
+- package Working Memory into validated Handoff Packages on trigger;
+- monitor resource signals and initiate Predictive Handoff before limits fail;
+- define and enforce the Resume Workflow for incoming agents;
+- expose continuity state to Mission Control and Decision Engine;
+- promote task-completion knowledge to Knowledge Manager / Hermes;
+- never transfer authority — only working state and sourced context.
+
+### Input
+
+- Working Memory updates from the active agent (step completion, evidence,
+  open questions, hypotheses, rejected alternatives);
+- resource signals from Resource Manager (quota thresholds, context pressure,
+  session TTL);
+- Handoff Package from outgoing agent;
+- human confirmation events for reassignment;
+- authoritative source versions from Knowledge Manager / Hermes.
+
+### Output
+
+- Working Memory record (active and preserved);
+- validated Handoff Package;
+- handoff event notification to AI Executive Office and Scheduler;
+- Predictive Handoff signal and recommendation (hand off vs. wait);
+- Resume Workflow steps and confirmation requests;
+- completion record and knowledge promotion candidates.
+
+### Internal State
+
+- active Working Memory per agent session and task;
+- Handoff Package store (pending, stored, read);
+- Predictive Handoff signal state and threshold configuration;
+- resume confirmation status;
+- handoff event and completion records.
+
+### External Dependencies
+
+- Resource Manager (quota, context, and session signals);
+- Knowledge Manager / Hermes (authoritative source retrieval, knowledge
+  promotion, handoff package storage);
+- Decision Engine (incoming agent selection, confirmation boundary);
+- Scheduler (task pause, wake, and reassignment coordination);
+- AI Executive Office (human-control confirmation routing).
+
+### Failure Modes
+
+- Working Memory not preserved before session end;
+- Handoff Package incomplete or missing required fields;
+- incoming agent skips orientation or reads package without source verification;
+- Predictive Handoff triggered too late (reactive, not proactive);
+- open questions treated as resolved by assumption;
+- rejected alternatives re-attempted without new evidence;
+- authority transferred in addition to working state.
+
+### Observability
+
+- Working Memory creation, update, and status transitions;
+- handoff trigger, package assembly completeness, and validation result;
+- Predictive Handoff signal values and threshold crossings;
+- incoming agent confirmation and first action;
+- deviations from Handoff Package intent;
+- completion record and knowledge promotion decisions;
+- all handoff events correlated with task and resource snapshots.
+
+### Future Extensions
+
+- automated Working Memory compression for long-running tasks;
+- cross-agent Predictive Handoff chains (A → B → C under one task);
+- handoff quality scoring and improvement;
+- team-level handoffs (AI to human or human to AI);
+- portable context packages for cross-project continuity.
+
 ## Contract Change Process
 
 Changes to responsibility, authority, input, output, state, dependency, failure,

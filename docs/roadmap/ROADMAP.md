@@ -16,6 +16,40 @@ order and exit evidence, not dates or implementation technology.
   assets under Resource Manager.
 - Exit criteria require evidence; code completion alone is insufficient.
 
+## Prototype Track
+
+The prototype track validates learning loops before production capability
+stages. It does not replace the N0–N9 roadmap and does not authorize production
+features, provider automation, framework selection, or UI implementation.
+
+PR #9 defines the first implementation plan for
+[Resource Briefing CLI](../prototypes/RESOURCE_BRIEFING_CLI.md). This is an
+implementation-before-code planning document. It defines the smallest prototype
+that can validate:
+
+```text
+Observe → Think → Advise → Remind
+```
+
+The prototype should read a manual AI resource snapshot, generate a daily
+briefing, recommend AI usage for a task using deterministic rules, and show
+reset, cost, quota, and context reminders.
+
+Prototype stages are tracked in
+[PROTOTYPE_ROADMAP.md](../prototypes/PROTOTYPE_ROADMAP.md):
+
+- P0 Documentation plan
+- P1 Resource Briefing CLI
+- P2 Local JSON persistence
+- P3 Rule-based recommendation
+- P4 Reminder queue
+- P5 Optional interactive prompt
+- P6 Mission Control UI later
+
+Prototype outcomes may inform N2 Resource Manager, N3 Decision Governance, and
+N4 Mission Control Dashboard, but prototype behavior becomes production
+authority only when promoted into the relevant source-of-truth documents.
+
 ## N0 — Foundation
 
 ### Goal
@@ -285,7 +319,9 @@ human-governed plans.
 ### Goal
 
 Give a solo developer one clear view of goals, advisors, resources, knowledge,
-decisions, schedules, and execution state.
+decisions, schedules, and execution state. In this stage the AI Continuity Layer
+— Working Memory, Handoff Protocol, Predictive Handoff, and Resume Workflow —
+becomes visible and operable through Mission Control.
 
 ### Scope
 
@@ -296,6 +332,12 @@ decisions, schedules, and execution state.
 - Wait, reassign, split, preserve, approve, reject, override, pause, retry, and
   cancel controls.
 - Freshness and uncertainty.
+- **AI Continuity Layer integration:**
+  - Active Working Memory state for the current agent task.
+  - Handoff event history and incoming/outgoing agent transitions.
+  - Predictive Handoff warnings before quota or context limits are hit.
+  - Human-confirmation controls for agent reassignment.
+  - Resume state confirmation before irreversible actions.
 
 ### Non-Goals
 
@@ -311,6 +353,9 @@ decisions, schedules, and execution state.
 - Stale and incomplete state is visible.
 - Dashboard commands pass through AI Executive Office.
 - Human final authority is usable, not merely documented.
+- Active agent Working Memory is inspectable.
+- Handoff events, package completeness, and resume confirmations are traceable.
+- Predictive Handoff signals are surfaced before limits cause failures.
 
 ## N5 — Knowledge Manager / Hermes
 

@@ -26,10 +26,18 @@ pre-release.
   Resource Manager MVP.
 - Knowledge navigation entry point, AI-agent onboarding guide, role-based
   reading paths, and source-of-truth authority map.
+- Resource Briefing CLI prototype plan, command contract, resource snapshot
+  format, deterministic decision rules, reminder rules, and prototype roadmap.
+- AI Continuity Layer specification: Working Memory data model and lifecycle,
+  AI-to-AI Handoff Protocol (including Handoff Package format, observed PR #9
+  case, and repository-native fallback), Predictive Handoff (quota/context/session
+  signals, hand-off-vs-wait decision, and pre-handoff checklist), Resume Workflow
+  (orient → read → confirm → create → execute), and Continuity Architecture
+  (layer position, component interactions, and Executive Office integration).
 
 ### Changed
 
-- Expanded the README into the project’s high-level introduction.
+- Expanded the README into the project's high-level introduction.
 - Defined the product, MVP, long-term vision, and conceptual system architecture.
 - Organized the system overview into presentation, application, orchestration,
   integration, and provider layers.
@@ -47,3 +55,10 @@ pre-release.
   continuity, cost and budget, and Decision Engine integration stages.
 - Strengthened repository navigation from an index into a knowledge-base
   navigation contract for humans and AI agents.
+- Added a prototype track that separates implementation-learning loops from
+  production roadmap stages.
+- Extended N4 Mission Control Dashboard scope to include AI Continuity Layer
+  visibility: Working Memory state, Handoff event history, Predictive Handoff
+  warnings, agent reassignment confirmation controls, and Resume state
+  confirmation.
+- Added AI Continuity Layer as Component 13 in COMPONENT_CONTRACTS.md.

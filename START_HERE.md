@@ -44,6 +44,23 @@ The repository is the knowledge base. Documents define product behavior,
 architecture contracts, resource models, provider capabilities, decision
 governance, and roadmap order before implementation begins.
 
+## Current Prototype Direction
+
+The next implementation direction is the
+[Resource Briefing CLI prototype](docs/prototypes/RESOURCE_BRIEFING_CLI.md).
+
+This prototype is planned to validate the first AI Executive Office closed loop:
+
+```text
+Observe → Think → Advise → Remind
+```
+
+It should read a manual AI resource snapshot, generate a daily resource
+briefing, recommend AI usage for a task, and show reset, cost, quota, and context
+continuity reminders. It is intentionally CLI-first and must not introduce UI,
+frameworks, provider automation, scraping, or package tooling before the plan is
+reviewed.
+
 ## 5-Minute Reading Path
 
 1. [README.md](README.md) — project introduction and philosophy.
@@ -55,6 +72,8 @@ governance, and roadmap order before implementation begins.
 6. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — architecture
    layers and authority flow.
 7. [ROADMAP.md](docs/roadmap/ROADMAP.md) — capability sequence.
+8. [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md) — next
+   prototype direction.
 
 ## Read by Purpose
 
@@ -116,6 +135,7 @@ Start with:
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [SOURCE_OF_TRUTH.md](docs/knowledge/SOURCE_OF_TRUTH.md)
 - [ROADMAP.md](docs/roadmap/ROADMAP.md)
+- [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md)
 
 Then update the authoritative documentation before implementation.
 
