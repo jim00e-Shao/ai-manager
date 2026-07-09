@@ -16,13 +16,28 @@ Before implementation:
 Documentation is the single source of truth. Code must implement accepted
 documentation; it must not silently redefine product or architecture decisions.
 
+## Non-Negotiable Rules
+
+- **Never implement features that are not documented.**
+- **Always update documentation before implementation.**
+- **Small pull requests only.**
+- **Review before merge.**
+
+These are merge gates, not suggestions. If the authoritative specification is
+missing, incomplete, or inconsistent, stop implementation and resolve the
+documentation first.
+
 ## AI Agent Collaboration
 
 AI agents must:
 
+- read [PROJECT_MAP.md](PROJECT_MAP.md) before planning or changing the
+  repository;
 - identify the authoritative documents before changing the repository;
 - state assumptions and unresolved questions explicitly;
 - keep documentation and implementation consistent;
+- write enough context for another agent with no prior conversation history to
+  continue safely;
 - avoid unrelated refactoring or generated files;
 - report validation performed and any validation not performed;
 - leave decisions requiring human judgment visible for review.

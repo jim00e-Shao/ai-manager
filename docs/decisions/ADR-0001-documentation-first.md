@@ -1,4 +1,4 @@
-# ADR-0001: Documentation First
+# ADR-0001: Documentation Is the Single Source of Truth
 
 - **Status:** Accepted
 - **Date:** 2026-07-09
@@ -15,12 +15,21 @@ decisions before implementation begins.
 
 ## Decision
 
-Documentation is the single source of truth for ai-manager.
+Documentation is the single source of truth for ai-manager. Source code is an
+implementation of the specification; it is not a substitute for one.
 
 Every human or AI agent must update the relevant product, architecture,
 research, roadmap, or decision document before starting implementation. The
 documentation change must make the intended behavior, constraints, assumptions,
 and unresolved questions reviewable.
+
+This requirement applies to every product and technical surface, including:
+
+- system architecture and component boundaries;
+- prompts, prompt composition, and prompt versions;
+- agent roles, workflows, state transitions, and review gates;
+- model-router inputs, policies, fallbacks, and explanations;
+- quota rules and provider constraints.
 
 Implementation may begin only after the relevant documentation is reviewed and
 accepted. Code must conform to accepted documentation. When implementation
@@ -50,7 +59,8 @@ may supersede an ADR, but they must not silently rewrite its history.
 
 Pull requests must identify the authoritative documents they change or follow.
 Reviewers must reject implementation that introduces undocumented product or
-architecture decisions.
+architecture decisions. The same rejection rule applies to undocumented prompts,
+workflows, routing behavior, and quota policy.
 
 [CONTRIBUTING.md](../../CONTRIBUTING.md) defines the collaboration workflow, and
 [PROJECT_MAP.md](../../PROJECT_MAP.md) identifies the authoritative documents.

@@ -1,13 +1,45 @@
 # Project Map
 
-This file is the entry point for the ai-manager repository. Use it to find the
-authoritative document for a question and to understand how the documents relate.
+This file is the navigation contract for the ai-manager repository, not merely
+an index. It tells humans and AI agents where authoritative context lives, how
+documents depend on one another, and what must be read before work begins.
+
+**Every AI agent must read this file before planning or changing the
+repository.**
+
+## Repository Navigation
+
+```text
+PROJECT_MAP (start here)
+        ↓
+README
+        ↓
+PRODUCT
+        ↓
+VISION
+        ↓
+SYSTEM OVERVIEW → COMPONENTS
+        ↓
+ROADMAP
+        ↓
+RESEARCH
+        ↓
+ADRs
+        ↓
+CONTRIBUTING
+```
+
+This path moves from orientation, through product intent and architecture, to
+delivery sequence, supporting evidence, accepted decisions, and contribution
+rules. A task may require only part of the path after initial orientation, but
+the agent must identify and read every authoritative document affected by its
+work.
 
 ## Recommended Reading Order
 
 1. [README.md](README.md) — understand the project at a glance.
-2. [VISION.md](docs/product/VISION.md) — understand the intended future.
-3. [PRODUCT.md](docs/product/PRODUCT.md) — understand users, problems, and scope.
+2. [PRODUCT.md](docs/product/PRODUCT.md) — understand users, problems, and scope.
+3. [VISION.md](docs/product/VISION.md) — understand the intended future.
 4. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
    system boundary and major flows.
 5. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
@@ -27,7 +59,7 @@ authoritative document for a question and to understand how the documents relate
 | Document | Purpose |
 | --- | --- |
 | [README.md](README.md) | Introduces the project, vision, modules, structure, philosophy, and roadmap. |
-| [PROJECT_MAP.md](PROJECT_MAP.md) | Maps all documentation and defines the reading order. |
+| [PROJECT_MAP.md](PROJECT_MAP.md) | Defines repository navigation, document authority, and required reading order. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Defines contribution rules for humans and AI agents. |
 | [CHANGELOG.md](CHANGELOG.md) | Records notable repository changes by release or phase. |
 
@@ -67,15 +99,20 @@ authoritative document for a question and to understand how the documents relate
 
 ## Document Relationships
 
-The vision sets direction. The product definition turns that direction into
-scope and outcomes. Architecture describes how the product can be realized.
-Research supplies evidence and alternatives for architecture decisions. ADRs
-record accepted decisions. The roadmap sequences the accepted work. The
-changelog records what actually changed.
+The README provides orientation. The product definition establishes the problem,
+users, scope, and outcomes. The vision describes the future that product work
+serves. Architecture defines system boundaries and component responsibilities.
+The roadmap sequences accepted work. Research supplies evidence and alternatives.
+ADRs record accepted decisions. Contributing rules govern how changes move from
+specification to implementation. The changelog records what actually changed.
 
 When documents conflict, the most recently accepted ADR governs the decision,
 and affected product, architecture, research, or roadmap documents must be
 updated in the same change.
+
+Implementation is never an authoritative substitute for missing documentation.
+If the required specification cannot be found through this map, the first task
+is to create or update that specification.
 
 ## Keeping the Map Current
 

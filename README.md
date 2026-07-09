@@ -2,18 +2,42 @@
 
 ## Project Introduction
 
-ai-manager is an AI orchestration project for managing model quotas, routing tasks,
-building prompts, and coordinating multi-agent development workflows.
+ai-manager is an **AI-native software engineering platform** for managing model
+quotas, routing tasks, building prompts, and coordinating multi-agent
+development workflows.
 
 The project is currently in its foundation phase. Documentation defines the
 product and architecture before implementation begins.
 
+### The Problem
+
+AI agents increasingly participate in software development, but the decisions
+that govern their work are fragmented across provider dashboards, prompt files,
+local conventions, and human memory. Teams lack one explicit system for
+understanding available model capacity, selecting a model, constructing the
+right context, coordinating agents, and reviewing why a decision was made.
+
+ai-manager exists to make those decisions visible, repeatable, and governed by
+versioned product and architecture specifications.
+
+### What ai-manager Is — and Is Not
+
+ai-manager is not another ChatGPT or a general-purpose chat interface. A chat
+product focuses on a conversation between a person and a model. ai-manager
+focuses on the engineering system around AI work: quota, routing, prompts,
+workflow, coordination, and traceability.
+
+Its first intended user is the AI agent that must understand a repository and
+continue work safely. Human developers and teams remain responsible for defining
+intent, reviewing decisions, and governing the system.
+
 ## Vision
 
-ai-manager aims to make AI operations understandable, controllable, and
-repeatable. It will provide one coherent system for deciding which model should
-handle a task, tracking available capacity, constructing reliable prompts, and
-coordinating agent work.
+ai-manager aims to become the specification-driven control plane for AI-native
+software engineering. It will provide one coherent system for deciding which
+model should handle a task, tracking available capacity, constructing reliable
+prompts, coordinating agent work, and preserving enough context for the next
+agent or human reviewer to continue with confidence.
 
 See [VISION.md](docs/product/VISION.md) for the long-term direction.
 
@@ -53,6 +77,10 @@ Documentation is not an explanation added after development. It is the source
 of the product specification. Product design, architecture, and decisions are
 first made explicit and aligned through documentation; implementation begins
 only after that shared understanding is established.
+
+Documents are written for both humans and AI agents. They must preserve enough
+intent, constraints, relationships, and unresolved questions for an agent with
+no prior conversation context to continue the work safely.
 
 This principle defines ai-manager's development culture. The repository is
 Documentation First:
