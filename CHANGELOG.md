@@ -15,6 +15,8 @@ pre-release.
 - Product principles and the N0–N7 capability roadmap.
 - Component contracts, system boundaries, conceptual data flows, and an
   architecture glossary.
+- Quota Manager product MVP, architecture specification, conceptual data model,
+  and availability state machine.
 
 ### Changed
 
@@ -22,3 +24,5 @@ pre-release.
 - Defined the product, MVP, long-term vision, and conceptual system architecture.
 - Organized the system overview into presentation, application, orchestration,
   integration, and provider layers.
+- Expanded Quota Manager research, component contract, and N1 roadmap into
+  implementation-ready documentation.
