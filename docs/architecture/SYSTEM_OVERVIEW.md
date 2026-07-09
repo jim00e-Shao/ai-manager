@@ -13,22 +13,123 @@ model, developer tool, or execution environment itself. It owns the policies and
 context needed to decide how AI work should proceed and preserves explanations
 that make those decisions reviewable.
 
+## Architecture Layers
+
+The conceptual architecture is organized into five responsibility layers. These
+layers describe authority and dependency direction, not required packages,
+processes, services, or deployment units.
+
+### Presentation
+
+The Presentation layer exposes manager state and human controls.
+
+Includes:
+
+- Dashboard;
+- future approved presentation clients.
+
+Responsibilities:
+
+- collect user goals, constraints, preferences, and approvals;
+- present state, explanations, uncertainty, failures, and required action;
+- provide pause, rejection, override, retry, and cancellation controls.
+
+The Presentation layer does not own orchestration policy or call Providers
+directly.
+
+### Application
+
+The Application layer provides the authoritative entry point for product use.
+
+Includes:
+
+- AI Manager.
+
+Responsibilities:
+
+- coordinate user intent and component decisions;
+- enforce product policy and human-control boundaries;
+- correlate tasks, decisions, actions, and outcomes;
+- expose coherent application state to Presentation.
+
+### Orchestration
+
+The Orchestration layer makes and executes manager-owned decisions.
+
+Includes:
+
+- Quota Manager;
+- Model Router;
+- Prompt Builder;
+- Workflow Engine;
+- Context Manager;
+- Memory Manager.
+
+Responsibilities:
+
+- evaluate capacity and routing;
+- assemble prompt and context packages;
+- govern workflow transitions and approvals;
+- preserve durable manager-owned memory;
+- return observable, explainable outcomes to AI Manager.
+
+Each component remains limited by its
+[component contract](COMPONENT_CONTRACTS.md).
+
+### Integration
+
+The Integration layer mediates external capabilities.
+
+Includes:
+
+- Plugin Manager;
+- provider, IDE, Git, tool, and MCP adapters.
+
+Responsibilities:
+
+- translate manager-owned requests at external boundaries;
+- enforce declared capabilities and permissions;
+- preserve version, provenance, health, and errors;
+- prevent external systems from bypassing manager policy.
+
+### Providers
+
+The Providers layer contains systems not owned by ai-manager.
+
+Includes:
+
+- AI model providers;
+- IDEs and developer tools;
+- Git and Git hosting services;
+- MCP servers;
+- other approved external tools and data sources.
+
+Responsibilities remain with each external system. ai-manager integrates with
+these systems but does not absorb their native product scope. See
+[SYSTEM_BOUNDARIES.md](SYSTEM_BOUNDARIES.md).
+
 ## Conceptual Architecture
 
 ```text
 User
   ↓
+Dashboard
+  ↓
 AI Manager
   ↓
-Quota Manager
-  ↓
 Model Router
-  ↓
+  ↕
+Quota Manager
+  ↓ eligibility and route decision
 Prompt Builder
   ↓
 Workflow Engine
   ↓
-AI Tools
+Plugin Manager
+  ↓
+AI Provider / IDE / Git / MCP / AI Tool
+  ↓
+Context Manager ↔ Memory Manager
 ```
 
 This sequence describes the primary planning and execution path, not a required
@@ -39,20 +140,23 @@ Manager.
 ## End-to-End Flow
 
 1. The **User** provides a goal, constraints, and any required approval boundary.
-2. **AI Manager** establishes the task context and coordinates the decision
+2. **Dashboard** validates user input and presents manager state and controls.
+3. **AI Manager** establishes the task context and coordinates the decision
    sequence.
-3. **Quota Manager** reports eligible capacity, uncertainty, and scheduling
-   constraints.
-4. **Model Router** compares eligible models against task requirements and
-   returns a selected model with an explanation.
-5. **Prompt Builder** assembles documented instructions and relevant context for
+4. **Model Router** evaluates task requirements and asks **Quota Manager** for
+   eligible capacity, uncertainty, and scheduling constraints.
+5. **Model Router** returns a selected model or no-route result with an
+   explanation.
+6. **Prompt Builder** assembles documented instructions and relevant context for
    the selected model.
-6. **Workflow Engine** governs execution steps, state transitions, human review,
+7. **Workflow Engine** governs execution steps, state transitions, human review,
    retries, and completion.
-7. **AI Tools** perform model inference or tool-specific actions within the
-   permissions and context supplied by the workflow.
-8. Results, actions, and explanations flow back through AI Manager so the User
-   can inspect the outcome and retain useful context.
+8. **Plugin Manager** mediates approved external capabilities, including AI
+   Providers, IDEs, Git, MCP servers, and other AI Tools.
+9. **Context Manager** assembles relevant information, while **Memory Manager**
+   governs durable records across sessions and models.
+10. Results, actions, and explanations flow back through AI Manager and
+    Dashboard so the User can inspect the outcome and retain useful context.
 
 ## Responsibility Boundaries
 
@@ -246,4 +350,8 @@ Those decisions require research and separate accepted ADRs.
 - [Product Definition](../product/PRODUCT.md)
 - [Product Principles](../product/PRINCIPLES.md)
 - [Components](COMPONENTS.md)
+- [Component Contracts](COMPONENT_CONTRACTS.md)
+- [System Boundaries](SYSTEM_BOUNDARIES.md)
+- [Data Flow](DATA_FLOW.md)
+- [Glossary](GLOSSARY.md)
 - [Roadmap](../roadmap/ROADMAP.md)
