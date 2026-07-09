@@ -1,0 +1,23 @@
+{
+  "name": "ai-manager",
+  "version": "0.1.0",
+  "description": "AI Executive Office CLI — Resource Briefing Prototype",
+  "private": true,
+  "type": "commonjs",
+  "bin": {
+    "ai-manager": "./bin/ai-manager.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/ai-manager.js"
+  },
+  "keywords": [
+    "ai-manager",
+    "ai-executive-office",
+    "resource-briefing",
+    "cli"
+  ],
+  "license": "MIT"
+}

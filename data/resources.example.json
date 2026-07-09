@@ -1,0 +1,74 @@
+{
+  "resources": [
+    {
+      "id": "chatgpt-web",
+      "provider": "ChatGPT",
+      "tool": "ChatGPT Web",
+      "model": "gpt-4o",
+      "status": "available",
+      "quotaLevel": 80,
+      "resetAt": "2026-07-10T08:00:00+08:00",
+      "costLevel": "medium",
+      "contextOwner": "none",
+      "confidence": "user_observed",
+      "lastUpdated": "2026-07-10T00:00:00+08:00",
+      "notes": "Good for architecture review and general reasoning. No active PR context."
+    },
+    {
+      "id": "claude-web",
+      "provider": "Claude",
+      "tool": "Claude Web",
+      "model": "claude-sonnet",
+      "status": "warning",
+      "quotaLevel": 18,
+      "resetAt": "2026-07-10T05:00:00+08:00",
+      "costLevel": "medium",
+      "contextOwner": "none",
+      "confidence": "user_observed",
+      "lastUpdated": "2026-07-10T00:00:00+08:00",
+      "notes": "Quota is low. Approaching daily limit. Strong for coding and architecture tasks."
+    },
+    {
+      "id": "codex-cli",
+      "provider": "Codex",
+      "tool": "Codex CLI",
+      "model": "default",
+      "status": "cooling_down",
+      "quotaLevel": 0,
+      "resetAt": "2026-07-10T06:00:00+08:00",
+      "costLevel": "low",
+      "contextOwner": "codex",
+      "confidence": "manual",
+      "lastUpdated": "2026-07-10T00:10:00+08:00",
+      "notes": "Used today. Cooling down after reaching usage limit. Has context for current PR work. Reset expected around 06:00."
+    },
+    {
+      "id": "gemini-web",
+      "provider": "Gemini",
+      "tool": "Gemini Web",
+      "model": "gemini-2.5-pro",
+      "status": "available",
+      "quotaLevel": 64,
+      "resetAt": "2026-07-10T08:00:00+08:00",
+      "costLevel": "low",
+      "contextOwner": "none",
+      "confidence": "user_observed",
+      "lastUpdated": "2026-07-10T00:00:00+08:00",
+      "notes": "Good for research, documentation, and long-context tasks. Cost-effective."
+    },
+    {
+      "id": "antigravity-ide",
+      "provider": "Antigravity",
+      "tool": "Antigravity IDE",
+      "model": "claude-sonnet-4.6",
+      "status": "available",
+      "quotaLevel": 90,
+      "resetAt": "unknown",
+      "costLevel": "medium",
+      "contextOwner": "antigravity",
+      "confidence": "manual",
+      "lastUpdated": "2026-07-10T00:40:00+08:00",
+      "notes": "Currently active. Owns context for PR #11. Strong for coding, documentation, and handoff tasks. No fixed reset window."
+    }
+  ]
+}

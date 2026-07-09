@@ -34,6 +34,11 @@ pre-release.
   signals, hand-off-vs-wait decision, and pre-handoff checklist), Resume Workflow
   (orient → read → confirm → create → execute), and Continuity Architecture
   (layer position, component interactions, and Executive Office integration).
+- Resource Briefing CLI prototype (P1): `bin/ai-manager.js` implementing
+  `status`, `brief`, `recommend`, and `reminders` commands; `data/resources.example.json`
+  snapshot with ChatGPT, Claude, Codex, Gemini, and Antigravity resources;
+  `package.json` with zero third-party dependencies. Validates the first
+  AI Executive Office closed loop: Observe → Think → Advise → Remind.
 
 ### Changed
 
