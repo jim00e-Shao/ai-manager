@@ -47,7 +47,15 @@ Start with [PROJECT_MAP.md](PROJECT_MAP.md) to navigate the repository.
 
 ## Development Philosophy
 
-ai-manager is Documentation First:
+> **Documentation is the Product Specification.**
+
+Documentation is not an explanation added after development. It is the source
+of the product specification. Product design, architecture, and decisions are
+first made explicit and aligned through documentation; implementation begins
+only after that shared understanding is established.
+
+This principle defines ai-manager's development culture. The repository is
+Documentation First:
 
 1. Define intent and constraints in documentation.
 2. Review and accept the relevant design or decision.
