@@ -20,7 +20,11 @@ PRINCIPLES
         ↓
 VISION
         ↓
-SYSTEM OVERVIEW → COMPONENTS
+SYSTEM OVERVIEW
+        ↓
+COMPONENTS → COMPONENT CONTRACTS
+        ↓
+SYSTEM BOUNDARIES → DATA FLOW → GLOSSARY
         ↓
 ROADMAP
         ↓
@@ -49,16 +53,25 @@ every authoritative document affected by its work.
    evaluate product tradeoffs.
 5. [VISION.md](docs/product/VISION.md) — understand the intended future.
 6. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
-   system boundary and major flows.
+   architecture layers, system boundary, and major flow.
 7. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
    responsibilities.
-8. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages.
-9. Research documents — inspect assumptions and open questions for each core
+8. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) — understand
+   component inputs, outputs, state, dependencies, failures, and extension
+   boundaries.
+9. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
+   manager ownership from Provider, IDE, Git, and MCP ownership.
+10. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — follow conceptual data
+    movement through the system.
+11. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative architecture
+    terminology.
+12. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages.
+13. Research documents — inspect assumptions and open questions for each core
    module.
-10. Decision records — understand accepted, superseded, or rejected decisions.
-11. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
+14. Decision records — understand accepted, superseded, or rejected decisions.
+15. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
    changing the repository.
-12. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
+16. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
 
 ## Document Directory
 
@@ -85,6 +98,10 @@ every authoritative document affected by its work.
 | --- | --- |
 | [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) | Defines system context, boundaries, flows, and constraints. |
 | [COMPONENTS.md](docs/architecture/COMPONENTS.md) | Defines component responsibilities, interfaces, and ownership. |
+| [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) | Defines conceptual contracts for manager-owned components. |
+| [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) | Separates ai-manager scope from Provider, IDE, Git, and MCP scope. |
+| [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) | Describes conceptual user, decision, provider, response, and memory flows. |
+| [GLOSSARY.md](docs/architecture/GLOSSARY.md) | Defines normative product and architecture terminology. |
 
 ### Roadmap
 
@@ -111,11 +128,11 @@ every authoritative document affected by its work.
 The README provides orientation, and PROJECT_MAP locates the authoritative next
 document. The product definition establishes the problem, users, MVP, and
 boundaries. Product principles govern tradeoffs. The vision describes the future
-that product work serves. Architecture defines system boundaries and component
-responsibilities. The roadmap sequences accepted work. Research supplies
-evidence and alternatives. ADRs record accepted decisions. Contributing rules
-govern how changes move from specification to implementation. The changelog
-records what actually changed.
+that product work serves. Architecture defines layers, component contracts,
+system boundaries, data flows, and normative language. The roadmap sequences
+accepted work. Research supplies evidence and alternatives. ADRs record accepted
+decisions. Contributing rules govern how changes move from specification to
+implementation. The changelog records what actually changed.
 
 When documents conflict, the most recently accepted ADR governs the decision,
 and affected product, architecture, research, or roadmap documents must be
