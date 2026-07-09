@@ -20,11 +20,15 @@ PRINCIPLES
         ↓
 VISION
         ↓
+QUOTA MANAGER MVP
+        ↓
 SYSTEM OVERVIEW
         ↓
 COMPONENTS → COMPONENT CONTRACTS
         ↓
 SYSTEM BOUNDARIES → DATA FLOW → GLOSSARY
+        ↓
+QUOTA RESEARCH → QUOTA SPEC → DATA MODEL → STATE MACHINE
         ↓
 ROADMAP
         ↓
@@ -52,26 +56,37 @@ every authoritative document affected by its work.
 4. [PRINCIPLES.md](docs/product/PRINCIPLES.md) — understand the rules used to
    evaluate product tradeoffs.
 5. [VISION.md](docs/product/VISION.md) — understand the intended future.
-6. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
+6. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the N1
+   read-only product boundary.
+7. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
    architecture layers, system boundary, and major flow.
-7. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
+8. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
    responsibilities.
-8. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) — understand
+9. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) — understand
    component inputs, outputs, state, dependencies, failures, and extension
    boundaries.
-9. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
+10. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
    manager ownership from Provider, IDE, Git, and MCP ownership.
-10. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — follow conceptual data
+11. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — follow conceptual data
     movement through the system.
-11. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative architecture
+12. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative architecture
     terminology.
-12. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages.
-13. Research documents — inspect assumptions and open questions for each core
-   module.
-14. Decision records — understand accepted, superseded, or rejected decisions.
-15. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
-   changing the repository.
-16. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
+13. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand N1 quota
+    sources, user problems, constraints, and failure behavior.
+14. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
+    Quota Manager decisions and architecture behavior.
+15. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand N1
+    conceptual entities and relationships.
+16. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
+    understand availability states and transition events.
+17. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages and
+    N1.1–N1.5 increments.
+18. Other research documents — inspect assumptions and open questions for each
+    remaining core module.
+19. Decision records — understand accepted, superseded, or rejected decisions.
+20. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
+    changing the repository.
+21. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
 
 ## Document Directory
 
@@ -91,6 +106,7 @@ every authoritative document affected by its work.
 | [PRODUCT.md](docs/product/PRODUCT.md) | Defines target users, problems, outcomes, scope, and success measures. |
 | [PRINCIPLES.md](docs/product/PRINCIPLES.md) | Defines durable principles for product behavior and tradeoffs. |
 | [VISION.md](docs/product/VISION.md) | Describes the long-term direction and guiding principles. |
+| [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) | Defines the read-only manual quota dashboard and its acceptance boundary. |
 
 ### Architecture
 
@@ -102,6 +118,9 @@ every authoritative document affected by its work.
 | [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) | Separates ai-manager scope from Provider, IDE, Git, and MCP scope. |
 | [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) | Describes conceptual user, decision, provider, response, and memory flows. |
 | [GLOSSARY.md](docs/architecture/GLOSSARY.md) | Defines normative product and architecture terminology. |
+| [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) | Defines N1 Quota Manager behavior, decisions, fallback, and observability. |
+| [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) | Defines conceptual quota entities and relationships. |
+| [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) | Defines availability states and event-driven transitions. |
 
 ### Roadmap
 
@@ -113,7 +132,7 @@ every authoritative document affected by its work.
 
 | Document | Purpose |
 | --- | --- |
-| [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) | Captures quota-management requirements, options, and open questions. |
+| [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) | Defines quota source types, MVP constraints, failure behavior, and open research questions. |
 | [MODEL_ROUTER.md](docs/research/MODEL_ROUTER.md) | Captures routing inputs, policies, options, and open questions. |
 | [PROMPT_BUILDER.md](docs/research/PROMPT_BUILDER.md) | Captures prompt composition, versioning, and evaluation questions. |
 

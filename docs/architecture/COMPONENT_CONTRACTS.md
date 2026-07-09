@@ -103,32 +103,42 @@ is assigned.
 - accept quota observations from approved sources;
 - normalize provider-specific usage, limits, reset windows, and availability;
 - preserve source, freshness, and uncertainty;
-- evaluate reservations, priorities, and scheduling eligibility;
+- evaluate reset, cooldown, threshold, and scheduling eligibility;
+- maintain explicit availability status and transition history;
+- distinguish provider-confirmed, manual, and estimated observations;
 - report capacity facts without selecting a model;
 - prevent unknown or stale data from appearing certain.
 
 ### Input
 
 - provider quota observations and timestamps;
+- manual observations and explicit overrides;
+- estimated observations with method, confidence, and expiration;
 - configured limits and reset rules;
-- reservations, priorities, and expected demand;
+- quota policy, warning thresholds, and freshness limits;
+- cooldown, account enabled state, and expected demand;
 - model-to-provider capability references;
 - requests for capacity eligibility.
 
 ### Output
 
 - normalized quota snapshots;
-- eligible, unavailable, unknown, or stale capacity states;
+- `available`, `warning`, `limited`, `exhausted`, `cooling_down`,
+  `unknown`, or `disabled` status with reason;
 - reset and scheduling information;
 - uncertainty and provenance;
+- status-change and observation events;
+- Dashboard read model and historical observation references;
 - quota-related warnings and failure reasons.
 
 ### Internal State
 
 - latest observations by provider, account, model, and quota dimension;
 - observation freshness and source provenance;
-- normalized limits, usage, and reset windows;
-- reservations and scheduling commitments;
+- Provider, Model, Account, Subscription, policy, and window references;
+- normalized limits, usage, reset windows, cooldowns, and thresholds;
+- manual overrides and QuotaEstimates;
+- current AvailabilityStatus and transition history;
 - source health and synchronization status.
 
 ### External Dependencies
@@ -137,31 +147,47 @@ is assigned.
 - time source for freshness and reset evaluation;
 - configuration defining normalization and scheduling policy;
 - Plugin Manager for provider-specific quota adapters.
+- AI Manager for policy, user control, and correlated operations;
+- Dashboard as a read-only consumer through AI Manager;
+- Model Router as a future eligibility consumer through the documented boundary.
 
 ### Failure Modes
 
 - provider data unavailable, delayed, contradictory, or malformed;
+- manual observations stale, conflicting, or missing provenance;
+- estimate expired, invalidated, or too uncertain;
 - unknown reset semantics;
 - authorization failure for a quota source;
 - normalization rule missing or incompatible;
-- concurrent reservations exceed reported capacity;
+- unsupported or incompatible quota dimensions;
+- status event cannot be recorded consistently;
 - clock or freshness uncertainty.
 
 ### Observability
 
 - source synchronization attempts and outcomes;
 - freshness, provenance, and confidence for every quota value;
-- normalization warnings;
-- reservation and release events;
+- accepted and rejected observations;
+- normalization, conflict, stale-data, reset, and cooldown warnings;
+- previous and next status with transition event and policy version;
+- manual override actor, reason, scope, and expiration;
 - scheduling eligibility decisions and rejected reasons.
 
 ### Future Extensions
 
-- predictive quota consumption;
-- cross-task capacity planning;
-- user-defined reservation policy;
-- shared team capacity;
-- cost budgets and rate-limit forecasting.
+- **Provider adapter extension point:** permitted API or plugin sources can
+  contribute typed observations without owning normalized status.
+- **Policy extension point:** additional thresholds, aggregation rules, and
+  scheduling policies can be introduced through versioned policy.
+- **Estimation extension point:** predictive consumption and time-to-exhaustion
+  can contribute labeled estimates.
+- **Scheduling extension point:** reservations and cross-task capacity planning
+  can use existing eligibility outputs.
+- **Scope extension point:** team, project, local-compute, cost-budget, and
+  rate-limit dimensions can extend the conceptual model.
+
+Detailed behavior is defined in
+[QUOTA_MANAGER_SPEC.md](QUOTA_MANAGER_SPEC.md).
 
 ## 3. Model Router
 

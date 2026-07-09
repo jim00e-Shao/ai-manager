@@ -52,15 +52,6 @@ development.
 Give an individual developer a coherent, trustworthy view of available AI model
 capacity and the scheduling constraints that affect planned work.
 
-### Scope
-
-- Documented quota concepts and provider-neutral terminology.
-- A limited set of validated quota sources.
-- Usage, remaining capacity, reset windows, and freshness.
-- Explicit unknown, stale, and unavailable states.
-- Scheduling inputs such as priority, reservation, and expected task demand.
-- Observable quota updates and source provenance.
-
 ### Non-Goals
 
 - Model-quality ranking.
@@ -69,13 +60,123 @@ capacity and the scheduling constraints that affect planned work.
 - Universal provider coverage.
 - Enterprise budgets, billing allocation, or chargeback.
 
-### Exit Criteria
+### N1.1 — Quota Specification
 
-- A user can inspect normalized capacity for the supported sources.
-- Every value exposes source and freshness.
-- Unknown and stale data cannot be mistaken for available capacity.
-- Scheduling eligibility can be evaluated without choosing a model.
-- Supported quota assumptions and limitations are documented.
+#### Goal
+
+Define provider-neutral quota behavior, entities, status, transitions, safety
+rules, and MVP boundaries before implementation.
+
+#### Scope
+
+- Quota product research and source types.
+- Manual, subscription, API, and estimated quota concepts.
+- Reset, cooldown, warning, privacy, and failure behavior.
+- Conceptual data model and state machine.
+- Quota Manager component contract and architecture specification.
+
+#### Exit Criteria
+
+- Required quota entities and relationships are documented.
+- `available`, `warning`, `limited`, `exhausted`, `cooling_down`, `unknown`,
+  and `disabled` have unambiguous meanings.
+- Decision precedence, fallback, and transition events are documented.
+- Manual MVP and explicit non-goals are reviewable.
+- No implementation choice is required to understand expected behavior.
+
+### N1.2 — Manual Quota Dashboard
+
+#### Goal
+
+Let an individual developer maintain and inspect provider-neutral quota status
+without automatic provider access.
+
+#### Scope
+
+- Read-only provider interaction.
+- Local Provider, Model, Account, and optional Subscription records.
+- Manual quota observations and history.
+- `available`, `warning`, `exhausted`, and `unknown` display.
+- Optional usage, limit, unit, warning threshold, and reset time.
+- Visible source, freshness, confidence, and stale state.
+
+#### Exit Criteria
+
+- A user can record a Provider, Model, Account, and manual observation.
+- Dashboard displays required states, source, and last-updated time.
+- Optional reset time includes timezone and does not imply automatic renewal.
+- Updating status preserves prior observation history.
+- No login, scraping, limit bypass, or provider web automation exists.
+
+### N1.3 — Provider Status Tracking
+
+#### Goal
+
+Accept permitted provider status observations while preserving source authority,
+privacy, and safe failure behavior.
+
+#### Scope
+
+- A limited set of validated, permitted provider or plugin sources.
+- Source health, authorization result, freshness, and provenance.
+- Provider-confirmed status and reset observations.
+- Explicit stale, malformed, conflicting, and unavailable source behavior.
+- Manual fallback that remains visibly manual.
+
+#### Exit Criteria
+
+- Each supported source has documented permissions and limitations.
+- Provider errors cannot be misreported as quota exhaustion.
+- Stale or conflicting data produces visible degradation or `unknown`.
+- Credentials and sensitive identifiers do not enter quota records or logs.
+- Manual and provider-confirmed observations remain distinguishable.
+
+### N1.4 — Usage History
+
+#### Goal
+
+Make quota changes and consumption inspectable over time without collecting
+unnecessary sensitive data.
+
+#### Scope
+
+- Append-oriented UsageRecords and quota observations.
+- Status transition history.
+- Reset and cooldown events.
+- Provenance, correction, supersession, and retention behavior.
+- Basic history views and trend inputs.
+
+#### Exit Criteria
+
+- A user can trace current status to source observations and transitions.
+- Corrections preserve provenance instead of silently rewriting history.
+- Retention and deletion behavior is documented and enforceable.
+- History excludes credentials and redacts sensitive account identifiers.
+- Missing event history is visible as degraded observability.
+
+### N1.5 — Router Integration
+
+#### Goal
+
+Provide Model Router with explainable, demand-aware capacity eligibility without
+moving model-selection responsibility into Quota Manager.
+
+#### Scope
+
+- Eligibility request with target scope and expected demand.
+- Status, freshness, confidence, reset, and restriction output.
+- Multi-window “most restrictive applicable limit” behavior.
+- Explicit no-capacity and unknown-capacity outcomes.
+- Correlation between quota snapshot and routing decision.
+
+#### Exit Criteria
+
+- Router can distinguish schedulable, restricted, exhausted, cooldown, unknown,
+  and disabled capacity.
+- Every eligibility result references its policy and quota basis.
+- Unknown or stale required capacity cannot silently become eligible.
+- Quota Manager does not rank model quality or choose the final model.
+- A routing decision can be reconstructed from its referenced quota snapshot.
 
 ## N2 — Model Router
 
