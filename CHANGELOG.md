@@ -21,6 +21,9 @@ pre-release.
   catalog, and provider-selection guide.
 - AI Executive Office positioning, Strategy Council, Advisor Model, Decision
   Governance, and advisor conflict-resolution specifications.
+- Resource Manager architecture, conceptual resource data and state models,
+  context-continuity specification, cost and budget policy, and manual
+  Resource Manager MVP.
 
 ### Changed
 
@@ -36,3 +39,7 @@ pre-release.
   Office, AI Operating System, and AI Resource Orchestration Platform.
 - Reorganized architecture around Presentation, Strategy, Decision, Resource,
   Knowledge, Execution, and External layers with an N0–N9 roadmap.
+- Elevated Resource Manager above quota as the primary Resource Layer component,
+  with Quota Manager retained as a specialized sub-capability.
+- Expanded N2 into specification, manual dashboard, snapshot history, context
+  continuity, cost and budget, and Decision Engine integration stages.

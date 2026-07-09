@@ -225,80 +225,108 @@ constraints into an explainable proposed plan.
 
 ### Purpose
 
-Maintain the current inventory, constraints, opportunity cost, and scheduling
-availability of AI resources.
+Own the Resource Layer operating picture for every resource that can sustain or
+interrupt AI-assisted development.
 
 ### Responsibilities
 
-- aggregate Quota Manager, Provider Registry, Model Catalog, cost, credit, reset,
-  context-capacity, tool, and health facts;
-- preserve source, freshness, confidence, and scope;
-- identify scarce or expiring resources;
-- support wait, reservation, reassignment, and split recommendations;
-- provide decision-ready resource snapshots.
+- aggregate quota, credit, rate-limit, reset, cost, availability, provider
+  health, model capability, tool, context-continuity, and local-compute facts;
+- reference Provider Registry and Model Catalog without duplicating their
+  identity or capability authority;
+- preserve source, freshness, confidence, scope, unit, and uncertainty;
+- evaluate demand-sensitive normalized resource states;
+- identify scarcity, exhaustion, degradation, continuity loss, and budget risk;
+- provide immutable decision-ready resource snapshots;
+- expose recovery and reevaluation conditions to Scheduler;
+- provide attributable read-only state to Mission Control.
 
 ### Input
 
-- quota and usage status;
-- provider/model capability and health;
-- credits, cost, reset, cooldown, and reservation;
-- context and tool availability;
-- task demand and scheduler commitments.
+- Provider Registry identity, account surface, adapter, and health facts;
+- Model Catalog capability references;
+- quota observations, usage, policies, windows, resets, and cooldowns;
+- credits, rate limits, cost profiles, budgets, and ceilings;
+- availability, tool, and local-compute observations;
+- context owner, continuity, portability, and rebuild cost;
+- task demand from Decision Engine;
+- reservations and commitments from Scheduler;
+- execution usage and outcome events;
+- human corrections and manual overrides.
 
 ### Output
 
-- resource inventory and eligibility;
-- scarcity and opportunity-cost warnings;
-- wait, preserve, or reassign options;
-- resource snapshot for Decision Engine;
-- updates for Mission Control.
+- versioned resource inventory and normalized state;
+- eligible, constrained, and ineligible resource facts;
+- scarcity, health, cost, reset, continuity, and opportunity-cost warnings;
+- wait, preserve, reserve, rebuild, or reassign options;
+- snapshot and unmet demand for Decision Engine;
+- wake and reevaluation conditions for Scheduler;
+- sourced status and history for Mission Control;
+- attributable resource events.
 
 ### Internal State
 
+- conceptual entities defined in
+  [RESOURCE_DATA_MODEL.md](RESOURCE_DATA_MODEL.md);
+- current state and transitions defined in
+  [RESOURCE_STATE_MODEL.md](RESOURCE_STATE_MODEL.md);
 - Provider Registry and Model Catalog references;
-- current Quota Manager states;
-- credits, cost classes, reset and cooldown;
-- reservations and scheduler commitments;
-- capability, health, context-capacity, and tool facts.
+- raw observations, supersession, freshness, confidence, and overrides;
+- quota, credit, rate-limit, reset, cooldown, cost, and budget state;
+- availability, provider health, tool, and local-compute state;
+- context owner, portability, preservation, and rebuild state;
+- reservations, scheduler commitments, snapshots, and event references.
 
 ### External Dependencies
 
-- Quota Manager;
 - [Provider Registry](../providers/PROVIDERS.md);
 - [Model Catalog](../providers/MODEL_CATALOG.md);
-- Plugin Manager health and adapter facts;
-- Scheduler.
+- quota capability specifications;
+- Plugin Manager and Provider Adapter health facts;
+- Knowledge Manager / Hermes for context sources;
+- Decision Engine for declared demand;
+- Scheduler for commitments and wake conditions;
+- trusted time and human-controlled manual records.
 
 ### Failure Modes
 
 - incompatible scopes aggregated;
-- stale quota or capability treated as current;
-- cost or credit source unknown;
-- reservation conflict;
-- provider health confused with capacity;
-- context value omitted.
+- stale or estimated facts treated as confirmed;
+- quota, rate limit, health, and availability conflated;
+- Registry or Catalog authority duplicated;
+- cost unit, billing scope, or ceiling ambiguous;
+- context owner, preservation artifact, or rebuild cost lost;
+- reservation conflict or snapshot used after supersession;
+- local-compute or tool dependency omitted;
+- Resource Manager selects a plan or dispatches execution.
 
 ### Observability
 
-- source and freshness of every resource fact;
-- inventory changes and reservations;
-- reset, cooldown, and scarcity events;
-- resource snapshot used by each decision;
-- rejected or conflicting facts.
+- resource identity, scope, source, unit, freshness, and confidence;
+- previous and next state with transition reason;
+- thresholds, policies, overrides, resets, and cooldowns;
+- inventory, reservation, cost, health, and continuity changes;
+- demand evaluated, unmet requirements, and alternatives;
+- snapshot version used by each decision and schedule;
+- rejected, stale, or conflicting facts and their normalization outcome.
 
 ### Future Extensions
 
 - predictive capacity planning;
 - multi-project allocation;
-- budget optimization;
-- local compute and developer-attention scheduling.
+- budget envelopes and portfolio optimization;
+- automated observations through reviewed adapters;
+- context portability scoring and preservation automation;
+- local accelerator and developer-attention scheduling;
+- team resource pools and delegated budgets.
 
 ## 5. Quota Manager
 
 ### Purpose
 
-Convert provider-native limits and observations into trustworthy scheduling
-status.
+Act as Resource Manager's quota-specific capability by converting
+provider-native limits and observations into trustworthy resource facts.
 
 ### Responsibilities
 
@@ -307,7 +335,8 @@ status.
 - evaluate reset, cooldown, warning, limited, exhausted, unknown, and disabled
   states;
 - preserve provenance, freshness, confidence, and history;
-- provide demand-aware eligibility without selecting a model.
+- provide demand-aware quota eligibility to Resource Manager without selecting
+  a model, plan, or schedule.
 
 ### Input
 
@@ -333,7 +362,7 @@ status.
 
 - provider adapters through Plugin Manager;
 - trusted time source;
-- Resource Manager;
+- Resource Manager as the owning Resource Layer component;
 - user-controlled manual records.
 
 ### Failure Modes
@@ -358,6 +387,10 @@ status.
 - predictive consumption;
 - reservations;
 - team and project capacity.
+
+Quota Manager is not a peer resource coordinator. Its public consumer is
+Resource Manager, which composes quota with credits, cost, rate limits, health,
+capability, tools, context continuity, and local compute.
 
 ## 6. Knowledge Manager / Hermes
 

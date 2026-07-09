@@ -121,13 +121,17 @@ Human authority remains final.
 
 ### Includes
 
-- Resource Manager;
-- Quota Manager;
 - Provider Registry;
 - Model Catalog;
-- capability and health facts;
-- credits, cost, reset time, cooldown, and reservations;
-- context capacity and tool availability.
+- Resource Manager as the primary Resource Layer component;
+- Quota Manager as a Resource Manager sub-capability;
+- quota, API credits, daily and weekly limits;
+- rate limits, reset time, and cooldown;
+- cost profiles, budgets, and reservations;
+- availability and provider health;
+- model capability and tool availability;
+- context continuity;
+- local compute.
 
 ### Responsibilities
 
@@ -135,14 +139,16 @@ Human authority remains final.
 - normalize availability without erasing provider provenance;
 - distinguish confirmed, manual, estimated, stale, and unknown facts;
 - expose scarce-resource and opportunity-cost constraints;
+- treat context continuity, cost, and local compute as first-class resources;
 - support scheduling, preservation, and eligibility;
 - update resource state from execution outcomes.
 
 ### Boundary
 
 Resource Layer reports resources and constraints. It does not choose the final
-plan or execute providers. Quota Manager, Provider Registry, and Model Catalog
-remain authoritative within their existing documented boundaries.
+plan or execute providers. Resource Manager owns composed resource state;
+Quota Manager owns quota-specific normalization beneath it; Provider Registry
+and Model Catalog retain identity and capability authority.
 
 ## Knowledge Layer
 
@@ -310,6 +316,11 @@ This conceptual architecture does not define:
 - [Advisor Model](ADVISOR_MODEL.md)
 - [Decision Governance](DECISION_GOVERNANCE.md)
 - [Conflict Resolution](CONFLICT_RESOLUTION.md)
+- [Resource Manager](RESOURCE_MANAGER.md)
+- [Resource Data Model](RESOURCE_DATA_MODEL.md)
+- [Resource State Model](RESOURCE_STATE_MODEL.md)
+- [Context Continuity](CONTEXT_CONTINUITY.md)
+- [Cost and Budget](COST_AND_BUDGET.md)
 - [Component Contracts](COMPONENT_CONTRACTS.md)
 - [System Boundaries](SYSTEM_BOUNDARIES.md)
 - [Provider Registry](../providers/PROVIDERS.md)
