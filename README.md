@@ -27,9 +27,9 @@ product focuses on a conversation between a person and a model. ai-manager
 focuses on the engineering system around AI work: quota, routing, prompts,
 workflow, coordination, and traceability.
 
-Its first intended user is the AI agent that must understand a repository and
-continue work safely. Human developers and teams remain responsible for defining
-intent, reviewing decisions, and governing the system.
+Its first operational user is the AI agent that must understand a repository and
+continue work safely. Its first human user is the individual developer who
+defines intent, reviews decisions, and governs the system.
 
 ## Vision
 
@@ -41,12 +41,26 @@ agent or human reviewer to continue with confidence.
 
 See [VISION.md](docs/product/VISION.md) for the long-term direction.
 
+## Product Principles
+
+ai-manager is governed by explicit product principles covering human control,
+observable AI actions, explainable routing, manager-owned context and memory,
+quota-aware scheduling, and task-appropriate model selection.
+
+Read the PR #2 product-definition set:
+
+- [Product Definition](docs/product/PRODUCT.md)
+- [Product Principles](docs/product/PRINCIPLES.md)
+- [Vision](docs/product/VISION.md)
+- [System Overview](docs/architecture/SYSTEM_OVERVIEW.md)
+- [Roadmap](docs/roadmap/ROADMAP.md)
+
 ## Core Modules
 
 - **Quota Manager** — tracks model usage, limits, and availability.
 - **Model Router** — selects an appropriate model for each task.
 - **Prompt Builder** — creates and manages reusable prompt structures.
-- **Agent Workflow Manager** — coordinates multi-agent work and review.
+- **Workflow Engine** — coordinates multi-agent work and review.
 
 Module boundaries remain proposals until they are accepted in the architecture
 and decision documents.
@@ -56,7 +70,7 @@ and decision documents.
 ```text
 .
 ├── docs/
-│   ├── product/        # Product definition and vision
+│   ├── product/        # Product definition, principles, and vision
 │   ├── architecture/   # System boundaries and component design
 │   ├── roadmap/        # Delivery phases and priorities
 │   ├── research/       # Module research and open questions

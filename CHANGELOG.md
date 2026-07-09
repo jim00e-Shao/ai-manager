@@ -12,7 +12,9 @@ pre-release.
 - Documentation-first project foundation.
 - Product, architecture, roadmap, research, and decision document structure.
 - Repository map and AI-agent contribution workflow.
+- Product principles and the N0–N7 capability roadmap.
 
 ### Changed
 
 - Expanded the README into the project’s high-level introduction.
+- Defined the product, MVP, long-term vision, and conceptual system architecture.
