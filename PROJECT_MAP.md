@@ -1,8 +1,8 @@
 # Project Map
 
-This file is the navigation contract for the ai-manager repository, not merely
-an index. It tells humans and AI agents where authoritative context lives, how
-documents depend on one another, and what must be read before work begins.
+This file is the navigation contract for ai-manager. It identifies authoritative
+context, document relationships, and the order humans and AI agents must use
+before changing the repository.
 
 **Every AI agent must read this file before planning or changing the
 repository.**
@@ -11,96 +11,96 @@ repository.**
 
 ```text
 README
-        ↓
+  ↓
 PROJECT_MAP
-        ↓
+  ↓
+AI_EXECUTIVE_OFFICE
+  ↓
 PRODUCT
-        ↓
+  ↓
 PRINCIPLES
-        ↓
+  ↓
 VISION
-        ↓
-QUOTA MANAGER MVP
-        ↓
-SYSTEM OVERVIEW
-        ↓
-COMPONENTS → COMPONENT CONTRACTS
-        ↓
-SYSTEM BOUNDARIES → DATA FLOW → GLOSSARY
-        ↓
-PROVIDER REGISTRY → ABSTRACTION → MODEL CATALOG
-        ↓
-CAPABILITY MATRIX → SELECTION GUIDE
-        ↓
-QUOTA RESEARCH → QUOTA SPEC → DATA MODEL → STATE MACHINE
-        ↓
+  ↓
+SYSTEM_OVERVIEW
+  ↓
+STRATEGY_COUNCIL
+  ↓
+ADVISOR_MODEL
+  ↓
+DECISION_GOVERNANCE
+  ↓
+CONFLICT_RESOLUTION
+  ↓
 ROADMAP
-        ↓
-RESEARCH
-        ↓
+  ↓
+PROVIDERS
+  ↓
+QUOTA / RESOURCE DOCUMENTS
+  ↓
 ADRs
-        ↓
+  ↓
 CONTRIBUTING
 ```
 
-README provides initial orientation, but PROJECT_MAP is the required navigation
-step before deeper repository work. The path then moves through product
-definition, decision principles, long-term direction, architecture, delivery
-sequence, supporting evidence, and accepted decisions. A task may require only
-part of the path after initial orientation, but the agent must identify and read
-every authoritative document affected by its work.
+This path moves from product identity to strategy, governance, execution
+sequence, external capability facts, resource details, and accepted decisions.
+Every affected authoritative document must be identified before work begins.
 
-## Recommended Reading Order
+## Required Reading Order
 
 1. [README.md](README.md) — understand the project at a glance.
-2. [PROJECT_MAP.md](PROJECT_MAP.md) — identify authoritative context and the
-   required navigation path.
-3. [PRODUCT.md](docs/product/PRODUCT.md) — understand users, problems, MVP, and
-   boundaries.
-4. [PRINCIPLES.md](docs/product/PRINCIPLES.md) — understand the rules used to
-   evaluate product tradeoffs.
-5. [VISION.md](docs/product/VISION.md) — understand the intended future.
-6. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the N1
-   read-only product boundary.
+2. [PROJECT_MAP.md](PROJECT_MAP.md) — locate authoritative context.
+3. [AI_EXECUTIVE_OFFICE.md](docs/product/AI_EXECUTIVE_OFFICE.md) — understand the
+   AI Executive Office, AI Chief of Staff, and AI Operating System positioning.
+4. [PRODUCT.md](docs/product/PRODUCT.md) — understand users, problems, MVP, and
+   product boundaries.
+5. [PRINCIPLES.md](docs/product/PRINCIPLES.md) — understand durable product
+   decision rules.
+6. [VISION.md](docs/product/VISION.md) — understand the long-term direction.
 7. [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) — understand the
-   architecture layers, system boundary, and major flow.
-8. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — understand proposed module
-   responsibilities.
-9. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) — understand
-   component inputs, outputs, state, dependencies, failures, and extension
-   boundaries.
-10. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
-   manager ownership from Provider, IDE, Git, and MCP ownership.
-11. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — follow conceptual data
-    movement through the system.
-12. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative architecture
-    terminology.
-13. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand registry kinds,
-    ownership, authority, and consumers.
+   seven architecture layers and authority flow.
+8. [STRATEGY_COUNCIL.md](docs/architecture/STRATEGY_COUNCIL.md) — understand how
+   advisors produce recommendations.
+9. [ADVISOR_MODEL.md](docs/architecture/ADVISOR_MODEL.md) — understand each
+   advisor contract, lens, KPI, and failure mode.
+10. [DECISION_GOVERNANCE.md](docs/architecture/DECISION_GOVERNANCE.md) —
+    understand goal alignment, weights, overrides, and human authority.
+11. [CONFLICT_RESOLUTION.md](docs/architecture/CONFLICT_RESOLUTION.md) —
+    understand how Decision Engine reconciles advisor conflicts.
+12. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N9 capability order.
+13. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand Provider Registry
+    kinds and authority.
 14. [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) —
-    understand adapter, discovery, health, and version boundaries.
-15. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand Provider →
-    Model Family → Model → Capabilities → Recommended Usage.
+    understand adapters, discovery, health, and versioning.
+15. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand model and
+    capability hierarchy.
 16. [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) — inspect the
-    verified provider capability baseline.
+    sourced provider baseline.
 17. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
-    understand initial task-selection guidance and required decision evidence.
-18. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand N1 quota
-    sources, user problems, constraints, and failure behavior.
-19. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
-    Quota Manager decisions and architecture behavior.
-20. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand N1
-    conceptual entities and relationships.
-21. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
-    understand availability states and transition events.
-22. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages and
-    N1.1–N1.5 increments.
-23. Other research documents — inspect assumptions and open questions for each
-    remaining core module.
-24. Decision records — understand accepted, superseded, or rejected decisions.
-25. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
-    changing the repository.
-26. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
+    understand initial task-fit guidance.
+18. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
+    manual read-only quota boundary.
+19. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
+    types, constraints, and research.
+20. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
+    quota decisions, fallback, and observability.
+21. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
+    conceptual quota entities.
+22. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
+    understand quota-state transitions.
+23. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
+24. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
+    understand component ownership and failure contracts.
+25. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
+    manager scope from external systems.
+26. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
+    movement.
+27. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
+28. Research documents — inspect open questions for remaining modules.
+29. Decision records — understand accepted, superseded, or rejected decisions.
+30. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
+31. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
 
 ## Document Directory
 
@@ -108,57 +108,62 @@ every authoritative document affected by its work.
 
 | Document | Purpose |
 | --- | --- |
-| [README.md](README.md) | Introduces the project, vision, modules, structure, philosophy, and roadmap. |
-| [PROJECT_MAP.md](PROJECT_MAP.md) | Defines repository navigation, document authority, and required reading order. |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Defines contribution rules for humans and AI agents. |
-| [CHANGELOG.md](CHANGELOG.md) | Records notable repository changes by release or phase. |
+| [README.md](README.md) | Introduces the AI Executive Office and development philosophy. |
+| [PROJECT_MAP.md](PROJECT_MAP.md) | Defines repository navigation and document authority. |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Defines human and AI-agent contribution rules. |
+| [CHANGELOG.md](CHANGELOG.md) | Records notable repository changes. |
 
 ### Product
 
 | Document | Purpose |
 | --- | --- |
-| [PRODUCT.md](docs/product/PRODUCT.md) | Defines target users, problems, outcomes, scope, and success measures. |
-| [PRINCIPLES.md](docs/product/PRINCIPLES.md) | Defines durable principles for product behavior and tradeoffs. |
-| [VISION.md](docs/product/VISION.md) | Describes the long-term direction and guiding principles. |
-| [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) | Defines the read-only manual quota dashboard and its acceptance boundary. |
+| [AI_EXECUTIVE_OFFICE.md](docs/product/AI_EXECUTIVE_OFFICE.md) | Defines repositioning, AI Chief of Staff, resource orchestration, and continuous productivity. |
+| [PRODUCT.md](docs/product/PRODUCT.md) | Defines users, problems, MVP, resources, and boundaries. |
+| [PRINCIPLES.md](docs/product/PRINCIPLES.md) | Defines durable product principles. |
+| [VISION.md](docs/product/VISION.md) | Defines time horizons and long-term positioning. |
+| [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) | Defines the manual quota-dashboard boundary. |
 
-### Architecture
+### Strategy and Governance Architecture
 
 | Document | Purpose |
 | --- | --- |
-| [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) | Defines system context, boundaries, flows, and constraints. |
-| [COMPONENTS.md](docs/architecture/COMPONENTS.md) | Defines component responsibilities, interfaces, and ownership. |
-| [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) | Defines conceptual contracts for manager-owned components. |
-| [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) | Separates ai-manager scope from Provider, IDE, Git, and MCP scope. |
-| [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) | Describes conceptual user, decision, provider, response, and memory flows. |
-| [GLOSSARY.md](docs/architecture/GLOSSARY.md) | Defines normative product and architecture terminology. |
-| [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) | Defines N1 Quota Manager behavior, decisions, fallback, and observability. |
+| [SYSTEM_OVERVIEW.md](docs/architecture/SYSTEM_OVERVIEW.md) | Defines Presentation, Strategy, Decision, Resource, Knowledge, Execution, and External layers. |
+| [STRATEGY_COUNCIL.md](docs/architecture/STRATEGY_COUNCIL.md) | Defines advisor coordination and recommendation contracts. |
+| [ADVISOR_MODEL.md](docs/architecture/ADVISOR_MODEL.md) | Defines advisor roles, lenses, metrics, failures, and examples. |
+| [DECISION_GOVERNANCE.md](docs/architecture/DECISION_GOVERNANCE.md) | Defines goal alignment, records, weights, overrides, and human authority. |
+| [CONFLICT_RESOLUTION.md](docs/architecture/CONFLICT_RESOLUTION.md) | Defines conflict-resolution method and examples. |
+| [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) | Defines AI Executive Office component contracts. |
+| [COMPONENTS.md](docs/architecture/COMPONENTS.md) | Summarizes component responsibilities. |
+| [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) | Separates manager and external-system ownership. |
+| [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) | Describes conceptual information flows. |
+| [GLOSSARY.md](docs/architecture/GLOSSARY.md) | Defines normative architecture terminology. |
+
+### Resource Architecture
+
+| Document | Purpose |
+| --- | --- |
+| [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) | Defines Quota Manager behavior and fallback. |
 | [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) | Defines conceptual quota entities and relationships. |
-| [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) | Defines availability states and event-driven transitions. |
-
-### Roadmap
-
-| Document | Purpose |
-| --- | --- |
-| [ROADMAP.md](docs/roadmap/ROADMAP.md) | Organizes delivery into documented phases and milestones. |
+| [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) | Defines quota status transitions. |
 
 ### Providers
 
 | Document | Purpose |
 | --- | --- |
-| [PROVIDERS.md](docs/providers/PROVIDERS.md) | Defines Provider Registry entries, kinds, authority, freshness, and consumers. |
-| [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) | Defines conceptual provider interface, adapter, discovery, health, and versioning. |
-| [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) | Defines the provider-neutral model hierarchy and capability profile. |
-| [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) | Records the sourced baseline for provider capabilities, surfaces, quota, cost, and risk. |
-| [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) | Defines initial task-fit guidance and selection evidence. |
+| [PROVIDERS.md](docs/providers/PROVIDERS.md) | Defines Provider Registry entries and consumers. |
+| [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) | Defines provider interfaces and adapters. |
+| [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) | Defines model hierarchy and capabilities. |
+| [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) | Records sourced provider capability facts. |
+| [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) | Defines initial selection guidance. |
 
-### Research
+### Roadmap and Research
 
 | Document | Purpose |
 | --- | --- |
-| [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) | Defines quota source types, MVP constraints, failure behavior, and open research questions. |
-| [MODEL_ROUTER.md](docs/research/MODEL_ROUTER.md) | Captures routing inputs, policies, options, and open questions. |
-| [PROMPT_BUILDER.md](docs/research/PROMPT_BUILDER.md) | Captures prompt composition, versioning, and evaluation questions. |
+| [ROADMAP.md](docs/roadmap/ROADMAP.md) | Organizes N0–N9 delivery stages. |
+| [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) | Defines quota research and constraints. |
+| [MODEL_ROUTER.md](docs/research/MODEL_ROUTER.md) | Captures model-routing research as an AI Router subtopic. |
+| [PROMPT_BUILDER.md](docs/research/PROMPT_BUILDER.md) | Captures prompt composition research. |
 
 ### Decisions
 
@@ -168,26 +173,18 @@ every authoritative document affected by its work.
 
 ## Document Relationships
 
-The README provides orientation, and PROJECT_MAP locates the authoritative next
-document. The product definition establishes the problem, users, MVP, and
-boundaries. Product principles govern tradeoffs. The vision describes the future
-that product work serves. Architecture defines layers, component contracts,
-system boundaries, data flows, and normative language. The roadmap sequences
-accepted work. The Provider Registry supplies shared external capability facts
-to quota, routing, workflow, and plugin decisions. Research supplies evidence
-and alternatives. ADRs record accepted decisions. Contributing rules govern how
-changes move from specification to implementation. The changelog records what
-actually changed.
+AI Executive Office defines product identity. Product and Principles define what
+must remain true. Strategy Council supplies specialized advice. Decision
+Governance turns advice, resources, and knowledge into a proposed plan.
+Scheduler and Execution carry out approved work. Provider and quota documents
+supply external and resource truth. ADRs record accepted cross-cutting
+decisions.
 
-When documents conflict, the most recently accepted ADR governs the decision,
-and affected product, architecture, research, or roadmap documents must be
-updated in the same change.
-
-Implementation is never an authoritative substitute for missing documentation.
-If the required specification cannot be found through this map, the first task
-is to create or update that specification.
+When documents conflict, the most recently accepted ADR governs, and affected
+documents must be updated in the same change. Implementation is never an
+authoritative substitute for missing documentation.
 
 ## Keeping the Map Current
 
-Every pull request that adds, removes, or renames a document must update this
-map. Links and document purposes must remain accurate.
+Every pull request that adds, removes, renames, or changes the authority of a
+document must update this map.

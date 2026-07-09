@@ -7,8 +7,9 @@ complete model-name lists because those facts change independently.
 
 ## Purpose
 
-The Model Catalog gives Model Router a provider-neutral way to understand what
-models are available, what they can do, and which uses are appropriate.
+The Model Catalog gives Resource Manager, Decision Engine, and AI Router a
+provider-neutral way to understand what models are available, what they can do,
+and which uses are appropriate.
 
 It separates model identity from provider products and access surfaces.
 
@@ -110,8 +111,9 @@ It may describe:
 - known unsuitable uses;
 - evidence and review date.
 
-Model Router combines this metadata with task requirements and Quota Manager
-eligibility. The catalog never chooses the final model.
+Decision Engine uses this metadata when proposing a plan. AI Router's Model
+Router submodule combines it with the approved execution step and Resource
+Manager eligibility. The catalog never chooses the plan or model.
 
 ## Dynamic Discovery
 

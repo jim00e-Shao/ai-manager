@@ -7,13 +7,21 @@ documentation review before implementation.
 
 ## What ai-manager Is
 
-ai-manager is an **AI-native software engineering platform** and the emerging
-control plane for AI-assisted development.
+ai-manager is an **AI Executive Office**, an emerging **AI Operating System**,
+and an **AI Resource Orchestration Platform** for AI-assisted software
+development.
+
+Its product personality is an **AI Chief of Staff**: it helps developers
+continuously ship software by coordinating specialized advisors, available AI
+resources, project knowledge, governed decisions, scheduling, and execution.
 
 It coordinates the system around AI work:
 
-- which model capacity is available;
-- which model should handle a task and why;
+- which goal and project priority should drive the next action;
+- which advisors should analyze the decision;
+- which AI resources are available and worth preserving;
+- whether work should proceed, wait, be reassigned, or be split;
+- which provider and model should handle an approved execution step and why;
 - which context and prompt should be supplied;
 - which workflow and review gates should govern execution;
 - which tools an AI may use;
@@ -24,6 +32,12 @@ ai-manager does not initially perform all of these functions. The roadmap
 introduces them in independently useful stages. The product definition describes
 the coherent system those stages are intended to become.
 
+The canonical positioning is:
+
+> AI Manager is an AI Executive Office that helps developers continuously ship
+> software by coordinating AI advisors, AI resources, project knowledge, and
+> execution workflows.
+
 ## What ai-manager Is Not
 
 ai-manager is not:
@@ -32,6 +46,7 @@ ai-manager is not:
 - a new foundation model or model-training platform;
 - an IDE replacement;
 - a coding agent that owns product decisions;
+- an autonomous executive that replaces developer judgment;
 - a provider-specific dashboard;
 - a thin prompt library;
 - a hidden autonomous system that acts without inspectable policy or review;
@@ -40,6 +55,19 @@ ai-manager is not:
 It may integrate with chat interfaces, editors, coding agents, providers, and
 developer tools, but it owns the coordination and governance layer rather than
 replacing those products.
+
+## AI Resources
+
+AI Manager manages AI resources, not only AI agents.
+
+AI resources include quota, credits, reset and cooldown time, monetary cost,
+provider and model capability, provider and adapter health, context held by an
+advisor or session, context-window capacity, project knowledge, CLI/API/browser/
+MCP tools, workflow state, scheduler commitments, and human approval
+availability.
+
+Resource Manager turns these facts into a current operating picture. Decision
+Engine combines that picture with advisor recommendations and governance.
 
 ## Primary Users
 
@@ -76,6 +104,18 @@ coherent view of usable capacity.
 Tasks are often routed by habit, defaults, or model popularity. The choice is
 rarely recorded with the constraints that justified it.
 
+### Disconnected Advice
+
+Architecture, resource, knowledge, cost, risk, and execution concerns are often
+collapsed into one prompt. Conflicts remain hidden instead of becoming an
+explainable decision.
+
+### Interrupted Productivity
+
+Work stops when one provider is exhausted, context is lost, or an approval is
+pending, even when other useful work could proceed. The product must coordinate
+waiting, reassignment, task splitting, and context preservation.
+
 ### Context Loss
 
 Important product intent, architecture decisions, repository history, and prior
@@ -94,18 +134,18 @@ what happened, which inputs were used, and where human approval was required.
 
 ## Phase-One MVP
 
-The first MVP is a **local, read-oriented AI capacity and routing workspace** for
-an individual developer.
+The first MVP remains a **local, read-oriented Mission Control for AI resource
+visibility and explainable recommendations** for an individual developer.
 
 It must enable the user to:
 
 1. define the models and quota sources they use without assuming one provider;
 2. view normalized quota availability and reset information;
 3. describe a task using a small, documented set of requirements;
-4. receive an explainable model recommendation based on eligibility, quota, and
-   task constraints;
-5. inspect the inputs, policy, candidate models, and reason behind the
-   recommendation;
+4. receive an explainable recommendation based on goals, eligibility, quota,
+   policy, and task constraints;
+5. inspect resource inputs, advisor or policy lenses, candidate execution paths,
+   and the reason behind the recommendation;
 6. preserve enough decision context for a later human or AI agent to understand
    what was recommended and why.
 
@@ -119,10 +159,11 @@ Available capacity + Task requirements + Policy
                 Inspectable decision record
 ```
 
-Quota Manager and Model Router are the primary MVP capabilities. Prompt Builder,
-Workflow Engine, Tool Integrations, Context/Memory, and MCP/Plugin System remain
-roadmap stages unless a minimal interface is required to preserve the conceptual
-boundary.
+Resource Manager and its Quota Manager, Provider Registry, and Model Catalog
+inputs are the primary MVP capabilities. Strategy Council, Decision Engine,
+Hermes, Scheduler, AI Router, Provider Adapters, and MCP/Plugin System remain
+roadmap stages unless a minimal read-only contract is required to preserve the
+conceptual boundary.
 
 ## MVP Success Criteria
 
@@ -130,7 +171,8 @@ The MVP is successful when an individual developer can:
 
 - understand current model capacity from one coherent view;
 - request a recommendation without manually comparing provider dashboards;
-- understand why a model was selected or rejected;
+- understand why an action, wait, reassignment, split, provider, or model was
+  recommended;
 - identify stale, missing, or uncertain input data;
 - revisit a decision and recover its task constraints and routing explanation;
 - use the system without surrendering routing policy or approval authority to a
@@ -180,7 +222,8 @@ Plane rather than another feature inside an AI-enabled application.
 
 ## Product Boundaries
 
-ai-manager owns coordination policy, durable product context, decision
+ai-manager owns goal coordination, advisor recommendations, resource
+orchestration, scheduling, durable product knowledge, decision governance,
 explanations, and human-control boundaries. Providers own model execution and
 provider-specific infrastructure. Integrated tools own their native editing,
 source-control, deployment, or communication behavior.
@@ -190,6 +233,7 @@ product specification.
 
 ## Related Documents
 
+- [AI Executive Office](AI_EXECUTIVE_OFFICE.md)
 - [Product Principles](PRINCIPLES.md)
 - [Vision](VISION.md)
 - [System Overview](../architecture/SYSTEM_OVERVIEW.md)

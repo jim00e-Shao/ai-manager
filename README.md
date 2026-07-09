@@ -2,12 +2,17 @@
 
 ## Project Introduction
 
-ai-manager is an **AI-native software engineering platform** for managing model
-quotas, routing tasks, building prompts, and coordinating multi-agent
-development workflows.
+ai-manager is an **AI Executive Office** and emerging **AI Operating System** for
+AI-assisted software development. It helps developers continuously ship software
+by coordinating AI advisors, AI resources, project knowledge, governed
+decisions, scheduling, and execution workflows.
 
 The project is currently in its foundation phase. Documentation defines the
 product and architecture before implementation begins.
+
+Its product personality is an **AI Chief of Staff**: advisors recommend,
+Decision Engine reconciles tradeoffs, and the developer remains the final
+decision maker.
 
 ### The Problem
 
@@ -17,15 +22,17 @@ local conventions, and human memory. Teams lack one explicit system for
 understanding available model capacity, selecting a model, constructing the
 right context, coordinating agents, and reviewing why a decision was made.
 
-ai-manager exists to make those decisions visible, repeatable, and governed by
-versioned product and architecture specifications.
+ai-manager exists to keep development moving by making strategy, resource,
+knowledge, scheduling, and execution decisions visible, repeatable, and governed
+by versioned product and architecture specifications.
 
 ### What ai-manager Is — and Is Not
 
 ai-manager is not another ChatGPT or a general-purpose chat interface. A chat
 product focuses on a conversation between a person and a model. ai-manager
-focuses on the engineering system around AI work: quota, routing, prompts,
-workflow, coordination, and traceability.
+focuses on the executive system around AI work: advisor coordination, resources,
+knowledge continuity, decision governance, scheduling, routing, execution, and
+traceability.
 
 Its first operational user is the AI agent that must understand a repository and
 continue work safely. Its first human user is the individual developer who
@@ -33,13 +40,29 @@ defines intent, reviews decisions, and governs the system.
 
 ## Vision
 
-ai-manager aims to become the specification-driven control plane for AI-native
-software engineering. It will provide one coherent system for deciding which
-model should handle a task, tracking available capacity, constructing reliable
-prompts, coordinating agent work, and preserving enough context for the next
-agent or human reviewer to continue with confidence.
+ai-manager aims to become the specification-driven AI Executive Office for solo
+developers and small teams: one coherent system for sustaining progress across
+changing goals, providers, quota, cost, context, tools, advisors, and workflows.
 
 See [VISION.md](docs/product/VISION.md) for the long-term direction.
+
+## Executive Office Architecture
+
+- **Mission Control** — presents goals, advisors, resources, decisions,
+  schedules, and execution state.
+- **Strategy Council** — gathers Architecture, Resource, Knowledge, Cost, Risk,
+  and Execution advice.
+- **Decision Engine** — reconciles recommendations under governance and human
+  authority.
+- **Resource Manager** — coordinates quota, credits, reset time, cost,
+  capabilities, context capacity, and tool availability.
+- **Hermes** — preserves authoritative project knowledge and context continuity.
+- **Scheduler and AI Router** — sequence approved work and select governed
+  execution paths.
+
+Start with
+[AI_EXECUTIVE_OFFICE.md](docs/product/AI_EXECUTIVE_OFFICE.md) and then follow
+[PROJECT_MAP.md](PROJECT_MAP.md).
 
 ## Product Principles
 
@@ -57,10 +80,12 @@ Read the PR #2 product-definition set:
 
 ## Core Modules
 
-- **Quota Manager** — tracks model usage, limits, and availability.
-- **Model Router** — selects an appropriate model for each task.
-- **Prompt Builder** — creates and manages reusable prompt structures.
-- **Workflow Engine** — coordinates multi-agent work and review.
+- **Strategy Council** — produces specialized recommendations.
+- **Decision Engine** — reconciles goals, policy, resources, cost, risk, and
+  execution.
+- **Resource Manager** — owns the AI resource operating picture.
+- **Knowledge Manager / Hermes** — preserves project knowledge and continuity.
+- **Scheduler and AI Router** — coordinate approved work and execution paths.
 
 Module boundaries remain proposals until they are accepted in the architecture
 and decision documents.
@@ -72,6 +97,7 @@ and decision documents.
 ├── docs/
 │   ├── product/        # Product definition, principles, and vision
 │   ├── architecture/   # System boundaries and component design
+│   ├── providers/      # Provider registry and capability facts
 │   ├── roadmap/        # Delivery phases and priorities
 │   ├── research/       # Module research and open questions
 │   └── decisions/      # Architecture Decision Records (ADRs)

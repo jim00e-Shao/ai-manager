@@ -3,8 +3,9 @@
 ## Status
 
 Initial product guidance. This is not a benchmark or automatic routing policy.
-Model Router must combine current capability facts, quota, health, cost,
-privacy, tool needs, and user policy.
+Decision Engine must combine current capability facts, resources, knowledge,
+cost, risk, execution needs, and user policy. After a plan is approved, AI
+Router and its Model Router submodule select the execution path.
 
 ## Selection Principles
 

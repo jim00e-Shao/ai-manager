@@ -2,77 +2,86 @@
 
 ## Status
 
-Conceptual component map. Responsibilities are aligned with
-[SYSTEM_OVERVIEW.md](SYSTEM_OVERVIEW.md); interfaces and implementation choices
-remain undefined.
+Conceptual component map aligned with
+[SYSTEM_OVERVIEW.md](SYSTEM_OVERVIEW.md). Detailed contracts are in
+[COMPONENT_CONTRACTS.md](COMPONENT_CONTRACTS.md).
 
-## AI Manager
+## AI Executive Office
 
-Coordinates product context, policy, quota, routing, prompts, workflows, tools,
-observability, and human-control boundaries. It owns the decision sequence and
-durable explanations without performing model inference itself.
+Coordinates developer goals, Strategy Council, Decision Engine, resources,
+knowledge, scheduling, execution, and Mission Control. It expresses the AI Chief
+of Staff product personality while preserving human authority.
 
-## Dashboard
+## Strategy Council
 
-Presents authoritative manager state and human controls. It collects goals,
-constraints, and approvals without owning orchestration policy or calling
-external providers directly.
+Collects specialized Architecture, Resource, Knowledge/Hermes, Cost, Risk, and
+Execution advisor recommendations. Advisors do not execute.
 
-## Quota Manager
+## Decision Engine
 
-Tracks usage, limits, availability, and policy inputs needed to determine
-whether a model can accept work.
+Reconciles advisor input, resource facts, knowledge, policy, deadline, and human
+constraints into an explainable proposed plan.
 
-Research: [QUOTA_MANAGER.md](../research/QUOTA_MANAGER.md)
+## Resource Manager
 
-## Model Router
+Maintains the operating picture for quota, credits, reset time, cost, provider
+and model capability, health, context capacity, and tool availability.
 
-Evaluates task requirements and eligible models, then returns an explainable
-routing decision.
+### Quota Manager
 
-Research: [MODEL_ROUTER.md](../research/MODEL_ROUTER.md)
+Normalizes quota observations and scheduling status. Its existing product and
+architecture specifications remain authoritative.
+
+### Provider Registry and Model Catalog
+
+Supply sourced external capability, model, surface, health, and cost-class facts.
+They do not choose the plan.
+
+## Knowledge Manager / Hermes
+
+Finds authoritative project knowledge, assembles context, preserves continuity,
+and governs manager-owned memory across advisors, sessions, and workflows.
+
+## Scheduler
+
+Sequences approved work across dependencies, resource windows, waits,
+reassignments, task splits, and human approvals.
+
+## AI Router
+
+Selects an eligible execution path inside an approved plan. Model Router is its
+model-ranking submodule, not the product's decision core.
 
 ## Prompt Builder
 
-Composes versioned prompt inputs from reusable definitions, task context, and
-model-specific constraints.
-
-Research: [PROMPT_BUILDER.md](../research/PROMPT_BUILDER.md)
+Builds reproducible model-ready input from an approved execution step and
+Hermes-provided context.
 
 ## Workflow Engine
 
-Coordinates agent roles, task state, review boundaries, and workflow outcomes.
-Detailed research remains to be created.
-
-## Context Manager
-
-Assembles bounded, authoritative task context with provenance, freshness,
-conflicts, and omissions made explicit.
-
-## Memory Manager
-
-Preserves durable project, decision, workflow, and outcome knowledge
-independently of any individual model, tool, or session.
+Executes accepted multi-step workflows as observable state transitions under
+Scheduler and review-gate control.
 
 ## Plugin Manager
 
-Controls capability declaration, permission, lifecycle, and observability for
-external providers, IDEs, Git systems, MCP servers, and tools.
+Controls Provider Adapters, MCP servers, and external-tool capability,
+permission, lifecycle, compatibility, and health.
+
+## Mission Control Dashboard
+
+Presents goals, advisors, resources, knowledge, decisions, schedules, and
+execution state. It exposes human confirmation and control without owning
+policy.
 
 ## External Capabilities
 
-AI Providers, IDEs, Git, MCP servers, and other tools remain outside
-ai-manager. They execute native capabilities through Plugin Manager boundaries
-without taking ownership of manager policy or memory.
-
-## Interfaces and Data Ownership
-
-Conceptual interfaces, state, dependencies, and failure semantics are defined in
-[COMPONENT_CONTRACTS.md](COMPONENT_CONTRACTS.md). Technology-specific interfaces
-and persistence choices remain undefined.
+OpenAI, Anthropic, Google, OpenRouter, Ollama, Codex, Claude Code, Gemini
+developer tools, OpenHands, IDEs, Git, MCP, and other tools remain external.
 
 ## Open Questions
 
-- Which component owns provider capability metadata?
-- How are routing decisions and prompt versions linked?
-- Which workflow events require durable storage?
+- Which initial read-only Resource Manager views deliver the first useful
+  Mission Control?
+- Which decisions require all six advisors versus a smaller council?
+- Which scheduler state must persist before execution exists?
+- How should Hermes quantify context-continuity value without overstating it?

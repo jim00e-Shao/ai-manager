@@ -97,6 +97,41 @@ correct choice.
 The preferred model is the least costly eligible model that can satisfy the
 documented requirements with acceptable confidence.
 
+## 11. The Best AI Is Not Always the Smartest AI
+
+The best resource is the one that advances the goal under current context,
+quota, cost, timing, tool, and risk constraints. Existing context or immediate
+availability can matter more than maximum model capability.
+
+## 12. AI Resource Coordination Is as Important as AI Capability
+
+Capability without available quota, credits, tools, context, or time cannot
+deliver work. ai-manager treats resource state and scheduling as first-class
+product inputs.
+
+## 13. Context Continuity Is a First-Class Resource
+
+Context already held by an advisor, session, or project memory has measurable
+value. Reassignment must preserve authoritative sources, decisions, open
+questions, and next steps.
+
+## 14. Advisors Advise; Humans Decide
+
+Specialized advisors expose tradeoffs. Decision Engine reconciles their input.
+Humans retain final authority over goals, consequential actions, architecture,
+permissions, cost, and accepted risk.
+
+## 15. Decisions Reconcile Architecture, Resources, Cost, Risk, and Execution
+
+No single lens owns the decision. Recommendations identify hard constraints,
+preferences, conflicts, uncertainty, and the reasons one plan is preferred.
+
+## 16. Continuous Productivity Matters More Than Isolated Task Completion
+
+The product should sustain useful progress across quota resets, unavailable
+providers, context handoffs, and review gates. Waiting, reassigning, preserving
+context, and splitting work can be better decisions than immediate execution.
+
 ## Applying the Principles
 
 Product and architecture proposals should state which principles they support

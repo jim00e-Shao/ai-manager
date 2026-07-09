@@ -2,9 +2,9 @@
 
 ## Status
 
-Draft shared specification for Quota Manager, Model Router, Workflow Engine, and
-Plugin Manager. Registry facts require source provenance and review before they
-become routing policy.
+Draft shared specification for Resource Manager, Decision Engine, AI Router,
+Workflow Engine, and Plugin Manager. Registry facts require source provenance
+and review before they become decision or routing inputs.
 
 ## Purpose
 
@@ -144,10 +144,20 @@ overwrite a higher-authority fact.
 Uses entry kind, account scope, quota type, reset policy, source method, and
 health. It remains authoritative for normalized availability status.
 
-### Model Router
+### Resource Manager
 
-Uses current Model and Capability facts, risk notes, cost category, and
-recommended usage. It remains authoritative for selection decisions.
+Combines provider/model facts with quota, cost, credits, health, context
+capacity, and tool availability.
+
+### Decision Engine
+
+Uses current capability, risk, cost, and recommended-usage facts as one input to
+the governed plan. It remains authoritative for the recommendation.
+
+### AI Router
+
+Uses eligible Provider, Model, surface, and adapter facts for an approved
+execution step. Model Router ranks models only inside this boundary.
 
 ### Workflow Engine
 

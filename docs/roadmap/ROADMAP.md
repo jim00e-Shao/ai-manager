@@ -2,415 +2,359 @@
 
 ## Status
 
-Draft product roadmap. Stages define capability order and exit conditions, not
-fixed dates or implementation technologies.
+Draft product roadmap for the AI Executive Office. Stages define capability
+order and exit evidence, not dates or implementation technology.
 
 ## Roadmap Rules
 
-- Documentation and review precede implementation in every stage.
-- Each stage must produce an independently understandable capability.
-- A stage may refine later stages but should not silently implement them.
-- Exit criteria describe evidence required to advance; code completion alone is
-  insufficient.
-- Human control, observability, and explainability apply throughout the roadmap.
+- Documentation and review precede implementation.
+- Each stage produces independently reviewable value.
+- Advisor recommendations never grant execution authority.
+- Human control, explainability, observability, and context continuity apply to
+  every stage.
+- Existing Quota Manager and Provider Registry specifications remain reusable
+  assets under Resource Manager.
+- Exit criteria require evidence; code completion alone is insufficient.
 
 ## N0 — Foundation
 
 ### Goal
 
-Establish the product specification, navigation model, conceptual architecture,
-decision process, and contribution rules needed for coherent human and AI-agent
-development.
+Establish Documentation First governance, product specifications, architecture
+contracts, provider facts, and contribution rules.
 
 ### Scope
 
-- Documentation-first repository structure.
-- Product definition, principles, and vision.
-- Conceptual system overview and responsibility boundaries.
-- N0–N7 roadmap.
-- Research areas and ADR process.
-- AI-agent collaboration and review rules.
+- Repository navigation and document authority.
+- Product principles and initial vision.
+- Conceptual architecture and component contracts.
+- Quota Manager specification.
+- Provider Registry and Capability Matrix.
+- ADR and review workflow.
 
 ### Non-Goals
 
-- Application code or user interfaces.
-- Technology selection.
-- Provider integrations.
-- Executable quota, routing, prompt, or workflow behavior.
+- Product implementation.
+- Framework or infrastructure selection.
+- Autonomous external execution.
 
 ### Exit Criteria
 
-- Product, principles, vision, system overview, and roadmap are reviewed.
-- Repository navigation identifies every authoritative foundation document.
-- MVP scope and non-goals are explicit.
-- No implementation is required to understand intended product direction.
+- Foundation documents are reviewed and merged.
+- Product decisions can be traced through PROJECT_MAP.
+- Quota and provider facts have explicit provenance and boundaries.
+- No implementation is needed to understand the baseline.
 
-## N1 — Quota Manager
-
-### Goal
-
-Give an individual developer a coherent, trustworthy view of available AI model
-capacity and the scheduling constraints that affect planned work.
-
-### Non-Goals
-
-- Model-quality ranking.
-- Full routing decisions.
-- Automatic purchasing or plan changes.
-- Universal provider coverage.
-- Enterprise budgets, billing allocation, or chargeback.
-
-### N1.1 — Quota Specification
-
-#### Goal
-
-Define provider-neutral quota behavior, entities, status, transitions, safety
-rules, and MVP boundaries before implementation.
-
-#### Scope
-
-- Quota product research and source types.
-- Manual, subscription, API, and estimated quota concepts.
-- Reset, cooldown, warning, privacy, and failure behavior.
-- Conceptual data model and state machine.
-- Quota Manager component contract and architecture specification.
-- Provider Registry kinds, quota classes, and source-provenance baseline.
-
-#### Exit Criteria
-
-- Required quota entities and relationships are documented.
-- `available`, `warning`, `limited`, `exhausted`, `cooling_down`, `unknown`,
-  and `disabled` have unambiguous meanings.
-- Decision precedence, fallback, and transition events are documented.
-- Manual MVP and explicit non-goals are reviewable.
-- Initial provider entries distinguish subscription, API, local, platform, and
-  gateway quota ownership.
-- No implementation choice is required to understand expected behavior.
-
-### N1.2 — Manual Quota Dashboard
-
-#### Goal
-
-Let an individual developer maintain and inspect provider-neutral quota status
-without automatic provider access.
-
-#### Scope
-
-- Read-only provider interaction.
-- Local Provider, Model, Account, and optional Subscription records.
-- Manual quota observations and history.
-- `available`, `warning`, `exhausted`, and `unknown` display.
-- Optional usage, limit, unit, warning threshold, and reset time.
-- Visible source, freshness, confidence, and stale state.
-
-#### Exit Criteria
-
-- A user can record a Provider, Model, Account, and manual observation.
-- Dashboard displays required states, source, and last-updated time.
-- Optional reset time includes timezone and does not imply automatic renewal.
-- Updating status preserves prior observation history.
-- No login, scraping, limit bypass, or provider web automation exists.
-
-### N1.3 — Provider Status Tracking
-
-#### Goal
-
-Accept permitted provider status observations while preserving source authority,
-privacy, and safe failure behavior.
-
-#### Scope
-
-- A limited set of validated, permitted provider or plugin sources.
-- Source health, authorization result, freshness, and provenance.
-- Provider-confirmed status and reset observations.
-- Explicit stale, malformed, conflicting, and unavailable source behavior.
-- Manual fallback that remains visibly manual.
-
-#### Exit Criteria
-
-- Each supported source has documented permissions and limitations.
-- Provider errors cannot be misreported as quota exhaustion.
-- Stale or conflicting data produces visible degradation or `unknown`.
-- Credentials and sensitive identifiers do not enter quota records or logs.
-- Manual and provider-confirmed observations remain distinguishable.
-
-### N1.4 — Usage History
-
-#### Goal
-
-Make quota changes and consumption inspectable over time without collecting
-unnecessary sensitive data.
-
-#### Scope
-
-- Append-oriented UsageRecords and quota observations.
-- Status transition history.
-- Reset and cooldown events.
-- Provenance, correction, supersession, and retention behavior.
-- Basic history views and trend inputs.
-
-#### Exit Criteria
-
-- A user can trace current status to source observations and transitions.
-- Corrections preserve provenance instead of silently rewriting history.
-- Retention and deletion behavior is documented and enforceable.
-- History excludes credentials and redacts sensitive account identifiers.
-- Missing event history is visible as degraded observability.
-
-### N1.5 — Router Integration
-
-#### Goal
-
-Provide Model Router with explainable, demand-aware capacity eligibility without
-moving model-selection responsibility into Quota Manager.
-
-#### Scope
-
-- Eligibility request with target scope and expected demand.
-- Status, freshness, confidence, reset, and restriction output.
-- Multi-window “most restrictive applicable limit” behavior.
-- Explicit no-capacity and unknown-capacity outcomes.
-- Correlation between quota snapshot and routing decision.
-
-#### Exit Criteria
-
-- Router can distinguish schedulable, restricted, exhausted, cooldown, unknown,
-  and disabled capacity.
-- Every eligibility result references its policy and quota basis.
-- Unknown or stale required capacity cannot silently become eligible.
-- Quota Manager does not rank model quality or choose the final model.
-- A routing decision can be reconstructed from its referenced quota snapshot.
-
-## N2 — Model Router
+## N1 — Product Repositioning
 
 ### Goal
 
-Recommend an eligible model for a documented task and explain the decision.
+Reposition ai-manager as an AI Executive Office, AI Operating System, and AI
+Resource Orchestration Platform.
 
 ### Scope
 
-- A documented task-requirement model.
-- Provider-neutral model capability facts.
-- Provider Registry, Model Catalog, and Capability Matrix inputs.
-- Eligibility rules based on quota and hard constraints.
-- Policy across quality, cost, latency, context capacity, and tool needs.
-- Fallback and no-eligible-model outcomes.
-- Inspectable candidates, rejections, selection, and explanation.
-- Durable routing decision records.
+- AI Chief of Staff product personality.
+- Continuous developer productivity.
+- Strategy Council and advisor roles.
+- Decision Governance and Conflict Resolution.
+- Seven-layer system architecture.
+- Revised component contracts and N0–N9 roadmap.
 
 ### Non-Goals
 
-- Prompt authoring.
-- Workflow execution.
-- Automatic task execution.
-- Self-modifying routing policy.
-- Claims of objectively ranking every model.
+- Implementing advisors or Decision Engine.
+- Building Mission Control UI.
+- Selecting models for advisor roles.
+- Changing external provider integrations.
 
 ### Exit Criteria
 
-- A supported task can receive a recommendation or explicit no-route outcome.
-- Every recommendation identifies considered candidates and decisive constraints.
-- Routing never treats stale or unknown quota as certain capacity.
-- A user can override or reject a recommendation.
-- A later human or AI agent can reconstruct why the decision was made.
-- Registry entry, model identity, serving path, and capability verification time
-  are retained with the routing explanation.
+- Canonical AI Executive Office positioning is reviewed.
+- Advisors recommend, Decision Engine aggregates, and humans decide.
+- Router is documented as an execution subcomponent.
+- Quota, providers, context, cost, and tools are defined as resources.
+- Roadmap no longer treats Quota → Router → Prompt → Workflow as the product
+  spine.
 
-## N3 — Prompt Builder
+## N2 — Resource Manager
 
 ### Goal
 
-Build reproducible model inputs from documented instructions and relevant
-manager-owned context.
+Provide a trustworthy operating picture of AI resources for decisions,
+scheduling, and continuous work.
 
 ### Scope
 
-- Versioned prompt definitions.
-- Required and optional context inputs.
-- Context selection and provenance.
-- Variable validation and missing-context reporting.
-- Model-aware rendering that preserves product intent.
-- Records linking prompts, context, selected models, and outcomes.
+- Quota Manager states, history, reset, and cooldown.
+- Provider Registry and Model Catalog.
+- Credits, cost class, capability, adapter health, and tool availability.
+- Manual read-only resource records.
+- Source, freshness, confidence, and uncertainty.
+- Resource snapshots and reservation concepts.
 
 ### Non-Goals
 
-- A general content-writing studio.
-- Hidden prompt optimization.
-- Long-term memory retrieval.
-- Workflow orchestration.
-- Automatic promotion based only on model preference.
+- Final plan selection.
+- Model quality ranking.
+- Automatic provider login, scraping, or web automation.
+- Enterprise financial accounting.
 
 ### Exit Criteria
 
-- The same prompt version and context references can be reconstructed.
-- Missing required context blocks execution rather than being silently ignored.
-- Model-specific adaptations remain inspectable.
-- Prompt changes follow documentation and review rules.
-- Routing and prompt records can be linked for an action.
+- Mission Control can read a provider-neutral resource inventory.
+- Every dynamic fact exposes source and freshness.
+- Unknown and stale facts cannot become eligible silently.
+- Quota, provider health, capability, cost, and reset remain distinct.
+- Resource snapshot can be attached to a later decision record.
 
-## N4 — Workflow Engine
+## N3 — Strategy Council and Decision Governance
 
 ### Goal
 
-Coordinate documented AI work as observable state transitions with explicit
-human-control boundaries.
+Produce specialized advisor recommendations and reconcile them into explainable,
+human-governed plans.
 
 ### Scope
 
-- Versioned workflow definitions.
-- Steps, roles, state transitions, and completion conditions.
-- Model and prompt requests through manager-owned components.
-- Human approval and rejection gates.
-- Failure, retry, pause, resume, and cancellation behavior.
-- Observable agent and workflow history.
+- Architecture, Resource, Knowledge/Hermes, Cost, Risk, and Execution Advisors.
+- Shared recommendation contract.
+- Decision Engine inputs, weights, vetoes, and alternatives.
+- Conflict Resolution.
+- Human confirmation and override.
+- Decision audit trail.
 
 ### Non-Goals
 
-- Unbounded autonomous agents.
-- A general business-process platform.
-- Silent expansion of permissions.
-- Tool-specific implementation inside the workflow core.
-- Removal of human accountability.
+- Advisors executing tools.
+- Self-modifying policy.
+- Permanent provider or model assignments to advisor roles.
+- Fully autonomous decisions.
 
 ### Exit Criteria
 
-- A documented workflow can progress through success and failure paths.
-- Current state and next allowed transitions are inspectable.
-- Consequential steps enforce their documented review gates.
-- Retries cannot bypass quota, routing, or permission policy.
-- A workflow record explains which agents, prompts, models, and approvals were
-  involved.
+- Each advisor emits sourced recommendations and confidence.
+- Decision Engine explains accepted and rejected advice.
+- Hard constraints and preferences are distinguishable.
+- Wait, reassign, split, preserve-context, and execute recommendations are
+  supported conceptually.
+- Human override is attributable and auditable.
 
-## N5 — Tool Integrations
+## N4 — Mission Control Dashboard
 
 ### Goal
 
-Allow governed workflows to use external AI and development tools through
-observable, permission-aware boundaries.
+Give a solo developer one clear view of goals, advisors, resources, knowledge,
+decisions, schedules, and execution state.
 
 ### Scope
 
-- A small set of high-value model and developer-tool integrations.
-- Provider Adapters implementing reviewed identity, discovery, quota, execution,
-  health, and version boundaries.
-- Explicit capabilities and permissions.
-- Standard action, result, error, and provenance concepts.
-- Tool health and availability reporting.
-- Audit records for tool requests and outcomes.
-- Safe failure and revocation behavior.
+- Mission and project overview.
+- Advisor recommendations and conflicts.
+- Resource availability, quota, cost, reset, and health.
+- Decision explanation and confirmation.
+- Wait, reassign, split, preserve, approve, reject, override, pause, retry, and
+  cancel controls.
+- Freshness and uncertainty.
 
 ### Non-Goals
 
-- Supporting every tool.
-- Replacing integrated tools' native functionality.
-- Granting broad credentials by default.
-- A public plugin marketplace.
-- Allowing tools to own manager policy or memory.
+- Direct provider control from the Dashboard.
+- Hidden autonomous actions.
+- Full team administration.
+- General chat-product replacement.
 
 ### Exit Criteria
 
-- Supported tools declare capabilities and required permissions.
-- Supported Provider Adapters preserve source, version, and upstream provenance.
-- Users can inspect and revoke access.
-- Tool actions and failures are visible in workflow history.
-- A tool outage or denial produces an explicit, recoverable outcome.
-- Integrations cannot bypass manager-owned policy and review gates.
+- Developer can inspect the current operating picture.
+- Every consequential recommendation exposes its reason and required action.
+- Stale and incomplete state is visible.
+- Dashboard commands pass through AI Executive Office.
+- Human final authority is usable, not merely documented.
 
-## N6 — Context / Memory
+## N5 — Knowledge Manager / Hermes
 
 ### Goal
 
-Preserve and retrieve durable, relevant development context independently of
-individual models, tools, and sessions.
+Preserve authoritative project knowledge and context continuity across advisors,
+sessions, models, tasks, and decisions.
 
 ### Scope
 
-- Manager-owned memory boundaries and provenance.
-- Project, decision, workflow, and outcome context.
-- Explicit write, review, correction, and deletion behavior.
-- Context retrieval based on documented task needs.
-- Freshness, confidence, and conflict visibility.
-- Links between retained context and its authoritative source.
+- Documentation, ADR, PR history, decision log, workflow outcome, and memory
+  sources.
+- Authority, provenance, freshness, conflict, and access.
+- Context packages for advisors and execution.
+- Handoff packages for wait, reassignment, split, and compression.
+- Memory correction, supersession, and deletion.
 
 ### Non-Goals
 
-- Recording every interaction forever.
-- Treating model-generated summaries as unquestioned truth.
-- Provider-owned memory as the canonical store.
+- Treating all conversation history as durable memory.
 - Replacing repository documentation.
-- Fully automatic memory writes without policy.
+- Provider-owned memory as source of truth.
+- Unreviewed automatic knowledge promotion.
 
 ### Exit Criteria
 
-- Context survives model and provider changes.
-- Retrieved memory exposes source, scope, and freshness.
-- Conflicts with authoritative documentation are visible and resolvable.
-- Users can inspect, correct, and remove retained memory.
-- A new agent can resume a supported workflow with sufficient relevant context.
+- A new advisor can resume with sufficient sourced context.
+- Documentation remains more authoritative than memory.
+- Context conflicts and omissions are visible.
+- Reassignment preserves decisions and open questions.
+- Users can inspect and correct durable memory.
 
-## N7 — MCP / Plugin System
+## N6 — Scheduler and Workflow Coordination
 
 ### Goal
 
-Create an open extension system for models, quota sources, tools, context
-providers, routing policies, and workflows without weakening core governance.
+Sustain productive work across time, dependencies, resource windows,
+confirmations, and failures.
 
 ### Scope
 
-- Documented extension boundaries and capability declarations.
-- Plugin-distributed Provider Adapters and model-catalog extensions.
-- MCP integration where it fits the accepted product model.
-- Plugin discovery, configuration, lifecycle, and compatibility concepts.
-- Permission isolation and explicit user approval.
-- Health, provenance, version, and failure reporting.
-- Reference extensions demonstrating supported boundaries.
+- Approved task sequence and dependencies.
+- Wait and wake conditions.
+- Reset, cooldown, reservation, and deadline awareness.
+- Reassignment and task splitting.
+- Context preservation before delay or handoff.
+- Workflow state, review gates, retry, pause, resume, and cancellation.
 
 ### Non-Goals
 
-- Executing untrusted extensions without isolation or consent.
-- Guaranteeing compatibility with every external plugin ecosystem.
-- Allowing extensions to overwrite core policy silently.
-- A commercial marketplace.
-- Stabilizing extension contracts before core boundaries are validated.
+- Unbounded autonomous operation.
+- Changing the approved goal.
+- Bypassing quota, permission, or review policy.
+- General business-process automation.
 
 ### Exit Criteria
 
-- A third party can build an extension from public documentation.
-- A provider plugin can declare supported registry entries, capability groups,
-  permissions, authentication, health, and compatibility.
-- Extensions declare capabilities, permissions, and compatibility.
-- Users can inspect, enable, disable, and remove extensions.
-- Extension actions remain observable and subject to manager policy.
-- A failing or incompatible extension cannot corrupt core decision history.
+- Scheduled tasks have explicit owner, dependency, resource, and wake state.
+- Waiting includes useful alternative work where possible.
+- Reassignment cannot proceed without context handoff.
+- Workflow history links decisions, routes, approvals, and outcomes.
+- Missed wake conditions and schedule conflicts are observable.
+
+## N7 — AI Router and Provider Adapters
+
+### Goal
+
+Dispatch approved execution steps through eligible, explainable provider,
+surface, tool, and model paths.
+
+### Scope
+
+- AI Router execution-path selection.
+- Model Router as a model-ranking submodule.
+- Provider Adapter identity, discovery, health, version, and execution.
+- Capability, quota, cost, permission, and risk filtering.
+- Fallback and no-route outcomes.
+- Prompt Builder integration.
+
+### Non-Goals
+
+- Replacing Decision Engine.
+- Selecting project strategy.
+- Allowing adapters to own policy or memory.
+- Universal provider support.
+
+### Exit Criteria
+
+- Route selection references approved plan and resource snapshot.
+- Provider, surface, adapter, and model provenance is retained.
+- Rejected candidates and fallback reasons are explainable.
+- No eligible route returns a safe explicit result.
+- Router cannot change architecture, risk, or human-control decisions.
+
+## N8 — MCP / Plugin System
+
+### Goal
+
+Allow reviewed extensions to add advisors, providers, resources, knowledge, and
+tools without weakening governance.
+
+### Scope
+
+- Plugin manifests, capabilities, permissions, health, and versions.
+- Provider Adapter plugins.
+- MCP client/server boundaries.
+- Advisor and knowledge-source extension contracts.
+- Lifecycle, compatibility, isolation, and provenance.
+
+### Non-Goals
+
+- Trusting plugins by default.
+- Executing untrusted code without isolation.
+- A commercial marketplace.
+- Allowing extensions to overwrite core policy.
+
+### Exit Criteria
+
+- Third parties can build extensions from public contracts.
+- Users can inspect, enable, disable, and remove plugins.
+- Plugin actions remain governed and observable.
+- Failure cannot corrupt decision or knowledge history.
+- Permissions and compatibility are explicit.
+
+## N9 — Multi-Project / Team Mode
+
+### Goal
+
+Extend the AI Executive Office from one developer/project to coordinated
+portfolios and small teams.
+
+### Scope
+
+- Multiple project goals and resource commitments.
+- Shared versus private knowledge boundaries.
+- Team roles, approvals, and delegated authority.
+- Portfolio scheduling and budget.
+- Cross-project advisor and resource visibility.
+- Audit and handoff between people.
+
+### Non-Goals
+
+- Enterprise breadth before individual use is coherent.
+- Replacing issue trackers or organizational planning systems.
+- Silent sharing of project context.
+- Removing project-level autonomy.
+
+### Exit Criteria
+
+- Project data and authority remain isolated by policy.
+- Shared resources cannot be double-booked silently.
+- Team decisions identify human authority and advisor inputs.
+- Cross-project scheduling explains tradeoffs.
+- A solo developer experience remains first class.
 
 ## Sequence and Dependencies
-
-The stages are ordered by product dependency:
 
 ```text
 N0 Foundation
   ↓
-N1 Quota Manager
+N1 Product Repositioning
   ↓
-N2 Model Router
+N2 Resource Manager
   ↓
-N3 Prompt Builder
+N3 Strategy Council + Decision Governance
   ↓
-N4 Workflow Engine
+N4 Mission Control Dashboard
   ↓
-N5 Tool Integrations
+N5 Knowledge Manager / Hermes
   ↓
-N6 Context / Memory
+N6 Scheduler + Workflow Coordination
   ↓
-N7 MCP / Plugin System
+N7 AI Router + Provider Adapters
+  ↓
+N8 MCP / Plugin System
+  ↓
+N9 Multi-project / Team Mode
 ```
 
-Research may run ahead of this sequence, but implementation should not depend on
-an undefined earlier boundary. A stage can be split into smaller reviewed
-increments while preserving its exit criteria.
+Research may run ahead, but implementation must not rely on an undefined earlier
+authority or contract. Each stage can be split into small reviewed increments.
 
 ## Roadmap Change Process
 
-Changes to stage goals, boundaries, order, or exit criteria require updates to
-the affected product and architecture documents. Technology choices belong in
-separate ADRs after the relevant conceptual boundary is accepted.
+Changes to stage goals, authority, order, or exit criteria require updates to
+affected product, architecture, advisor, resource, and governance documents.
+Technology choices belong in separate ADRs.
