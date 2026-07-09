@@ -16,8 +16,9 @@ provider-neutral scheduling facts. It helps a developer answer:
 - Is usage approaching a limit?
 - Should work proceed, be deferred, or require manual review?
 
-Quota Manager reports capacity. It does not select the best model; Model Router
-uses quota status as one routing input.
+Quota Manager reports capacity. It does not select the plan or best model;
+Resource Manager consumes quota status, and AI Router's Model Router submodule
+uses eligibility only after Decision Engine approves an execution plan.
 
 ## User Problems
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft product specification for N1.2 Manual Quota Dashboard.
+Draft product specification retained as an N2 Resource Manager increment.
 
 ## Product Goal
 
@@ -134,9 +134,9 @@ The first MVP does not:
 
 ## Later Increments
 
-- N1.3 adds permitted provider status sources.
-- N1.4 adds richer usage history.
-- N1.5 supplies quota eligibility to Model Router.
+- Later N2 increments add permitted provider status sources and richer usage
+  history.
+- N7 supplies quota eligibility to AI Router and its Model Router submodule.
 
 ## Related Documents
 

@@ -2,707 +2,846 @@
 
 ## Status
 
-Draft architecture contract. This document defines conceptual responsibilities
-and data boundaries without selecting implementation technologies, protocols,
-schemas, process boundaries, or deployment topology.
+Draft conceptual contracts for the AI Executive Office architecture. Inputs and
+outputs are information contracts, not API schemas or implementation topology.
 
 ## Contract Rules
 
-- A component owns only the responsibilities and state named in its contract.
-- Inputs and outputs are conceptual information, not finalized API schemas.
-- Dependencies may be direct or mediated by AI Manager; no call topology is
-  implied.
-- Failures must remain explicit and observable. A component must not silently
-  invent missing data or expand its authority.
-- Future extensions require documentation review before they change a boundary.
+- Components own only documented responsibility and state.
+- Advisors recommend; Decision Engine aggregates; humans decide; Execution acts.
+- Missing or stale facts remain visible.
+- External systems cannot acquire manager authority through integration.
+- Contract changes require documentation review before implementation.
 
-## 1. AI Manager
+## 1. AI Executive Office
 
 ### Purpose
 
-Act as the application control plane that coordinates user intent, policy,
-component decisions, human-control boundaries, and observable outcomes.
+Act as the AI Chief of Staff and application control plane around developer
+goals, advisors, resources, knowledge, decisions, scheduling, and execution.
 
 ### Responsibilities
 
-- accept goals, task constraints, and approval boundaries;
-- coordinate quota, routing, prompt, workflow, context, memory, plugin, and
-  presentation capabilities;
-- enforce documented policy and component boundaries;
-- maintain correlation across a task's decisions and actions;
-- return coherent state and explanations to the Dashboard;
-- prevent models and integrations from becoming authoritative over manager
-  policy or durable memory.
+- maintain the current operating picture;
+- coordinate Strategy Council, Decision Engine, Resource Manager, Hermes,
+  Scheduler, and Execution;
+- enforce product policy and human-control boundaries;
+- correlate goals, recommendations, decisions, actions, and outcomes;
+- expose coherent state through Mission Control.
 
 ### Input
 
-- user commands, goals, preferences, and approvals;
-- component results, warnings, and failures;
-- product policy and configuration;
-- provider and integration events;
-- context and memory references.
+- developer goals, priorities, constraints, approvals, and overrides;
+- advisor recommendations;
+- resource and knowledge snapshots;
+- decisions, schedules, execution events, and failures.
 
 ### Output
 
-- coordinated requests to internal components;
-- user-visible status, decisions, explanations, and required approvals;
-- task lifecycle events and correlation identifiers;
-- policy decisions and rejected-operation reasons;
-- records proposed for durable memory.
+- advisor and decision requests;
+- explainable recommendations and confirmation requests;
+- approved plan and scheduling intent;
+- Mission Control state;
+- correlated decision and outcome records.
 
 ### Internal State
 
-- active task and operation state;
-- correlation between user intent, component decisions, and outcomes;
-- current policy and approval context;
-- component availability and health summary;
-- references to authoritative context and durable records.
+- active goals and priorities;
+- operating-picture version;
+- pending decisions and confirmations;
+- component health and correlation references;
+- current approved plan.
 
 ### External Dependencies
 
-- Dashboard or other approved presentation clients;
-- all manager-owned components defined in this document;
-- documented configuration and product specifications;
-- external capabilities accessed through Plugin Manager.
+- Mission Control Dashboard;
+- all manager-owned components;
+- authoritative product specifications;
+- external capabilities only through Execution Layer.
 
 ### Failure Modes
 
-- required component unavailable or returns an invalid result;
-- conflicting policy or approval state;
-- incomplete task requirements;
-- stale component health or configuration;
-- loss of correlation between request, decision, and outcome;
-- attempted boundary bypass by a component or external integration.
+- operating picture inconsistent or stale;
+- required component unavailable;
+- goal and plan lose correlation;
+- human authority or policy bypass attempted;
+- execution diverges from approved plan.
 
 ### Observability
 
-- task and operation lifecycle;
-- component requests, outcomes, duration, and failure category;
-- policy and approval decisions;
-- correlation across routing, prompting, workflows, provider actions, and
-  memory writes;
-- boundary violations and rejected requests.
+- goal and plan lifecycle;
+- component requests and health;
+- recommendations, confirmations, overrides, and dispatch;
+- divergence and boundary violations;
+- end-to-end outcome correlation.
 
 ### Future Extensions
 
-- team-scoped policies and shared control planes;
-- delegated approval models;
-- planning across multiple workflows;
-- additional presentation clients;
-- distributed coordination, subject to a future ADR.
+- multi-project portfolio coordination;
+- team roles and delegated approvals;
+- scenario planning;
+- additional presentation clients.
 
-## 2. Quota Manager
+## 2. Strategy Council
 
 ### Purpose
 
-Represent provider capacity as trustworthy scheduling information before AI work
-is assigned.
+Produce specialized, inspectable recommendations before Decision Engine forms a
+plan.
 
 ### Responsibilities
 
-- accept quota observations from approved sources;
-- normalize provider-specific usage, limits, reset windows, and availability;
-- preserve source, freshness, and uncertainty;
-- evaluate reset, cooldown, threshold, and scheduling eligibility;
-- maintain explicit availability status and transition history;
-- distinguish provider-confirmed, manual, and estimated observations;
-- report capacity facts without selecting a model;
-- prevent unknown or stale data from appearing certain.
+- select relevant advisor roles;
+- provide a shared goal and authoritative baseline;
+- collect independent architecture, resource, knowledge, cost, risk, and
+  execution recommendations;
+- preserve disagreement and confidence;
+- prevent advisors from executing directly.
 
 ### Input
 
-- provider quota observations and timestamps;
-- manual observations and explicit overrides;
-- estimated observations with method, confidence, and expiration;
-- configured limits and reset rules;
-- quota policy, warning thresholds, and freshness limits;
-- cooldown, account enabled state, and expected demand;
-- model-to-provider capability references;
-- requests for capacity eligibility.
+- goal and decision question;
+- product policy and architecture;
+- resource and knowledge snapshots;
+- advisor availability and role versions.
 
 ### Output
 
-- normalized quota snapshots;
-- `available`, `warning`, `limited`, `exhausted`, `cooling_down`,
-  `unknown`, or `disabled` status with reason;
-- reset and scheduling information;
-- uncertainty and provenance;
-- status-change and observation events;
-- Dashboard read model and historical observation references;
-- quota-related warnings and failure reasons.
+- structured advisor recommendations;
+- missing-evidence and abstention reports;
+- conflicts and shared assumptions;
+- reevaluation triggers.
 
 ### Internal State
 
-- latest observations by provider, account, model, and quota dimension;
-- observation freshness and source provenance;
-- Provider, Model, Account, Subscription, policy, and window references;
-- normalized limits, usage, reset windows, cooldowns, and thresholds;
-- manual overrides and QuotaEstimates;
-- current AvailabilityStatus and transition history;
-- source health and synchronization status.
+- active council request;
+- participating advisors and role versions;
+- recommendation completeness;
+- source and confidence references.
 
 ### External Dependencies
 
-- provider quota sources accessed through approved integrations;
-- time source for freshness and reset evaluation;
-- configuration defining normalization and scheduling policy;
-- Plugin Manager for provider-specific quota adapters.
-- AI Manager for policy, user control, and correlated operations;
-- Dashboard as a read-only consumer through AI Manager;
-- Model Router as a future eligibility consumer through the documented boundary.
+- AI Executive Office;
+- Knowledge Manager / Hermes;
+- Resource Manager;
+- advisor definitions in [ADVISOR_MODEL.md](ADVISOR_MODEL.md).
 
 ### Failure Modes
 
-- provider data unavailable, delayed, contradictory, or malformed;
-- manual observations stale, conflicting, or missing provenance;
-- estimate expired, invalidated, or too uncertain;
-- unknown reset semantics;
-- authorization failure for a quota source;
-- normalization rule missing or incompatible;
-- unsupported or incompatible quota dimensions;
-- status event cannot be recorded consistently;
-- clock or freshness uncertainty.
+- relevant lens omitted;
+- duplicated advice creates false confidence;
+- shared stale context biases all advisors;
+- recommendation malformed or execution attempted;
+- uncertainty hidden.
 
 ### Observability
 
-- source synchronization attempts and outcomes;
-- freshness, provenance, and confidence for every quota value;
-- accepted and rejected observations;
-- normalization, conflict, stale-data, reset, and cooldown warnings;
-- previous and next status with transition event and policy version;
-- manual override actor, reason, scope, and expiration;
-- scheduling eligibility decisions and rejected reasons.
+- advisors requested and reasons;
+- inputs, sources, confidence, and latency;
+- recommendations, abstentions, and conflicts;
+- rejected malformed advice.
 
 ### Future Extensions
 
-- **Provider adapter extension point:** permitted API or plugin sources can
-  contribute typed observations without owning normalized status.
-- **Policy extension point:** additional thresholds, aggregation rules, and
-  scheduling policies can be introduced through versioned policy.
-- **Estimation extension point:** predictive consumption and time-to-exhaustion
-  can contribute labeled estimates.
-- **Scheduling extension point:** reservations and cross-task capacity planning
-  can use existing eligibility outputs.
-- **Scope extension point:** team, project, local-compute, cost-budget, and
-  rate-limit dimensions can extend the conceptual model.
+- project-specific advisor roles;
+- independent challenge advisor;
+- simulation councils;
+- advisor-quality feedback.
 
-Detailed behavior is defined in
-[QUOTA_MANAGER_SPEC.md](QUOTA_MANAGER_SPEC.md).
-
-## 3. Model Router
+## 3. Decision Engine
 
 ### Purpose
 
-Select or recommend an eligible model for a task and provide a reconstructable
-explanation.
+Reconcile goals, advisor recommendations, resources, knowledge, policy, and
+constraints into an explainable proposed plan.
 
 ### Responsibilities
 
-- evaluate documented task requirements;
-- request current capacity eligibility from Quota Manager;
-- compare candidate capabilities and constraints;
-- apply routing policy, preferences, and fallback rules;
-- return a selection or explicit no-route outcome;
-- explain why each relevant candidate was selected, rejected, or deferred.
+- validate advisor and source inputs;
+- separate hard constraints from preferences;
+- apply governance weights, vetoes, and override rules;
+- resolve or expose conflicts;
+- recommend act, wait, reassign, split, preserve context, or clarify;
+- create an execution plan and confirmation boundary;
+- record accepted and rejected alternatives.
 
 ### Input
 
-- task requirements and hard constraints;
-- candidate model capability information;
-- quota eligibility and uncertainty;
-- routing policy and user preferences;
-- workflow and tool requirements.
+- developer goal and acceptance criteria;
+- Strategy Council recommendations;
+- Resource Manager and Hermes snapshots;
+- policy, deadline, risk, cost, and architecture constraints;
+- prior decisions and human overrides.
 
 ### Output
 
-- selected or recommended model;
-- ranked or evaluated candidate set where policy permits;
-- applied constraints and decisive factors;
-- rejected-candidate reasons;
-- fallback or no-route result;
-- decision record suitable for later inspection.
+- recommendation and alternatives;
+- execution plan;
+- advisor acceptance/rejection explanation;
+- human-confirmation request;
+- decision record and reevaluation trigger.
 
 ### Internal State
 
-- active routing evaluation;
-- candidate facts used for the decision;
-- policy and preference version;
-- references to quota snapshots;
-- decision explanation and outcome.
+- active decision;
+- advisor inputs and evidence versions;
+- hard constraints, preferences, weights, and vetoes;
+- alternatives and selected recommendation;
+- confirmation and override status.
+
+### External Dependencies
+
+- Strategy Council;
+- Resource Manager;
+- Knowledge Manager / Hermes;
+- Decision Governance and Conflict Resolution specifications;
+- AI Executive Office.
+
+### Failure Modes
+
+- required evidence missing or stale;
+- policy conflict cannot be resolved;
+- hidden weight or veto;
+- false consensus;
+- no eligible plan;
+- recommendation cannot be explained.
+
+### Observability
+
+- input versions and confidence;
+- weights, constraints, vetoes, and conflicts;
+- alternatives considered;
+- recommendation rationale;
+- confirmation, override, and outcome linkage.
+
+### Future Extensions
+
+- scenario comparison;
+- policy simulation;
+- decision-outcome learning under explicit governance;
+- portfolio-level prioritization.
+
+## 4. Resource Manager
+
+### Purpose
+
+Maintain the current inventory, constraints, opportunity cost, and scheduling
+availability of AI resources.
+
+### Responsibilities
+
+- aggregate Quota Manager, Provider Registry, Model Catalog, cost, credit, reset,
+  context-capacity, tool, and health facts;
+- preserve source, freshness, confidence, and scope;
+- identify scarce or expiring resources;
+- support wait, reservation, reassignment, and split recommendations;
+- provide decision-ready resource snapshots.
+
+### Input
+
+- quota and usage status;
+- provider/model capability and health;
+- credits, cost, reset, cooldown, and reservation;
+- context and tool availability;
+- task demand and scheduler commitments.
+
+### Output
+
+- resource inventory and eligibility;
+- scarcity and opportunity-cost warnings;
+- wait, preserve, or reassign options;
+- resource snapshot for Decision Engine;
+- updates for Mission Control.
+
+### Internal State
+
+- Provider Registry and Model Catalog references;
+- current Quota Manager states;
+- credits, cost classes, reset and cooldown;
+- reservations and scheduler commitments;
+- capability, health, context-capacity, and tool facts.
 
 ### External Dependencies
 
 - Quota Manager;
-- model capability sources through Plugin Manager;
-- AI Manager for task, policy, and user-control context;
-- documented routing research and policy.
+- [Provider Registry](../providers/PROVIDERS.md);
+- [Model Catalog](../providers/MODEL_CATALOG.md);
+- Plugin Manager health and adapter facts;
+- Scheduler.
 
 ### Failure Modes
 
-- no eligible model;
-- incomplete or contradictory task requirements;
-- missing or stale capability information;
-- quota state unavailable or uncertain;
-- routing policy conflict;
-- inability to explain a result using retained inputs.
+- incompatible scopes aggregated;
+- stale quota or capability treated as current;
+- cost or credit source unknown;
+- reservation conflict;
+- provider health confused with capacity;
+- context value omitted.
 
 ### Observability
 
-- candidate set and evaluation sequence;
-- hard constraints, preferences, and policy version;
-- referenced quota snapshot;
-- selected, rejected, and deferred reasons;
-- user overrides and fallback activation;
-- routing latency and failure category.
+- source and freshness of every resource fact;
+- inventory changes and reservations;
+- reset, cooldown, and scarcity events;
+- resource snapshot used by each decision;
+- rejected or conflicting facts.
 
 ### Future Extensions
 
-- multi-model routing within one workflow;
-- learned recommendations constrained by explicit policy;
-- quality and outcome feedback;
-- policy simulation;
-- routing across local and remote models.
+- predictive capacity planning;
+- multi-project allocation;
+- budget optimization;
+- local compute and developer-attention scheduling.
 
-## 4. Prompt Builder
+## 5. Quota Manager
 
 ### Purpose
 
-Construct reproducible model input from an accepted prompt definition and
-authoritative context without changing product intent.
+Convert provider-native limits and observations into trustworthy scheduling
+status.
 
 ### Responsibilities
 
-- resolve a versioned prompt definition;
-- request relevant context from Context Manager;
-- validate required variables and context;
-- adapt representation to selected model constraints;
-- expose missing, truncated, or conflicting context;
-- preserve references needed to reconstruct the model input.
+- validate and normalize provider, API, subscription, manual, and estimated
+  quota observations;
+- evaluate reset, cooldown, warning, limited, exhausted, unknown, and disabled
+  states;
+- preserve provenance, freshness, confidence, and history;
+- provide demand-aware eligibility without selecting a model.
 
 ### Input
 
-- prompt definition and version;
-- task requirements and workflow step;
-- selected model and input constraints;
-- context request and returned context package;
-- user-supplied variables and policy constraints.
+- quota observations and usage records;
+- reset rules, thresholds, cooldowns, and policies;
+- account and subscription state;
+- manual overrides and expected demand.
+
+### Output
+
+- normalized availability status and reason;
+- quota windows, reset, freshness, and confidence;
+- status events and history;
+- eligibility facts for Resource Manager.
+
+### Internal State
+
+- quota entities defined in [QUOTA_DATA_MODEL.md](QUOTA_DATA_MODEL.md);
+- current and historical status;
+- source health, overrides, estimates, and policy versions.
+
+### External Dependencies
+
+- provider adapters through Plugin Manager;
+- trusted time source;
+- Resource Manager;
+- user-controlled manual records.
+
+### Failure Modes
+
+- source unavailable, unauthorized, stale, malformed, or conflicting;
+- reset semantics unknown;
+- estimate invalid;
+- event history unavailable;
+- unsupported quota dimension.
+
+### Observability
+
+- observation validation and source health;
+- status transitions and policy versions;
+- reset/cooldown calculations;
+- override actor, reason, and lifetime;
+- eligibility reasoning.
+
+### Future Extensions
+
+- provider discovery plugins;
+- predictive consumption;
+- reservations;
+- team and project capacity.
+
+## 6. Knowledge Manager / Hermes
+
+### Purpose
+
+Maintain authoritative knowledge continuity across advisors, decisions, models,
+sessions, workflows, and projects.
+
+### Responsibilities
+
+- find product documents, ADRs, PR history, decision logs, memory, and active
+  context;
+- classify authority, provenance, freshness, and conflict;
+- assemble bounded context packages;
+- preserve context before wait, reassignment, split, or compression;
+- prevent memory from overriding documentation.
+
+### Input
+
+- goal and context requirements;
+- repository documentation and history;
+- decision and workflow records;
+- active advisor/session context;
+- memory records and access policy.
+
+### Output
+
+- authoritative context package;
+- source/freshness map;
+- conflict and missing-knowledge report;
+- context-preservation or handoff package;
+- continuity recommendation.
+
+### Internal State
+
+- source index and authority metadata;
+- active context requests;
+- selected and omitted references;
+- memory, supersession, and conflict references;
+- handoff state.
+
+### External Dependencies
+
+- repository and approved knowledge integrations;
+- Memory Manager behavior;
+- AI Executive Office;
+- Strategy Council and Decision Engine.
+
+### Failure Modes
+
+- authoritative source missing;
+- stale memory treated as truth;
+- provenance lost;
+- protected knowledge exposed;
+- irrelevant context overwhelms decision;
+- handoff incomplete.
+
+### Observability
+
+- sources considered, selected, omitted, or denied;
+- authority, freshness, and conflict;
+- context-package consumers;
+- preservation and handoff outcomes;
+- memory writes and corrections.
+
+### Future Extensions
+
+- multi-project knowledge;
+- semantic retrieval;
+- knowledge quality review;
+- portable context packages.
+
+## 7. Scheduler
+
+### Purpose
+
+Sequence approved work across time, resource windows, dependencies, approvals,
+and context continuity.
+
+### Responsibilities
+
+- schedule, pause, wake, reassign, and cancel approved tasks;
+- track reset, cooldown, deadline, dependency, and approval conditions;
+- preserve context before delayed or reassigned work;
+- coordinate Resource Manager reservations and Workflow Engine state;
+- prevent scheduling from changing the approved goal.
+
+### Input
+
+- approved execution plan;
+- task dependencies and priority;
+- resource eligibility, reset, cooldown, and reservation;
+- approval and deadline conditions;
+- context-preservation requirements.
+
+### Output
+
+- task sequence and wake conditions;
+- wait, reassign, or split scheduling action;
+- reservation requests and releases;
+- dispatch-ready work;
+- schedule events for Mission Control.
+
+### Internal State
+
+- scheduled tasks and dependencies;
+- wake conditions and deadlines;
+- reservations and ownership;
+- pause/resume/cancel state;
+- context-handoff references.
+
+### External Dependencies
+
+- Decision Engine approved plan;
+- Resource Manager;
+- Knowledge Manager / Hermes;
+- Workflow Engine;
+- AI Router.
+
+### Failure Modes
+
+- wake condition missed;
+- resource double-booked;
+- task dispatched without approval;
+- dependency cycle;
+- context lost during reassignment;
+- stale plan scheduled.
+
+### Observability
+
+- schedule and priority changes;
+- wait reasons and wake conditions;
+- reservations and releases;
+- reassignment and handoff;
+- missed deadlines and blocked tasks.
+
+### Future Extensions
+
+- cross-project scheduling;
+- predictive reset planning;
+- background and recurring work;
+- team capacity.
+
+## 8. AI Router
+
+### Purpose
+
+Select an eligible execution path inside an approved plan. Model Router is a
+submodule that ranks candidate models; it is not Decision Engine.
+
+### Responsibilities
+
+- receive a dispatch-ready step and required capability;
+- filter eligible provider, surface, adapter, tool, and model paths;
+- invoke Model Router for model-level ranking where needed;
+- preserve serving-path and model provenance;
+- return a route or explicit no-route result;
+- never alter the approved goal or policy.
+
+### Input
+
+- approved execution step;
+- required capabilities and permissions;
+- Resource Manager eligibility;
+- Provider Registry and Model Catalog facts;
+- routing policy and adapter health.
+
+### Output
+
+- selected provider/surface/adapter/model path;
+- rejected candidates and reasons;
+- fallback order;
+- no-route result;
+- route record for execution and audit.
+
+### Internal State
+
+- active route evaluation;
+- candidate paths and facts;
+- Model Router subdecision;
+- policy and resource snapshot references;
+- selected/fallback route.
+
+### External Dependencies
+
+- Scheduler;
+- Resource Manager;
+- Provider Registry and Model Catalog;
+- Plugin Manager and Provider Adapters;
+- Model Router policy.
+
+### Failure Modes
+
+- no eligible route;
+- capability unknown;
+- resource snapshot stale;
+- adapter unhealthy;
+- provider and model identity lost;
+- route cannot be explained.
+
+### Observability
+
+- candidate and rejected paths;
+- Model Router ranking;
+- resource and policy versions;
+- selected serving provenance;
+- fallback activation and failure.
+
+### Future Extensions
+
+- multi-route execution;
+- local/remote hybrid paths;
+- outcome-informed ranking under governance;
+- route simulation.
+
+## 9. Prompt Builder
+
+### Purpose
+
+Build reproducible model input for a selected execution path from approved
+instructions and Hermes-provided context.
+
+### Responsibilities
+
+- resolve versioned prompt definitions;
+- validate variables and required context;
+- adapt representation without changing intent;
+- expose omission, conflict, truncation, and uncertainty;
+- preserve reproducibility references.
+
+### Input
+
+- approved execution step;
+- selected route and model constraints;
+- prompt definition;
+- context package;
+- policy and variables.
 
 ### Output
 
 - model-ready prompt package;
-- prompt, variable, and context references;
 - validation result;
-- truncation, omission, conflict, and uncertainty warnings;
-- reproducibility metadata.
+- prompt/context/version references;
+- warnings and missing-input result.
 
 ### Internal State
 
-- prompt definitions and version references;
-- active composition state;
-- validated variable values;
-- context references and ordering;
-- model-specific adaptation decisions.
+- active composition;
+- prompt and variable versions;
+- context ordering;
+- adaptation and omission record.
 
 ### External Dependencies
 
-- Context Manager;
-- Model Router output;
-- documented prompt definitions;
-- model capability information through approved integrations.
+- AI Router;
+- Knowledge Manager / Hermes;
+- Workflow Engine;
+- Model Catalog.
 
 ### Failure Modes
 
-- prompt definition or version not found;
-- required variable or context missing;
-- incompatible model input constraints;
-- context exceeds allowed capacity;
-- conflicting authoritative context;
-- non-reproducible composition.
+- missing prompt or context;
+- incompatible model constraints;
+- context budget exceeded;
+- non-reproducible composition;
+- intent changed during adaptation.
 
 ### Observability
 
-- prompt definition and version selected;
-- context sources included, omitted, or truncated;
-- variable validation without exposing protected values;
-- model-specific adaptations;
-- composition duration and failure category;
-- link from prompt package to resulting provider action.
+- prompt and context versions;
+- included/omitted sources;
+- validation and adaptation;
+- package-to-action correlation.
 
 ### Future Extensions
 
-- prompt evaluation and promotion workflows;
-- reusable composition policies;
+- evaluation and promotion;
 - multimodal context;
 - policy-controlled compression;
-- provider-neutral prompt portability analysis.
+- reusable composition profiles.
 
-## 5. Workflow Engine
+## 10. Workflow Engine
 
 ### Purpose
 
-Execute documented AI workflows as observable state transitions with explicit
-permissions, failure paths, and human review gates.
+Execute an approved multi-step workflow as observable state transitions under
+Scheduler and human-control boundaries.
 
 ### Responsibilities
 
-- load an accepted workflow definition;
-- manage steps, roles, state transitions, and completion conditions;
-- request routing, prompting, provider, context, and memory capabilities through
-  manager-owned boundaries;
-- enforce approval, permission, retry, pause, resume, and cancellation rules;
-- record workflow history and outcomes;
+- load accepted workflow definitions;
+- enforce steps, permissions, transitions, retries, and review gates;
+- request routing, prompts, adapters, and tools;
+- return outcomes and newly produced knowledge;
 - refuse undocumented transitions.
 
 ### Input
 
-- workflow definition and version;
-- task, policy, and approval context;
-- component decisions and action results;
-- user approvals, rejections, pauses, and cancellations;
-- retry and failure policy.
+- approved plan and workflow version;
+- scheduled dispatch;
+- route, prompt, context, and permission state;
+- action results and human control events.
 
 ### Output
 
-- current workflow state and allowed next transitions;
-- component and plugin requests;
-- approval requests;
-- step results, warnings, and failure state;
+- current state and allowed transitions;
+- execution and approval requests;
+- step results and failures;
 - terminal outcome and workflow history.
 
 ### Internal State
 
-- workflow instance and definition version;
-- current step and transition history;
-- pending approvals and permissions;
-- retry counters and failure context;
-- references to component decisions, provider actions, and produced artifacts.
+- workflow instance and version;
+- current step and transitions;
+- pending approvals;
+- retries and failure context;
+- action/artifact references.
 
 ### External Dependencies
 
-- AI Manager;
-- Model Router, Prompt Builder, Context Manager, and Memory Manager;
-- Plugin Manager for external actions;
-- Dashboard for human review and control.
+- Scheduler;
+- AI Router and Prompt Builder;
+- Plugin Manager;
+- Hermes;
+- Mission Control.
 
 ### Failure Modes
 
-- invalid or undocumented transition;
-- required approval missing or expired;
-- component or external action failure;
-- retry limit exceeded;
-- workflow definition incompatible with current policy;
-- orphaned, duplicated, or contradictory execution state.
+- invalid transition;
+- approval missing;
+- adapter/tool failure;
+- retry exhausted;
+- duplicated or orphaned state;
+- execution diverges from plan.
 
 ### Observability
 
-- workflow definition and version;
-- current and historical state;
-- transition reason and actor;
-- approvals, permissions, retries, and cancellations;
-- component and external action correlation;
-- terminal outcome and unresolved failure.
+- state and transition actor;
+- approvals, retries, pauses, and cancellation;
+- route, prompt, adapter, and artifact correlation;
+- terminal outcome.
 
 ### Future Extensions
 
-- reusable workflow composition;
-- parallel and dependent task execution;
-- team approval policies;
-- long-running workflow recovery;
-- simulation and dry-run modes.
+- parallel workflows;
+- long-running recovery;
+- reusable composition;
+- simulation and dry run.
 
-## 6. Context Manager
-
-### Purpose
-
-Assemble task-relevant, authoritative context for components without becoming
-the durable store of all knowledge.
-
-### Responsibilities
-
-- interpret a component's context requirements;
-- locate relevant documentation, task, workflow, and memory sources;
-- rank and package context while preserving provenance;
-- expose freshness, authority, conflict, omission, and capacity constraints;
-- enforce access policy;
-- keep context selection distinct from prompt wording.
-
-### Input
-
-- context request and intended consumer;
-- task and workflow scope;
-- authoritative repository documents;
-- current operation state;
-- memory query results;
-- access, relevance, and capacity policy.
-
-### Output
-
-- bounded context package;
-- source references and authority classification;
-- freshness and confidence indicators;
-- conflict, omission, and truncation warnings;
-- access-denied or insufficient-context result.
-
-### Internal State
-
-- active context request;
-- discovered candidate sources;
-- relevance and authority evaluation;
-- selected source references and ordering;
-- package budget and omission record.
-
-### External Dependencies
-
-- repository and documentation sources through approved integrations;
-- Memory Manager;
-- AI Manager task and policy context;
-- Plugin Manager for external context providers.
-
-### Failure Modes
-
-- authoritative source unavailable;
-- insufficient relevant context;
-- conflicting sources with no governing decision;
-- capacity budget exceeded;
-- stale or unverifiable source;
-- access denied or provenance lost.
-
-### Observability
-
-- context request purpose and consumer;
-- candidate and selected source references;
-- authority, freshness, and relevance signals;
-- omitted, truncated, conflicting, and denied sources;
-- package size and assembly duration;
-- link from context package to prompt or decision that consumed it.
-
-### Future Extensions
-
-- semantic and structured retrieval;
-- policy-controlled context compression;
-- task-specific context profiles;
-- cross-repository context;
-- user feedback on relevance and omissions.
-
-## 7. Memory Manager
+## 11. Plugin Manager
 
 ### Purpose
 
-Own durable, inspectable knowledge across models, tools, sessions, and
-workflows while preserving provenance and human control.
+Govern capability declaration, permissions, lifecycle, compatibility, and
+observability for Provider Adapters, MCP servers, and external tools.
 
 ### Responsibilities
 
-- accept proposed memory records through policy;
-- classify scope, authority, provenance, freshness, and retention;
-- store and retrieve durable project, decision, workflow, and outcome memory;
-- support correction, supersession, and deletion;
-- detect conflicts with authoritative documentation;
-- prevent model-generated memory from silently becoming product truth.
-
-### Input
-
-- proposed memory record and provenance;
-- task, workflow, routing, prompt, action, and outcome references;
-- memory query and scope;
-- retention, access, and write policy;
-- user corrections and deletion requests.
-
-### Output
-
-- accepted, rejected, or review-required write result;
-- memory query results with provenance and confidence;
-- conflict and staleness warnings;
-- correction, supersession, and deletion result;
-- references suitable for Context Manager.
-
-### Internal State
-
-- durable memory records and identifiers;
-- source, authority, confidence, and freshness metadata;
-- scope and access classification;
-- supersession and correction history;
-- retention and deletion status.
-
-### External Dependencies
-
-- AI Manager for policy and correlation;
-- Context Manager as the primary retrieval consumer;
-- Workflow Engine and external action records as memory sources;
-- user-controlled durable storage boundary, to be selected later.
-
-### Failure Modes
-
-- write lacks provenance or policy authorization;
-- conflicting or duplicate memory;
-- stale memory presented without warning;
-- retrieval scope leaks protected information;
-- correction or deletion is incomplete;
-- durable store unavailable or corrupted.
-
-### Observability
-
-- proposed, accepted, rejected, corrected, and deleted records;
-- actor, source, authority, and policy for each write;
-- query purpose and returned references;
-- conflict and stale-memory detection;
-- retention actions and storage health;
-- use of memory in later context packages.
-
-### Future Extensions
-
-- configurable memory types and retention policies;
-- shared team memory with explicit ownership;
-- cross-project knowledge under access policy;
-- memory quality review workflows;
-- portable memory export and migration.
-
-## 8. Plugin Manager
-
-### Purpose
-
-Control discovery, capability declaration, permission, lifecycle, and
-observability for external integrations, including future MCP-based extensions.
-
-### Responsibilities
-
-- register and describe approved integrations;
+- register and validate plugins;
 - expose declared capabilities and required permissions;
-- mediate configuration, enablement, disablement, and health;
-- route external requests without granting undeclared authority;
-- isolate plugin failures from manager decision history;
-- preserve version and provenance for external actions.
+- mediate enablement, health, version, and removal;
+- prevent plugins from acquiring manager authority;
+- isolate external failure.
 
 ### Input
 
-- plugin or MCP capability manifest;
-- user enablement and permission decisions;
-- manager-owned external action request;
-- plugin health, result, and error events;
-- compatibility and configuration policy.
+- manifests and capability declarations;
+- user permissions and configuration references;
+- external action request;
+- health, result, version, and error events.
 
 ### Output
 
-- available capability catalog;
-- permission and compatibility result;
-- mediated action result or failure;
-- plugin health and lifecycle status;
-- provenance and version metadata for external actions.
+- capability catalog;
+- permission/compatibility result;
+- mediated action result;
+- health and lifecycle status;
+- external provenance.
 
 ### Internal State
 
-- registered integrations and versions;
-- enabled or disabled status;
-- granted permissions and configuration references;
-- capability and compatibility metadata;
-- health, failure, and lifecycle history.
+- installed/enabled plugins;
+- capabilities, versions, and compatibility;
+- permissions and configuration references;
+- health and failure history.
 
 ### External Dependencies
 
-- external plugins, MCP servers, providers, IDEs, Git hosts, and tools;
-- AI Manager policy and user approvals;
-- Dashboard for configuration and control;
-- future isolation mechanism defined by ADR.
+- external providers, IDEs, Git, MCP, CLI, API, browser, and tools;
+- AI Executive Office policy;
+- Mission Control;
+- future isolation mechanism.
 
 ### Failure Modes
 
-- invalid or incompatible capability declaration;
-- required permission denied or revoked;
-- plugin unavailable, slow, malformed, or deceptive;
-- capability changes without compatible versioning;
-- external action exceeds declared scope;
-- failure isolation does not preserve manager state.
+- invalid manifest;
+- permission denied;
+- plugin unavailable or deceptive;
+- capability/version drift;
+- external action exceeds scope;
+- failure isolation lost.
 
 ### Observability
 
-- registration, enablement, update, and removal events;
-- declared capabilities, permissions, and version;
-- action requests, outcomes, duration, and failure category;
-- health and compatibility state;
-- permission changes and boundary violations;
-- external provenance attached to downstream records.
+- install, enable, update, and removal;
+- permissions and capability changes;
+- action result and latency;
+- compatibility and boundary violations.
 
 ### Future Extensions
 
-- signed and verified extension metadata;
-- sandboxed execution;
-- plugin discovery catalogs;
-- compatibility negotiation;
-- community extension governance.
+- signed metadata;
+- sandboxed plugins;
+- community catalogs;
+- compatibility negotiation.
 
-## 9. Dashboard
+## 12. Mission Control Dashboard
 
 ### Purpose
 
-Provide the human-facing presentation layer for understanding and controlling
-AI Manager without owning orchestration or product policy.
+Give the developer one operating view for strategy, resources, knowledge,
+decisions, schedule, and execution while preserving final authority.
 
 ### Responsibilities
 
-- display quota, routing, workflow, provider, context, memory, and plugin state;
-- collect goals, constraints, preferences, and explicit approvals;
-- present explanations, uncertainty, failures, and required action;
-- let users pause, reject, override, retry, or cancel where policy permits;
-- preserve accessibility and clarity at consequential control points;
-- avoid hiding manager state behind conversational output.
+- collect goals, constraints, preferences, and confirmations;
+- display advisors, conflicts, resources, decisions, schedules, and outcomes;
+- expose act, wait, reassign, split, preserve-context, approve, reject, override,
+  retry, pause, and cancel controls;
+- show freshness, uncertainty, risk, and missing evidence;
+- avoid hiding state behind conversational output.
 
 ### Input
 
-- user interaction;
-- AI Manager view state and events;
-- component health and summarized observability;
-- approval and control requests;
-- explanations and warnings.
+- developer interaction;
+- AI Executive Office view state;
+- advisor and decision explanations;
+- resource, knowledge, schedule, workflow, and health events.
 
 ### Output
 
-- validated user commands and preferences;
-- approvals, rejections, overrides, and cancellations;
-- navigation and inspection requests;
-- presentation of system state without redefining it.
+- validated developer goals and commands;
+- confirmations, rejections, overrides, and control actions;
+- inspection requests;
+- non-authoritative presentation state.
 
 ### Internal State
 
-- presentation and navigation state;
-- user input in progress;
-- selected views and filters;
-- non-authoritative cached display data;
-- pending confirmation state.
+- navigation and presentation state;
+- selected mission, project, and filters;
+- pending confirmation;
+- non-authoritative cache and freshness.
 
 ### External Dependencies
 
-- AI Manager as its authoritative application boundary;
+- AI Executive Office as the sole authoritative application boundary;
 - user environment and accessibility capabilities;
-- no direct provider, Git, IDE, or MCP dependency.
+- no direct Provider dependency.
 
 ### Failure Modes
 
-- stale display state;
-- user action submitted twice or without confirmation;
-- explanation or warning omitted;
-- loss of connection to AI Manager;
-- inaccessible or ambiguous control;
-- presentation cache mistaken for authoritative state.
+- stale state shown as current;
+- confirmation ambiguous or duplicated;
+- conflict/risk hidden;
+- connection lost;
+- presentation cache treated as truth;
+- inaccessible control.
 
 ### Observability
 
-- user commands and confirmations, subject to privacy policy;
 - view-state freshness;
-- approval, override, retry, and cancellation events;
-- presentation errors and disconnected state;
-- correlation between displayed decision and authoritative manager record.
+- developer confirmations and overrides;
+- control actions and errors;
+- displayed-to-authoritative record correlation.
 
 ### Future Extensions
 
-- additional local and remote presentation clients;
-- team and operational views;
-- configurable dashboards;
-- notification surfaces;
-- accessibility and localization expansion.
+- multi-project portfolio view;
+- team mission control;
+- notifications;
+- localization and accessibility expansion.
 
 ## Contract Change Process
 
-Any change to component ownership, inputs, outputs, state, dependencies, or
-failure semantics must update this document and related boundaries, flows, and
-glossary before implementation. Technology-specific interfaces require separate
-design documents or ADRs.
+Changes to responsibility, authority, input, output, state, dependency, failure,
+or observability require updates here and in System Overview, governance,
+roadmap, and affected product specifications before implementation.

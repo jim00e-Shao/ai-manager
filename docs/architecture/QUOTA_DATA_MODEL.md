@@ -60,7 +60,9 @@ Identify a model capability to which quota or availability may apply.
 
 ### Notes
 
-Model metadata is not a quality ranking. Model Router owns selection.
+Model metadata is not a quality ranking. Decision Engine governs the plan, while
+AI Router's Model Router submodule owns model-level ranking for an approved
+execution step.
 
 ## Account
 
@@ -276,7 +278,7 @@ Represent the current scheduling interpretation for a defined scope.
 
 - derives from applicable QuotaWindows, QuotaPolicy, provider/account state,
   cooldown, and manual overrides;
-- may be consumed by Dashboard and Model Router;
+- may be consumed by Resource Manager, Mission Control, and AI Router;
 - changes emit status events.
 
 ### Notes

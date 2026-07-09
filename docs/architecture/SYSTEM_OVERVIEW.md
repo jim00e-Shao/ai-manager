@@ -2,356 +2,315 @@
 
 ## Status
 
-Conceptual architecture. This document defines responsibilities and information
-flow without selecting implementation technologies, protocols, frameworks,
-storage systems, or deployment models.
+Conceptual architecture for the AI Executive Office. It defines authority,
+layers, and information flow without selecting frameworks, protocols, storage,
+process boundaries, or deployment topology.
 
 ## System Purpose
 
-ai-manager coordinates AI-assisted software development without becoming the
-model, developer tool, or execution environment itself. It owns the policies and
-context needed to decide how AI work should proceed and preserves explanations
-that make those decisions reviewable.
+ai-manager helps developers continuously ship software by coordinating AI
+advisors, AI resources, project knowledge, governed decisions, scheduling, and
+execution workflows.
+
+It is an AI Executive Office and emerging AI Operating System around external
+models, agents, developer tools, and providers. It does not replace those
+systems or the developer's authority.
 
 ## Architecture Layers
 
-The conceptual architecture is organized into five responsibility layers. These
-layers describe authority and dependency direction, not required packages,
-processes, services, or deployment units.
+```mermaid
+flowchart TD
+    Developer["Developer<br/>Final authority"]
+    Presentation["Presentation Layer<br/>Mission Control"]
+    Strategy["Strategy Layer<br/>Strategy Council and Advisors"]
+    Decision["Decision Layer<br/>Decision Engine, Governance, Conflict Resolution"]
+    Resource["Resource Layer<br/>Resource Manager, Quota, Cost, Reset, Registry, Catalog"]
+    Knowledge["Knowledge Layer<br/>Hermes, Context, Memory, PR History, Decision Logs"]
+    Execution["Execution Layer<br/>AI Router, Adapters, Scheduler, Workflow, CLI/API/Browser/MCP"]
+    External["External Layer<br/>Providers, Models, Agents, IDEs, Git, Tools"]
 
-### Presentation
-
-The Presentation layer exposes manager state and human controls.
-
-Includes:
-
-- Dashboard;
-- future approved presentation clients.
-
-Responsibilities:
-
-- collect user goals, constraints, preferences, and approvals;
-- present state, explanations, uncertainty, failures, and required action;
-- provide pause, rejection, override, retry, and cancellation controls.
-
-The Presentation layer does not own orchestration policy or call Providers
-directly.
-
-### Application
-
-The Application layer provides the authoritative entry point for product use.
-
-Includes:
-
-- AI Manager.
-
-Responsibilities:
-
-- coordinate user intent and component decisions;
-- enforce product policy and human-control boundaries;
-- correlate tasks, decisions, actions, and outcomes;
-- expose coherent application state to Presentation.
-
-### Orchestration
-
-The Orchestration layer makes and executes manager-owned decisions.
-
-Includes:
-
-- Quota Manager;
-- Model Router;
-- Prompt Builder;
-- Workflow Engine;
-- Context Manager;
-- Memory Manager.
-
-Responsibilities:
-
-- evaluate capacity and routing;
-- assemble prompt and context packages;
-- govern workflow transitions and approvals;
-- preserve durable manager-owned memory;
-- return observable, explainable outcomes to AI Manager.
-
-Each component remains limited by its
-[component contract](COMPONENT_CONTRACTS.md).
-
-### Integration
-
-The Integration layer mediates external capabilities.
-
-Includes:
-
-- Plugin Manager;
-- provider, IDE, Git, tool, and MCP adapters.
-
-Responsibilities:
-
-- translate manager-owned requests at external boundaries;
-- enforce declared capabilities and permissions;
-- preserve version, provenance, health, and errors;
-- prevent external systems from bypassing manager policy.
-
-### Providers
-
-The Providers layer contains systems not owned by ai-manager.
-
-Includes:
-
-- AI model providers;
-- IDEs and developer tools;
-- Git and Git hosting services;
-- MCP servers;
-- other approved external tools and data sources.
-
-Responsibilities remain with each external system. ai-manager integrates with
-these systems but does not absorb their native product scope. See
-[SYSTEM_BOUNDARIES.md](SYSTEM_BOUNDARIES.md).
-
-## Conceptual Architecture
-
-```text
-User
-  ↓
-Dashboard
-  ↓
-AI Manager
-  ↓
-Model Router
-  ↕
-Quota Manager
-  ↓ eligibility and route decision
-Prompt Builder
-  ↓
-Workflow Engine
-  ↓
-Plugin Manager
-  ↓
-AI Provider / IDE / Git / MCP / AI Tool
-  ↓
-Context Manager ↔ Memory Manager
+    Developer <--> Presentation
+    Presentation <--> Strategy
+    Strategy --> Decision
+    Resource --> Decision
+    Knowledge --> Decision
+    Decision --> Presentation
+    Decision --> Execution
+    Execution --> External
+    External --> Execution
+    Execution --> Knowledge
+    Execution --> Resource
 ```
 
-This sequence describes the primary planning and execution path, not a required
-runtime topology. Information may flow back to earlier components for
-explanation, review, or replanning. All stages report observable state to the AI
-Manager.
+Arrows show conceptual information and authority flow, not direct API calls.
 
-## End-to-End Flow
+## Presentation Layer
 
-1. The **User** provides a goal, constraints, and any required approval boundary.
-2. **Dashboard** validates user input and presents manager state and controls.
-3. **AI Manager** establishes the task context and coordinates the decision
-   sequence.
-4. **Model Router** evaluates task requirements and asks **Quota Manager** for
-   eligible capacity, uncertainty, and scheduling constraints.
-5. **Model Router** returns a selected model or no-route result with an
-   explanation.
-6. **Prompt Builder** assembles documented instructions and relevant context for
-   the selected model.
-7. **Workflow Engine** governs execution steps, state transitions, human review,
-   retries, and completion.
-8. **Plugin Manager** mediates approved external capabilities, including AI
-   Providers, IDEs, Git, MCP servers, and other AI Tools.
-9. **Context Manager** assembles relevant information, while **Memory Manager**
-   governs durable records across sessions and models.
-10. Results, actions, and explanations flow back through AI Manager and
-    Dashboard so the User can inspect the outcome and retain useful context.
+### Includes
 
-## Responsibility Boundaries
+- Mission Control Dashboard;
+- future approved presentation clients.
 
-### User
+### Responsibilities
 
-The User defines intent and retains authority.
+- collect developer goals, priorities, constraints, and confirmations;
+- present the operating picture across strategy, resources, knowledge, and
+  execution;
+- show advisor recommendations, conflicts, uncertainty, and explanations;
+- expose wait, reassign, split, preserve-context, approve, reject, override,
+  pause, retry, and cancel controls;
+- keep stale or incomplete state visible.
 
-Responsibilities:
+### Boundary
 
-- state the desired outcome and relevant constraints;
-- define or accept policies and approval boundaries;
-- review consequential decisions and actions;
-- pause, reject, or override work when necessary.
+Presentation does not own policy, decide recommendations, or call external
+providers directly.
 
-Boundary:
+## Strategy Layer
 
-The User should not need to manually coordinate provider quota, compare every
-model, or reconstruct execution history. The User does not delegate product
-ownership to an AI model.
+### Includes
 
-### AI Manager
+- Strategy Council;
+- Architecture Advisor;
+- Resource Advisor / AI Chief of Staff;
+- Knowledge Advisor / Hermes;
+- Cost Advisor;
+- Risk Advisor;
+- Execution Advisor.
 
-AI Manager is the control plane and policy coordinator.
+### Responsibilities
 
-Responsibilities:
+- analyze goals through specialized lenses;
+- identify constraints, options, risks, missing evidence, and tradeoffs;
+- produce structured, sourced recommendations;
+- make disagreement explicit;
+- abstain when evidence is insufficient.
 
-- receive goals and task constraints;
-- assemble the authoritative task and project context;
-- coordinate quota, routing, prompt, workflow, and tool capabilities;
-- enforce human-control boundaries and documented policy;
-- expose observable state and preserve decision records;
-- maintain manager-owned context and memory across models and sessions.
+### Boundary
 
-Boundary:
+Advisors recommend. They do not dispatch tools, allocate resources, alter policy,
+or execute work.
 
-AI Manager does not perform model inference, replace integrated developer tools,
-or allow an individual model to own durable policy or memory.
+## Decision Layer
 
-### Quota Manager
+### Includes
 
-Quota Manager treats provider capacity as a scheduling input.
+- Decision Engine;
+- Decision Governance;
+- Conflict Resolution;
+- decision records and human override rules.
 
-Responsibilities:
+### Responsibilities
 
-- collect or accept quota, usage, availability, and reset information;
-- normalize provider-specific capacity into explicit manager concepts;
-- identify stale, missing, or uncertain data;
-- evaluate reservations, priorities, and scheduling constraints;
-- report which capacity is eligible for a task.
+- align recommendations with developer goals;
+- validate advisor inputs and evidence;
+- separate hard constraints from preferences;
+- apply weights, vetoes, policy, and resource facts;
+- reconcile architecture, resources, knowledge, cost, risk, and execution;
+- recommend acting, waiting, reassigning, splitting, or preserving context;
+- construct an explainable execution plan;
+- request human confirmation when required;
+- preserve the audit trail.
 
-Boundary:
+### Boundary
 
-Quota Manager does not decide which eligible model is best for the task, compose
-prompts, or execute work. It reports capacity facts and policy outcomes to the
-Model Router and AI Manager.
+Decision Engine proposes and governs. It does not perform provider execution.
+Human authority remains final.
 
-### Model Router
+## Resource Layer
 
-Model Router makes explainable model-selection decisions.
+### Includes
 
-Responsibilities:
+- Resource Manager;
+- Quota Manager;
+- Provider Registry;
+- Model Catalog;
+- capability and health facts;
+- credits, cost, reset time, cooldown, and reservations;
+- context capacity and tool availability.
 
-- receive task requirements and eligible capacity;
-- compare model capabilities and constraints;
-- apply documented routing policy and fallbacks;
-- select or recommend an eligible model;
-- explain why candidates were selected, rejected, or deferred.
+### Responsibilities
 
-Boundary:
+- maintain the current inventory of AI resources;
+- normalize availability without erasing provider provenance;
+- distinguish confirmed, manual, estimated, stale, and unknown facts;
+- expose scarce-resource and opportunity-cost constraints;
+- support scheduling, preservation, and eligibility;
+- update resource state from execution outcomes.
 
-Model Router does not own raw quota collection, prompt content, workflow state,
-or model execution. It cannot bypass user policy or conceal uncertainty.
+### Boundary
 
-### Prompt Builder
+Resource Layer reports resources and constraints. It does not choose the final
+plan or execute providers. Quota Manager, Provider Registry, and Model Catalog
+remain authoritative within their existing documented boundaries.
 
-Prompt Builder turns authoritative context and instructions into model-ready
-input.
+## Knowledge Layer
 
-Responsibilities:
+### Includes
 
-- select documented prompt definitions;
-- assemble relevant product, repository, task, and workflow context;
-- validate required inputs and expose missing context;
-- adapt presentation to model constraints without changing product intent;
-- identify the prompt and context versions used for an action.
+- Knowledge Manager / Hermes;
+- Context Manager behavior;
+- Memory Manager behavior;
+- product and architecture specifications;
+- ADRs, PR history, workflow outcomes, and decision logs.
 
-Boundary:
+### Responsibilities
 
-Prompt Builder does not choose the model, invent undocumented requirements,
-control workflow state, or become the durable owner of project memory.
+- find authoritative project knowledge;
+- assemble context with provenance, freshness, and authority;
+- preserve continuity across models, advisors, sessions, and projects;
+- identify conflicts and missing information;
+- retain durable memory without overriding documentation;
+- prepare context-preservation packages for wait, reassignment, or task split.
 
-### Workflow Engine
+### Boundary
 
-Workflow Engine governs how work progresses.
+Knowledge Layer informs decisions and execution. It does not invent product
+intent or treat model-generated memory as authoritative.
 
-Responsibilities:
+## Execution Layer
 
-- execute documented steps and state transitions;
-- coordinate AI agents, tools, retries, and failure paths;
-- enforce permissions and human review gates;
-- expose current state, actions, and outcomes;
-- return results and newly produced context to AI Manager.
+### Includes
 
-Boundary:
+- Scheduler;
+- Workflow Engine;
+- AI Router, with Model Router as a submodule;
+- Prompt Builder;
+- Provider Adapters;
+- Plugin Manager;
+- CLI, API, browser, MCP, IDE, Git, and tool integration boundaries.
 
-Workflow Engine does not redefine product goals, routing policy, or prompts. It
-executes accepted workflow specifications and cannot silently expand tool
-permissions.
+### Responsibilities
 
-### AI Tools
+- sequence approved work;
+- wait for time, resource, or approval conditions;
+- preserve context before reassignment;
+- route approved execution steps to eligible providers/models/tools;
+- build model-ready prompt and context packages;
+- enforce workflow state, permissions, approvals, retries, and cancellation;
+- return observable results, failures, usage, and artifacts.
 
-AI Tools are external execution capabilities used by governed workflows.
+### Boundary
 
-They may include:
+Execution cannot redefine the goal, advisor recommendation, governance policy,
+or approved plan. AI Router selects an execution path inside the plan; it is not
+the product's decision core.
 
-- model providers;
-- coding agents;
-- editors and source-control systems;
-- command, browser, research, or communication tools;
-- MCP servers and future plugins.
+## External Layer
 
-Responsibilities:
+### Includes
 
-- perform the requested action within supplied permissions and constraints;
-- return results, failures, and relevant execution metadata;
-- avoid claiming manager-owned authority over policy or durable memory.
+- OpenAI;
+- Anthropic;
+- Google;
+- OpenRouter;
+- Ollama and other local runtimes;
+- Codex;
+- Claude Code;
+- Gemini CLI or successor products;
+- OpenHands;
+- IDEs, Git, MCP servers, and other approved tools.
 
-Boundary:
+### Responsibilities
 
-AI Tools do not control AI Manager policy, independently schedule work, or
-become the single source of truth for project context.
+External systems own their native models, interfaces, availability, billing,
+errors, safety behavior, and terms.
 
-## Cross-Cutting Product Requirements
+### Boundary
 
-### Observability
+ai-manager integrates with external systems but does not absorb their native
+scope, bypass their controls, or grant them authority over manager policy,
+knowledge, or decisions.
 
-Every AI action should produce enough structured evidence to understand what was
-attempted, which inputs and tools were used, and what happened.
+## End-to-End Operating Flow
+
+1. **Developer** defines the goal, priority, constraints, and approval boundary
+   through Mission Control.
+2. **AI Executive Office** establishes the current operating picture.
+3. **Strategy Council** requests the relevant advisor lenses.
+4. **Resource Manager** supplies quota, credits, cost, reset, health, capability,
+   context-capacity, and tool facts.
+5. **Hermes** supplies authoritative project knowledge and continuity risks.
+6. **Decision Engine** reconciles advisor input, resources, knowledge, policy,
+   and deadline.
+7. The system recommends act, wait, reassign, split, preserve context, or request
+   clarification.
+8. **Developer** confirms, rejects, or overrides when required.
+9. **Scheduler** sequences the approved plan.
+10. **AI Router** selects an eligible execution path; Model Router may rank
+    candidate models within that path.
+11. **Provider Adapters and tools** execute through governed boundaries.
+12. Outcomes update Resource Manager, Hermes, decision logs, and Mission Control.
+
+## Authority Model
+
+| Authority | Owns |
+| --- | --- |
+| Developer | goals, priorities, approvals, architecture tradeoffs, accepted risk, final decision |
+| AI Executive Office | coordination and operating picture |
+| Advisors | specialized recommendations |
+| Decision Engine | aggregation, policy application, explanation, proposed plan |
+| Resource Manager | resource facts and scheduling constraints |
+| Hermes | knowledge provenance and continuity |
+| Scheduler | approved sequence and wake conditions |
+| AI Router | approved execution-path selection |
+| External systems | native execution and provider facts |
+
+No lower authority silently redefines a higher one.
+
+## Cross-Cutting Requirements
+
+### Documentation First
+
+Product, architecture, advisor, resource, governance, and execution behavior is
+specified before implementation.
 
 ### Explainability
 
-Routing and scheduling outcomes should identify relevant candidates,
-constraints, uncertainty, and the reason for the result.
+Every recommendation explains advisor input, resource facts, policy, conflicts,
+alternatives, and human action.
+
+### Observability
+
+Every state transition, recommendation, override, dispatch, external action, and
+outcome is correlated.
 
 ### Human Control
 
-Consequential actions require explicit, documented approval boundaries. The
-system must preserve a path to inspect, pause, reject, or override.
+Consequential decisions and actions preserve an inspectable confirmation,
+rejection, pause, and override path.
 
-### Manager-Owned Context
+### Context Continuity
 
-Durable context and memory remain independent of individual models and tools.
-Components consume context according to policy; they do not become its sole
-owner.
+Wait, reassign, split, compression, and session changes preserve sourced
+context.
 
 ### Provider Neutrality
 
-Provider-specific facts remain explicit at integration boundaries. Core product
-concepts should not silently inherit one provider's terminology or limitations.
-
-## Conceptual Data Passed Between Components
-
-The architecture assumes the following conceptual information, without defining
-a storage format or interface:
-
-- user goal and task requirements;
-- policy and approval constraints;
-- quota observations and freshness;
-- model capability and eligibility facts;
-- routing decision and explanation;
-- prompt definition and assembled context references;
-- workflow state and tool permissions;
-- action records, outcomes, and retained memory.
+External terms remain explicit at adapter boundaries. Registry facts do not
+become provider favoritism.
 
 ## Out of Scope for This Version
 
-This document does not define:
+This conceptual architecture does not define:
 
-- programming languages or application frameworks;
-- process, service, or package boundaries;
-- APIs, protocols, schemas, or databases;
-- user-interface structure;
-- deployment, hosting, or runtime topology;
-- authentication or billing implementation;
-- provider-specific integrations.
-
-Those decisions require research and separate accepted ADRs.
+- implementation language or framework;
+- concrete APIs or schemas;
+- database or storage technology;
+- process or service topology;
+- UI layout;
+- provider adapter implementation;
+- autonomous authority expansion;
+- enterprise identity or billing implementation.
 
 ## Related Documents
 
-- [Product Definition](../product/PRODUCT.md)
-- [Product Principles](../product/PRINCIPLES.md)
-- [Components](COMPONENTS.md)
+- [AI Executive Office](../product/AI_EXECUTIVE_OFFICE.md)
+- [Strategy Council](STRATEGY_COUNCIL.md)
+- [Advisor Model](ADVISOR_MODEL.md)
+- [Decision Governance](DECISION_GOVERNANCE.md)
+- [Conflict Resolution](CONFLICT_RESOLUTION.md)
 - [Component Contracts](COMPONENT_CONTRACTS.md)
 - [System Boundaries](SYSTEM_BOUNDARIES.md)
-- [Data Flow](DATA_FLOW.md)
-- [Glossary](GLOSSARY.md)
+- [Provider Registry](../providers/PROVIDERS.md)
 - [Roadmap](../roadmap/ROADMAP.md)

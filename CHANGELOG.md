@@ -19,6 +19,8 @@ pre-release.
   and availability state machine.
 - Provider Registry, capability matrix, provider abstraction, conceptual model
   catalog, and provider-selection guide.
+- AI Executive Office positioning, Strategy Council, Advisor Model, Decision
+  Governance, and advisor conflict-resolution specifications.
 
 ### Changed
 
@@ -30,3 +32,7 @@ pre-release.
   implementation-ready documentation.
 - Connected provider capability facts to Quota Manager, Model Router, Workflow
   Engine, and future provider-plugin roadmap dependencies.
+- Repositioned ai-manager from a quota/router-centered product to an AI Executive
+  Office, AI Operating System, and AI Resource Orchestration Platform.
+- Reorganized architecture around Presentation, Strategy, Decision, Resource,
+  Knowledge, Execution, and External layers with an N0–N9 roadmap.

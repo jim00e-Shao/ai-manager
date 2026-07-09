@@ -17,7 +17,8 @@ It owns:
 - reset, cooldown, and threshold evaluation;
 - current availability status by applicable scope;
 - history and events needed to explain status;
-- eligibility output consumed later by Model Router.
+- eligibility output consumed by Resource Manager and later by AI Router for an
+  approved execution step.
 
 It does not own model-quality ranking, provider execution, credentials, prompt
 construction, or task routing.

@@ -8,8 +8,9 @@ choosing programming interfaces, schemas, frameworks, or plugin packaging.
 ## Design Goal
 
 Provider-specific behavior should stop at a documented adapter boundary.
-Quota Manager, Model Router, Workflow Engine, and Plugin Manager consume
-provider-neutral facts with provenance rather than embedding vendor logic.
+Resource Manager, Decision Engine, AI Router, Workflow Engine, and Plugin Manager
+consume provider-neutral facts with provenance rather than embedding vendor
+logic.
 
 ## Provider Interface
 

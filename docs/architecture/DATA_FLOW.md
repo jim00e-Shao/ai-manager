@@ -2,124 +2,121 @@
 
 ## Status
 
-Conceptual data flow. Arrows describe how information progresses through a user
-operation; they do not define APIs, synchronous calls, process boundaries, or
-deployment topology.
+Conceptual AI Executive Office flow. Arrows describe information and authority,
+not APIs, process boundaries, or deployment topology.
 
-## Primary User-to-Response Flow
+## Strategy-to-Execution Flow
 
 ```mermaid
 flowchart TD
-    User["User"] --> Dashboard["Dashboard"]
-    Dashboard --> Manager["AI Manager"]
-    Manager --> Router["Model Router"]
-    Router --> Quota["Quota Manager"]
-    Quota --> Prompt["Prompt Builder"]
-    Prompt --> Provider["AI Provider"]
-    Provider --> Response["Response"]
-    Response --> Memory["Memory Manager"]
-    Memory --> Dashboard
+    Developer["Developer"]
+    Mission["Mission Control"]
+    Office["AI Executive Office"]
+    Council["Strategy Council"]
+    Resources["Resource Manager"]
+    Hermes["Knowledge Manager / Hermes"]
+    Decision["Decision Engine"]
+    Confirm{"Human confirmation required?"}
+    Scheduler["Scheduler"]
+    Router["AI Router<br/>Model Router submodule"]
+    Prompt["Prompt Builder"]
+    Workflow["Workflow Engine"]
+    Plugins["Plugin Manager / Provider Adapters"]
+    External["External Provider / Tool"]
+    Outcome["Outcome"]
+
+    Developer --> Mission
+    Mission --> Office
+    Office --> Council
+    Office --> Resources
+    Office --> Hermes
+    Council --> Decision
+    Resources --> Decision
+    Hermes --> Decision
+    Decision --> Confirm
+    Confirm -->|Yes| Developer
+    Developer -->|Approve / override| Office
+    Confirm -->|No| Scheduler
+    Office --> Scheduler
+    Scheduler --> Router
+    Router --> Prompt
+    Prompt --> Workflow
+    Workflow --> Plugins
+    Plugins --> External
+    External --> Outcome
+    Outcome --> Resources
+    Outcome --> Hermes
+    Outcome --> Mission
 ```
 
-The linear view emphasizes the user-visible lifecycle:
-
-1. **User → Dashboard:** the user provides a goal, constraints, preferences, and
-   approval boundaries.
-2. **Dashboard → AI Manager:** the Dashboard sends validated intent to the
-   authoritative application boundary.
-3. **AI Manager → Model Router:** AI Manager requests an explainable model
-   decision for the task.
-4. **Model Router → Quota Manager:** the Router requests current capacity
-   eligibility and uncertainty before selecting a model.
-5. **Quota Manager → Prompt Builder:** quota eligibility is part of the
-   coordinated decision context that allows prompt composition to proceed for
-   the selected model. AI Manager may mediate this handoff.
-6. **Prompt Builder → AI Provider:** an approved, model-ready prompt and context
-   package is sent through the relevant integration boundary.
-7. **AI Provider → Response:** the provider returns output or an explicit
-   failure.
-8. **Response → Memory Manager:** policy determines which provenance, decision,
-   action, and outcome records should be retained.
-9. **Memory Manager → Dashboard:** the user sees the response together with
-   manager-owned history, explanation, and retained context.
-
-## Coordination Detail
-
-The primary flow is not a direct dependency graph. The contract-accurate
-coordination loop is:
+## Decision Detail
 
 ```mermaid
 sequenceDiagram
-    actor User
-    participant Dashboard
-    participant Manager as AI Manager
-    participant Router as Model Router
-    participant Quota as Quota Manager
-    participant Context as Context Manager
-    participant Prompt as Prompt Builder
-    participant Plugins as Plugin Manager
-    participant Provider as AI Provider
-    participant Memory as Memory Manager
+    actor Developer
+    participant Mission as Mission Control
+    participant Office as AI Executive Office
+    participant Council as Strategy Council
+    participant Resource as Resource Manager
+    participant Hermes
+    participant Decision as Decision Engine
+    participant Scheduler
+    participant Router as AI Router
+    participant Execution as Workflow / Adapters
 
-    User->>Dashboard: Goal, constraints, approvals
-    Dashboard->>Manager: Validated task request
-    Manager->>Router: Route task
-    Router->>Quota: Request capacity eligibility
-    Quota-->>Router: Capacity, freshness, uncertainty
-    Router-->>Manager: Selection and explanation
-    Manager->>Context: Request authoritative context
-    Context->>Memory: Query relevant durable memory
-    Memory-->>Context: Records with provenance
-    Context-->>Manager: Context package and warnings
-    Manager->>Prompt: Compose for selected model
-    Prompt-->>Manager: Prompt package and references
-    Manager->>Plugins: Request provider capability
-    Plugins->>Provider: Governed model request
-    Provider-->>Plugins: Response or failure
-    Plugins-->>Manager: Observable action result
-    Manager->>Memory: Propose decision and outcome records
-    Memory-->>Manager: Write result
-    Manager-->>Dashboard: Response, explanation, state
-    Dashboard-->>User: Inspectable outcome and controls
+    Developer->>Mission: Goal, priority, constraints
+    Mission->>Office: Validated mission
+    Office->>Council: Request relevant advisor lenses
+    Office->>Resource: Request resource snapshot
+    Office->>Hermes: Request authoritative context
+    Council-->>Decision: Advisor recommendations and conflicts
+    Resource-->>Decision: Quota, cost, reset, capability, health
+    Hermes-->>Decision: Knowledge, continuity, missing evidence
+    Decision-->>Office: Plan, alternatives, explanation
+    alt Confirmation required
+        Office-->>Mission: Request confirmation
+        Mission-->>Developer: Explain recommendation
+        Developer->>Mission: Approve, reject, or override
+        Mission->>Office: Human decision
+    end
+    Office->>Scheduler: Approved plan
+    Scheduler->>Hermes: Preserve context before wait or handoff
+    Scheduler->>Router: Dispatch-ready execution step
+    Router->>Execution: Selected provider/model/tool path
+    Execution-->>Office: Observable result or failure
+    Execution-->>Resource: Usage and health update
+    Execution-->>Hermes: Outcome and decision references
+    Office-->>Mission: Updated operating picture
 ```
-
-Workflow Engine may govern the same interactions when the request belongs to a
-multi-step workflow. Its state transitions and approval gates surround the
-component calls rather than replacing their contracts.
 
 ## Data Categories
 
-| Category | Origin | Primary consumers | Required properties |
+| Category | Authority | Consumers | Required properties |
 | --- | --- | --- | --- |
-| User intent | User through Dashboard | AI Manager, Workflow Engine | validated, attributable, bounded |
-| Task requirements | AI Manager | Model Router, Context Manager | explicit, versioned where durable |
-| Quota snapshot | Quota Manager | Model Router, Dashboard | source, freshness, uncertainty |
-| Routing decision | Model Router | AI Manager, Prompt Builder, Dashboard | candidates, constraints, explanation |
-| Context package | Context Manager | Prompt Builder, Workflow Engine | provenance, authority, omissions |
-| Prompt package | Prompt Builder | Provider integration | prompt version, context references |
-| Provider response | AI Provider through Plugin Manager | AI Manager, Workflow Engine | provider provenance, success or failure |
-| Memory record | Memory Manager | Context Manager, Dashboard | scope, authority, provenance, lifecycle |
+| Goal and priority | Developer | Office, advisors, Decision Engine | attributable, bounded, current |
+| Advisor recommendation | Strategy Council role | Decision Engine, Mission Control | lens, evidence, confidence, alternatives |
+| Resource snapshot | Resource Manager | Decision Engine, Scheduler, AI Router | source, scope, freshness, uncertainty |
+| Knowledge package | Hermes | Advisors, Decision Engine, Execution | provenance, authority, omissions, access |
+| Decision record | Decision Engine plus human action | Office, Scheduler, audit | conflicts, weights, rationale, override |
+| Schedule | Scheduler | Mission Control, Execution | dependency, wake, resource, approval |
+| Route | AI Router | Workflow, adapters, audit | provider, surface, model, fallback, reason |
+| Execution result | External system through adapters | Office, Resource, Hermes | provenance, success/failure, usage, artifacts |
 
 ## Failure Flow
 
-Any stage may return an explicit failure instead of forwarding incomplete or
-invented data. AI Manager correlates the failure and exposes it to the
-Dashboard. Retry, fallback, approval, or cancellation occurs only under
-documented policy.
-
-Examples:
-
-- unknown quota produces an uncertain or no-route result;
-- no eligible model stops prompt composition;
-- missing authoritative context blocks prompt construction;
-- provider failure remains a provider failure and may activate documented
-  fallback;
-- memory-write failure does not rewrite the provider response, but it is shown
-  as an incomplete retention outcome.
+- Missing advisor evidence can trigger clarification or waiting.
+- Unknown resource facts cannot become eligible silently.
+- Knowledge conflict blocks or qualifies the recommendation.
+- Human rejection returns the decision for revision.
+- Missed wake or reservation conflict remains visible in Mission Control.
+- No eligible route returns a safe no-route outcome.
+- Provider failure updates resource health and can trigger governed replanning.
+- Knowledge-write failure does not erase the execution outcome.
 
 ## Related Documents
 
 - [System Overview](SYSTEM_OVERVIEW.md)
+- [Strategy Council](STRATEGY_COUNCIL.md)
+- [Decision Governance](DECISION_GOVERNANCE.md)
 - [Component Contracts](COMPONENT_CONTRACTS.md)
-- [System Boundaries](SYSTEM_BOUNDARIES.md)
-- [Glossary](GLOSSARY.md)
+- [AI Executive Office](../product/AI_EXECUTIVE_OFFICE.md)

@@ -13,6 +13,42 @@ tools within a documented workflow or manager request.
 An Agent is not the same as a Model. The Agent has a role, task state, context,
 permissions, and action history; one or more Models may support it.
 
+## Advisor
+
+A non-executing Strategy Council role that evaluates a goal through one declared
+lens and returns a sourced recommendation, confidence, risks, and alternatives.
+
+Advisors advise; Decision Engine aggregates; humans decide.
+
+## Decision
+
+A governed, auditable selection among alternatives that records goals, advisor
+input, resource and knowledge facts, constraints, weights, policy, human action,
+and reevaluation triggers.
+
+## AI Resource
+
+Any capacity or constraint coordinated by Resource Manager, including quota,
+credits, cost, reset time, model capability, provider health, context capacity,
+knowledge, tools, scheduler availability, and human approval availability.
+
+## Hermes
+
+The product name for Knowledge Manager and the Knowledge Advisor role. Hermes
+preserves authoritative project knowledge and context continuity without
+replacing documentation.
+
+## Mission Control
+
+The human-facing Dashboard that presents goals, advisors, resources, knowledge,
+decisions, schedules, and execution state and exposes human controls.
+
+## AI Router
+
+The execution-layer component that selects an eligible provider, surface,
+adapter, tool, and model path inside an approved plan. Model Router is its
+model-ranking submodule.
+
 ## Model
 
 A specific AI capability that accepts input and produces output, identified by
