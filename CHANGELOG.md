@@ -24,6 +24,8 @@ pre-release.
 - Resource Manager architecture, conceptual resource data and state models,
   context-continuity specification, cost and budget policy, and manual
   Resource Manager MVP.
+- Knowledge navigation entry point, AI-agent onboarding guide, role-based
+  reading paths, and source-of-truth authority map.
 
 ### Changed
 
@@ -43,3 +45,5 @@ pre-release.
   with Quota Manager retained as a specialized sub-capability.
 - Expanded N2 into specification, manual dashboard, snapshot history, context
   continuity, cost and budget, and Decision Engine integration stages.
+- Strengthened repository navigation from an index into a knowledge-base
+  navigation contract for humans and AI agents.
