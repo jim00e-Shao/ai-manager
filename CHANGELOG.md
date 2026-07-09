@@ -17,6 +17,8 @@ pre-release.
   architecture glossary.
 - Quota Manager product MVP, architecture specification, conceptual data model,
   and availability state machine.
+- Provider Registry, capability matrix, provider abstraction, conceptual model
+  catalog, and provider-selection guide.
 
 ### Changed
 
@@ -26,3 +28,5 @@ pre-release.
   integration, and provider layers.
 - Expanded Quota Manager research, component contract, and N1 roadmap into
   implementation-ready documentation.
+- Connected provider capability facts to Quota Manager, Model Router, Workflow
+  Engine, and future provider-plugin roadmap dependencies.

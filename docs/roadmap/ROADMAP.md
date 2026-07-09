@@ -74,6 +74,7 @@ rules, and MVP boundaries before implementation.
 - Reset, cooldown, warning, privacy, and failure behavior.
 - Conceptual data model and state machine.
 - Quota Manager component contract and architecture specification.
+- Provider Registry kinds, quota classes, and source-provenance baseline.
 
 #### Exit Criteria
 
@@ -82,6 +83,8 @@ rules, and MVP boundaries before implementation.
   and `disabled` have unambiguous meanings.
 - Decision precedence, fallback, and transition events are documented.
 - Manual MVP and explicit non-goals are reviewable.
+- Initial provider entries distinguish subscription, API, local, platform, and
+  gateway quota ownership.
 - No implementation choice is required to understand expected behavior.
 
 ### N1.2 — Manual Quota Dashboard
@@ -188,6 +191,7 @@ Recommend an eligible model for a documented task and explain the decision.
 
 - A documented task-requirement model.
 - Provider-neutral model capability facts.
+- Provider Registry, Model Catalog, and Capability Matrix inputs.
 - Eligibility rules based on quota and hard constraints.
 - Policy across quality, cost, latency, context capacity, and tool needs.
 - Fallback and no-eligible-model outcomes.
@@ -209,6 +213,8 @@ Recommend an eligible model for a documented task and explain the decision.
 - Routing never treats stale or unknown quota as certain capacity.
 - A user can override or reject a recommendation.
 - A later human or AI agent can reconstruct why the decision was made.
+- Registry entry, model identity, serving path, and capability verification time
+  are retained with the routing explanation.
 
 ## N3 — Prompt Builder
 
@@ -285,6 +291,8 @@ observable, permission-aware boundaries.
 ### Scope
 
 - A small set of high-value model and developer-tool integrations.
+- Provider Adapters implementing reviewed identity, discovery, quota, execution,
+  health, and version boundaries.
 - Explicit capabilities and permissions.
 - Standard action, result, error, and provenance concepts.
 - Tool health and availability reporting.
@@ -302,6 +310,7 @@ observable, permission-aware boundaries.
 ### Exit Criteria
 
 - Supported tools declare capabilities and required permissions.
+- Supported Provider Adapters preserve source, version, and upstream provenance.
 - Users can inspect and revoke access.
 - Tool actions and failures are visible in workflow history.
 - A tool outage or denial produces an explicit, recoverable outcome.
@@ -349,6 +358,7 @@ providers, routing policies, and workflows without weakening core governance.
 ### Scope
 
 - Documented extension boundaries and capability declarations.
+- Plugin-distributed Provider Adapters and model-catalog extensions.
 - MCP integration where it fits the accepted product model.
 - Plugin discovery, configuration, lifecycle, and compatibility concepts.
 - Permission isolation and explicit user approval.
@@ -366,6 +376,8 @@ providers, routing policies, and workflows without weakening core governance.
 ### Exit Criteria
 
 - A third party can build an extension from public documentation.
+- A provider plugin can declare supported registry entries, capability groups,
+  permissions, authentication, health, and compatibility.
 - Extensions declare capabilities, permissions, and compatibility.
 - Users can inspect, enable, disable, and remove extensions.
 - Extension actions remain observable and subject to manager policy.

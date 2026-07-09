@@ -28,6 +28,10 @@ COMPONENTS → COMPONENT CONTRACTS
         ↓
 SYSTEM BOUNDARIES → DATA FLOW → GLOSSARY
         ↓
+PROVIDER REGISTRY → ABSTRACTION → MODEL CATALOG
+        ↓
+CAPABILITY MATRIX → SELECTION GUIDE
+        ↓
 QUOTA RESEARCH → QUOTA SPEC → DATA MODEL → STATE MACHINE
         ↓
 ROADMAP
@@ -71,22 +75,32 @@ every authoritative document affected by its work.
     movement through the system.
 12. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative architecture
     terminology.
-13. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand N1 quota
+13. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand registry kinds,
+    ownership, authority, and consumers.
+14. [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) —
+    understand adapter, discovery, health, and version boundaries.
+15. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand Provider →
+    Model Family → Model → Capabilities → Recommended Usage.
+16. [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) — inspect the
+    verified provider capability baseline.
+17. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
+    understand initial task-selection guidance and required decision evidence.
+18. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand N1 quota
     sources, user problems, constraints, and failure behavior.
-14. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
+19. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
     Quota Manager decisions and architecture behavior.
-15. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand N1
+20. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand N1
     conceptual entities and relationships.
-16. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
+21. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
     understand availability states and transition events.
-17. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages and
+22. [ROADMAP.md](docs/roadmap/ROADMAP.md) — understand N0–N7 delivery stages and
     N1.1–N1.5 increments.
-18. Other research documents — inspect assumptions and open questions for each
+23. Other research documents — inspect assumptions and open questions for each
     remaining core module.
-19. Decision records — understand accepted, superseded, or rejected decisions.
-20. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
+24. Decision records — understand accepted, superseded, or rejected decisions.
+25. [CONTRIBUTING.md](CONTRIBUTING.md) — follow the collaboration workflow before
     changing the repository.
-21. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
+26. [CHANGELOG.md](CHANGELOG.md) — review notable changes over time.
 
 ## Document Directory
 
@@ -128,6 +142,16 @@ every authoritative document affected by its work.
 | --- | --- |
 | [ROADMAP.md](docs/roadmap/ROADMAP.md) | Organizes delivery into documented phases and milestones. |
 
+### Providers
+
+| Document | Purpose |
+| --- | --- |
+| [PROVIDERS.md](docs/providers/PROVIDERS.md) | Defines Provider Registry entries, kinds, authority, freshness, and consumers. |
+| [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) | Defines conceptual provider interface, adapter, discovery, health, and versioning. |
+| [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) | Defines the provider-neutral model hierarchy and capability profile. |
+| [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) | Records the sourced baseline for provider capabilities, surfaces, quota, cost, and risk. |
+| [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) | Defines initial task-fit guidance and selection evidence. |
+
 ### Research
 
 | Document | Purpose |
@@ -149,9 +173,11 @@ document. The product definition establishes the problem, users, MVP, and
 boundaries. Product principles govern tradeoffs. The vision describes the future
 that product work serves. Architecture defines layers, component contracts,
 system boundaries, data flows, and normative language. The roadmap sequences
-accepted work. Research supplies evidence and alternatives. ADRs record accepted
-decisions. Contributing rules govern how changes move from specification to
-implementation. The changelog records what actually changed.
+accepted work. The Provider Registry supplies shared external capability facts
+to quota, routing, workflow, and plugin decisions. Research supplies evidence
+and alternatives. ADRs record accepted decisions. Contributing rules govern how
+changes move from specification to implementation. The changelog records what
+actually changed.
 
 When documents conflict, the most recently accepted ADR governs the decision,
 and affected product, architecture, research, or roadmap documents must be
