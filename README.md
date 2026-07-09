@@ -63,6 +63,8 @@ See [VISION.md](docs/product/VISION.md) for the long-term direction.
   authority.
 - **Resource Manager** — coordinates quota, credits, reset time, cost,
   capabilities, context capacity, and tool availability.
+- **AI Continuity Layer** — governs agent Working Memory, AI-to-AI Handoff
+  Protocol, Predictive Handoff, and Resume Workflow.
 - **Hermes** — preserves authoritative project knowledge and context continuity.
 - **Scheduler and AI Router** — sequence approved work and select governed
   execution paths.
@@ -99,6 +101,8 @@ Knowledge-navigation documents:
 - **Decision Engine** — reconciles goals, policy, resources, cost, risk, and
   execution.
 - **Resource Manager** — owns the AI resource operating picture.
+- **AI Continuity Layer** — maintains agent Working Memory and governs AI-to-AI
+  Handoff Protocol, Predictive Handoff, and Resume Workflow.
 - **Knowledge Manager / Hermes** — preserves project knowledge and continuity.
 - **Scheduler and AI Router** — coordinate approved work and execution paths.
 
@@ -110,10 +114,12 @@ and decision documents.
 ```text
 .
 ├── docs/
+│   ├── continuity/     # AI Continuity Layer: Working Memory, Handoff, Resume
 │   ├── product/        # Product definition, principles, and vision
 │   ├── architecture/   # System boundaries and component design
 │   ├── knowledge/      # Navigation, reading paths, and agent onboarding
 │   ├── providers/      # Provider registry and capability facts
+│   ├── prototypes/     # Prototype plans and validation roadmap
 │   ├── roadmap/        # Delivery phases and priorities
 │   ├── research/       # Module research and open questions
 │   └── decisions/      # Architecture Decision Records (ADRs)

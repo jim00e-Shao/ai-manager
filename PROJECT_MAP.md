@@ -8,6 +8,16 @@ from incomplete context.
 **Every AI agent must read this file before planning or changing the
 repository.**
 
+# Project Map
+
+This file is the **Repository Navigation Contract** for ai-manager. It defines
+how humans and AI agents enter the knowledge base, identify authoritative
+documents, follow role-specific reading paths, and avoid changing the repository
+from incomplete context.
+
+**Every AI agent must read this file before planning or changing the
+repository.**
+
 For the fastest orientation, start with [START_HERE.md](START_HERE.md). For
 topic authority and conflict resolution, use
 [SOURCE_OF_TRUTH.md](docs/knowledge/SOURCE_OF_TRUTH.md).
@@ -47,6 +57,10 @@ ROADMAP
   ↓
 PROTOTYPES
   ↓
+CONTINUITY_ARCHITECTURE
+  ↓
+WORKING_MEMORY + HANDOFF_PROTOCOL + PREDICTIVE_HANDOFF + RESUME_WORKFLOW
+  ↓
 PROVIDERS
   ↓
 RESOURCE_MANAGER
@@ -63,8 +77,6 @@ CONTRIBUTING
 ```
 
 This path moves from entry orientation to document authority, product identity,
-strategy, governance, execution sequence, prototype validation, external
-capability facts, resource details, accepted decisions, and contribution rules.
 Every affected authoritative document must be identified before work begins.
 
 ## Required Reading Order
@@ -102,51 +114,61 @@ Every affected authoritative document must be identified before work begins.
     prototype validation stages separate from production roadmap stages.
 19. [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md) —
     understand the next CLI prototype plan before implementation.
-20. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand Provider Registry
+20. [CONTINUITY_ARCHITECTURE.md](docs/continuity/CONTINUITY_ARCHITECTURE.md) —
+    understand how the AI Continuity Layer integrates with the Executive Office.
+21. [WORKING_MEMORY.md](docs/continuity/WORKING_MEMORY.md) — understand active
+    agent working state, its data model, lifecycle, and preservation rules.
+22. [HANDOFF_PROTOCOL.md](docs/continuity/HANDOFF_PROTOCOL.md) — understand the
+    governed AI-to-AI task handoff, Handoff Package format, and records.
+23. [PREDICTIVE_HANDOFF.md](docs/continuity/PREDICTIVE_HANDOFF.md) — understand
+    how the system anticipates agent limits and initiates handoffs proactively.
+24. [RESUME_WORKFLOW.md](docs/continuity/RESUME_WORKFLOW.md) — understand the
+    incoming agent’s required steps to safely resume a handed-off task.
+25. [PROVIDERS.md](docs/providers/PROVIDERS.md) — understand Provider Registry
     kinds and authority.
-21. [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) —
+26. [PROVIDER_ABSTRACTION.md](docs/providers/PROVIDER_ABSTRACTION.md) —
     understand adapters, discovery, health, and versioning.
-22. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand model and
+27. [MODEL_CATALOG.md](docs/providers/MODEL_CATALOG.md) — understand model and
     capability hierarchy.
-23. [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) — inspect the
+28. [CAPABILITY_MATRIX.md](docs/providers/CAPABILITY_MATRIX.md) — inspect the
     sourced provider baseline.
-24. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
+29. [PROVIDER_SELECTION_GUIDE.md](docs/providers/PROVIDER_SELECTION_GUIDE.md) —
     understand initial task-fit guidance.
-25. [RESOURCE_MANAGER.md](docs/architecture/RESOURCE_MANAGER.md) — understand
+30. [RESOURCE_MANAGER.md](docs/architecture/RESOURCE_MANAGER.md) — understand
     the primary Resource Layer authority and relationships.
-26. [RESOURCE_MANAGER_MVP.md](docs/product/RESOURCE_MANAGER_MVP.md) — understand
+31. [RESOURCE_MANAGER_MVP.md](docs/product/RESOURCE_MANAGER_MVP.md) — understand
     the manual read-only resource boundary.
-27. [RESOURCE_DATA_MODEL.md](docs/architecture/RESOURCE_DATA_MODEL.md) —
+32. [RESOURCE_DATA_MODEL.md](docs/architecture/RESOURCE_DATA_MODEL.md) —
     understand conceptual resource identities, observations, snapshots, and
     events.
-28. [RESOURCE_STATE_MODEL.md](docs/architecture/RESOURCE_STATE_MODEL.md) —
+33. [RESOURCE_STATE_MODEL.md](docs/architecture/RESOURCE_STATE_MODEL.md) —
     understand normalized resource states and transitions.
-29. [CONTEXT_CONTINUITY.md](docs/architecture/CONTEXT_CONTINUITY.md) — understand
+34. [CONTEXT_CONTINUITY.md](docs/architecture/CONTEXT_CONTINUITY.md) — understand
     context ownership, preservation, portability, and rebuild decisions.
-30. [COST_AND_BUDGET.md](docs/architecture/COST_AND_BUDGET.md) — understand
+35. [COST_AND_BUDGET.md](docs/architecture/COST_AND_BUDGET.md) — understand
     direct cost, opportunity cost, budget policy, and routing constraints.
-31. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
+36. [QUOTA_MANAGER_MVP.md](docs/product/QUOTA_MANAGER_MVP.md) — understand the
     legacy manual quota boundary now contained by Resource Manager MVP.
-32. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
+37. [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) — understand quota source
     types, constraints, and research.
-33. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
+38. [QUOTA_MANAGER_SPEC.md](docs/architecture/QUOTA_MANAGER_SPEC.md) — understand
     the quota sub-capability, fallback, and observability.
-34. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
+39. [QUOTA_DATA_MODEL.md](docs/architecture/QUOTA_DATA_MODEL.md) — understand
     conceptual quota entities.
-35. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
+40. [QUOTA_STATE_MACHINE.md](docs/architecture/QUOTA_STATE_MACHINE.md) —
     understand quota-state transitions.
-36. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
-37. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
+41. [COMPONENTS.md](docs/architecture/COMPONENTS.md) — inspect the component map.
+42. [COMPONENT_CONTRACTS.md](docs/architecture/COMPONENT_CONTRACTS.md) —
     understand component ownership and failure contracts.
-38. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
+43. [SYSTEM_BOUNDARIES.md](docs/architecture/SYSTEM_BOUNDARIES.md) — distinguish
     manager scope from external systems.
-39. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
+44. [DATA_FLOW.md](docs/architecture/DATA_FLOW.md) — inspect conceptual data
     movement.
-40. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
-41. Research documents — inspect open questions for remaining modules.
-42. Decision records — understand accepted, superseded, or rejected decisions.
-43. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
-44. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
+45. [GLOSSARY.md](docs/architecture/GLOSSARY.md) — use normative terms.
+46. Research documents — inspect open questions for remaining modules.
+47. Decision records — understand accepted, superseded, or rejected decisions.
+48. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
+49. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
 
 ## Role-Based Reading Paths
 
@@ -212,6 +234,16 @@ authority for:
 | --- | --- |
 | [RESOURCE_BRIEFING_CLI.md](docs/prototypes/RESOURCE_BRIEFING_CLI.md) | Defines the first CLI prototype plan for Observe → Think → Advise → Remind. |
 | [PROTOTYPE_ROADMAP.md](docs/prototypes/PROTOTYPE_ROADMAP.md) | Defines prototype validation stages separate from the production roadmap. |
+
+### AI Continuity Layer
+
+| Document | Purpose |
+| --- | --- |
+| [CONTINUITY_ARCHITECTURE.md](docs/continuity/CONTINUITY_ARCHITECTURE.md) | Defines the AI Continuity Layer, its components, and integration with the Executive Office. |
+| [WORKING_MEMORY.md](docs/continuity/WORKING_MEMORY.md) | Defines active agent working state, data model, lifecycle, and preservation rules. |
+| [HANDOFF_PROTOCOL.md](docs/continuity/HANDOFF_PROTOCOL.md) | Defines governed AI-to-AI task handoff, Handoff Package format, and records. |
+| [PREDICTIVE_HANDOFF.md](docs/continuity/PREDICTIVE_HANDOFF.md) | Defines how the system anticipates agent limits and initiates handoffs proactively. |
+| [RESUME_WORKFLOW.md](docs/continuity/RESUME_WORKFLOW.md) | Defines the incoming agent’s required steps to safely resume a handed-off task. |
 
 ### Product
 

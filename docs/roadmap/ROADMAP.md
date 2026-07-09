@@ -319,7 +319,9 @@ human-governed plans.
 ### Goal
 
 Give a solo developer one clear view of goals, advisors, resources, knowledge,
-decisions, schedules, and execution state.
+decisions, schedules, and execution state. In this stage the AI Continuity Layer
+— Working Memory, Handoff Protocol, Predictive Handoff, and Resume Workflow —
+becomes visible and operable through Mission Control.
 
 ### Scope
 
@@ -330,6 +332,12 @@ decisions, schedules, and execution state.
 - Wait, reassign, split, preserve, approve, reject, override, pause, retry, and
   cancel controls.
 - Freshness and uncertainty.
+- **AI Continuity Layer integration:**
+  - Active Working Memory state for the current agent task.
+  - Handoff event history and incoming/outgoing agent transitions.
+  - Predictive Handoff warnings before quota or context limits are hit.
+  - Human-confirmation controls for agent reassignment.
+  - Resume state confirmation before irreversible actions.
 
 ### Non-Goals
 
@@ -345,6 +353,9 @@ decisions, schedules, and execution state.
 - Stale and incomplete state is visible.
 - Dashboard commands pass through AI Executive Office.
 - Human final authority is usable, not merely documented.
+- Active agent Working Memory is inspectable.
+- Handoff events, package completeness, and resume confirmations are traceable.
+- Predictive Handoff signals are surfaced before limits cause failures.
 
 ## N5 — Knowledge Manager / Hermes
 
