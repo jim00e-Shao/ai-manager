@@ -22,7 +22,7 @@ ADR before implementation.
 | Topic | Source of Truth | Supporting Documents |
 | --- | --- | --- |
 | Product positioning | [AI_EXECUTIVE_OFFICE.md](../product/AI_EXECUTIVE_OFFICE.md) and [PRODUCT.md](../product/PRODUCT.md) | [README.md](../../README.md), [VISION.md](../product/VISION.md) |
-| Principles | [PRINCIPLES.md](../product/PRINCIPLES.md) | [ADR-0001](../decisions/ADR-0001-documentation-first.md), [CONTRIBUTING.md](../../CONTRIBUTING.md) |
+| Principles | [PRINCIPLES.md](../product/PRINCIPLES.md) | [ADR-0001](../decisions/ADR-0001-documentation-first.md), [ADR-0002](../decisions/ADR-0002-deterministic-first.md), [CONTRIBUTING.md](../../CONTRIBUTING.md) |
 | Architecture layers | [SYSTEM_OVERVIEW.md](../architecture/SYSTEM_OVERVIEW.md) | [DATA_FLOW.md](../architecture/DATA_FLOW.md), [SYSTEM_BOUNDARIES.md](../architecture/SYSTEM_BOUNDARIES.md) |
 | Component contracts | [COMPONENT_CONTRACTS.md](../architecture/COMPONENT_CONTRACTS.md) | [COMPONENTS.md](../architecture/COMPONENTS.md), [GLOSSARY.md](../architecture/GLOSSARY.md) |
 | Resource Manager | [RESOURCE_MANAGER.md](../architecture/RESOURCE_MANAGER.md) | [RESOURCE_MANAGER_MVP.md](../product/RESOURCE_MANAGER_MVP.md), [RESOURCE_DATA_MODEL.md](../architecture/RESOURCE_DATA_MODEL.md), [RESOURCE_STATE_MODEL.md](../architecture/RESOURCE_STATE_MODEL.md) |
@@ -32,7 +32,7 @@ ADR before implementation.
 | Decision Governance | [DECISION_GOVERNANCE.md](../architecture/DECISION_GOVERNANCE.md) | [STRATEGY_COUNCIL.md](../architecture/STRATEGY_COUNCIL.md), [ADVISOR_MODEL.md](../architecture/ADVISOR_MODEL.md), [CONFLICT_RESOLUTION.md](../architecture/CONFLICT_RESOLUTION.md) |
 | Roadmap | [ROADMAP.md](../roadmap/ROADMAP.md) | [CHANGELOG.md](../../CHANGELOG.md), PR descriptions |
 | Contribution rules | [CONTRIBUTING.md](../../CONTRIBUTING.md) | [AI_AGENT_ONBOARDING.md](AI_AGENT_ONBOARDING.md), [PROJECT_MAP.md](../../PROJECT_MAP.md) |
-| Coding Agent Task Protocol | [CODING_AGENT_TASK_PROTOCOL.md](../architecture/CODING_AGENT_TASK_PROTOCOL.md) | [ENGINEERING_TICKET_TEMPLATE.md](../templates/ENGINEERING_TICKET_TEMPLATE.md), [COMPLETION_REPORT_TEMPLATE.md](../templates/COMPLETION_REPORT_TEMPLATE.md), [HANDOFF_PROTOCOL.md](../continuity/HANDOFF_PROTOCOL.md) |
+| Coding Agent Task Protocol | [CODING_AGENT_TASK_PROTOCOL.md](../architecture/CODING_AGENT_TASK_PROTOCOL.md) | [ENGINEERING_TICKET_TEMPLATE.md](../templates/ENGINEERING_TICKET_TEMPLATE.md), [COMPLETION_REPORT_TEMPLATE.md](../templates/COMPLETION_REPORT_TEMPLATE.md), [HANDOFF_PROTOCOL.md](../continuity/HANDOFF_PROTOCOL.md), [PRINCIPLES.md](../product/PRINCIPLES.md) (Deterministic-First, Principle 17) |
 | ADR | [docs/decisions/](../decisions/) | Topic-specific source-of-truth documents |
 
 ## Source-of-Truth Responsibilities
@@ -50,6 +50,11 @@ them.
 survive implementation detail changes. If a proposed feature violates a
 principle, the principle must be amended through review before the feature is
 implemented.
+
+Deterministic-First (Principle 17) is the general, repo-wide statement of
+the rule; it governs any manager-owned orchestration surface, not only the
+Coding Agent Task Protocol below. [ADR-0002](../decisions/ADR-0002-deterministic-first.md)
+records the architecture decision and its consequences.
 
 ### Architecture
 
@@ -110,6 +115,10 @@ Codex, Gemini CLI, or a successor). It is distinct from
 [HANDOFF_PROTOCOL.md](../continuity/HANDOFF_PROTOCOL.md), which governs
 mid-task AI-to-AI continuity within the AI Continuity Layer; see the task
 protocol's relationship section for the boundary between the two.
+
+Its Deterministic-First section is the first operational application of the
+general Principle 17 / ADR-0002 rule above; it does not restate the general
+principle as a competing definition.
 
 ### ADRs
 

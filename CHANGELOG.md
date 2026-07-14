@@ -59,6 +59,18 @@ pre-release.
   context to the minimum needed per call, never a full conversation replay.
   Data contract only — no usage tracker or model-dispatch policy
   implemented.
+- Deterministic-First promoted to a repo-wide architecture principle:
+  Principle 17 in `docs/product/PRINCIPLES.md` and
+  `docs/decisions/ADR-0002-deterministic-first.md`. Records that ordinary
+  deterministic code moves state and data by default, and AI is invoked only
+  for understanding, judgment, code/document writing, complex diagnosis,
+  semantic review, or non-rule-based summarization; every AI call must be
+  attributable, named, and minimally scoped; Hermes/any Orchestrator/Runner
+  must remain replaceable and not a mandatory inference layer; unknown
+  usage/cost metadata is recorded as unknown, not zero.
+  `docs/architecture/CODING_AGENT_TASK_PROTOCOL.md` remains the detailed
+  operational authority for the Coding Agent task lifecycle. Documentation
+  only — no usage tracker, model router, or orchestrator implemented.
 
 ### Changed
 

@@ -132,6 +132,26 @@ The product should sustain useful progress across quota resets, unavailable
 providers, context handoffs, and review gates. Waiting, reassigning, preserving
 context, and splitting work can be better decisions than immediate execution.
 
+## 17. Deterministic-First: Ordinary Code Moves State by Default
+
+Ordinary deterministic code should move state and data by default. AI Agents
+are expensive, slower, and less predictable than code; they should be
+invoked only for work that genuinely requires understanding, judgment, code
+or document writing, complex diagnosis, semantic review, or non-rule-based
+summarization.
+
+This protects quota, cost, privacy and safety, reproducibility, auditability,
+and human-approval boundaries. An AI call with no ticket or decision record
+to attribute it to, or one that could have been a deterministic check
+instead, is a product failure, not a convenience.
+
+This principle governs any manager-owned orchestration surface, not only the
+Coding Agent Task Protocol. See
+[ADR-0002](../decisions/ADR-0002-deterministic-first.md) for the recorded
+architecture decision and
+[CODING_AGENT_TASK_PROTOCOL.md](../architecture/CODING_AGENT_TASK_PROTOCOL.md)
+for its detailed operational application to the Coding Agent task lifecycle.
+
 ## Applying the Principles
 
 Product and architecture proposals should state which principles they support
