@@ -39,6 +39,26 @@ pre-release.
   snapshot with ChatGPT, Claude, Codex, Gemini, and Antigravity resources;
   `package.json` with zero third-party dependencies. Validates the first
   AI Executive Office closed loop: Observe → Think → Advise → Remind.
+- Coding Agent Task Protocol (v1): Planning Agent ↔ Coding Agent
+  engineering-ticket lifecycle, an eight-state task state machine
+  (`draft` through `done`) with a human-only `merge-approved` gate, fixed
+  Engineering Ticket and Completion Report templates, a Review Report
+  format, a human-approval boundary for push/merge/deploy/production/paid
+  operations, blocked/timeout/retry/idempotency rules, branch/Base SHA/
+  commit/Issue correlation rules, and a minimum audit-trail data contract.
+  Explicitly distinguished from the AI Continuity Layer's Handoff Protocol.
+  No runner, GitHub API integration, or automation implemented.
+- Deterministic-First principle, formalized as an AI Manager architecture
+  decision within the Coding Agent Task Protocol: an explicit boundary
+  between deterministic-code responsibilities (Issue/label I/O, schema and
+  scope validation, state-transition legality, timeout/retry/idempotency
+  checks, audit persistence) and AI-invocation responsibilities (ticket
+  authoring, ambiguity/conflict judgment, code/doc changes, complex
+  diagnosis, semantic review). Adds per-call audit fields (`model`,
+  `call_reason`, `usage_cost_metadata`) and constrains Orchestrator/Runner
+  context to the minimum needed per call, never a full conversation replay.
+  Data contract only — no usage tracker or model-dispatch policy
+  implemented.
 
 ### Changed
 

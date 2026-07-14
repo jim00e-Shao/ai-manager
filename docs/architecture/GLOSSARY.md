@@ -128,6 +128,58 @@ Within ai-manager, MCP is one possible Plugin integration mechanism. It does not
 define the entire product architecture, and an MCP server is not trusted merely
 because it is protocol-compatible.
 
+## Deterministic-First
+
+The principle that ordinary deterministic code handles work that does not
+require semantic understanding or content generation, and that AI is invoked
+only when it is actually required. See
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md#deterministic-first-code-vs-ai-boundary).
+
+Deterministic-First applies to AI Manager, any Orchestrator/Runner, and
+Hermes: none of them may invoke an AI model merely to move data, relabel a
+record, evaluate a timestamp, or reformat already-structured data.
+
+## Coding Agent
+
+An external Agent (Claude Code, Codex, Gemini CLI, or a successor) that
+accepts an Engineering Ticket and produces changes plus a Completion Report
+under the
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md).
+
+A Coding Agent is interchangeable by contract: the ticket and report formats
+never assume a specific tool.
+
+## Engineering Ticket
+
+A fixed-format unit of dispatched work, bound to one GitHub Issue, one base
+branch, one Base SHA, and explicit Allowed/Forbidden change boundaries. See
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md).
+
+An Engineering Ticket is a specific, structured instance of the general Task
+term above.
+
+## Completion Report
+
+The fixed-format report a Coding Agent submits against an Engineering
+Ticket's Final commit SHA, moving the ticket from `coding` to
+`ready-for-review`. See
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md).
+
+## Review Agent
+
+A non-executing role (AI or human) that inspects a Completion Report and its
+diff against an Engineering Ticket's required verification and scope, and
+returns a review report recommending `changes-requested` or recommending the
+ticket for `merge-approved`. A Review Agent cannot itself set
+`merge-approved`.
+
+## Human Approver
+
+The accountable human role that is the sole trigger for `merge-approved` and
+for push, merge, deployment, cloud-resource, migration, secrets/production,
+paid, and remote-deletion actions under the
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md).
+
 ## Related Distinctions
 
 | Terms | Distinction |
@@ -138,6 +190,7 @@ because it is protocol-compatible.
 | Context vs. Memory | Context is assembled for current use; Memory is durable manager-owned knowledge. |
 | Plugin vs. MCP | A Plugin is ai-manager's extension unit; MCP is one protocol a Plugin may use. |
 | Provider vs. Model | A Provider operates AI services; a Model is one capability offered through a Provider. |
+| Coding Agent Task Protocol vs. AI Continuity Layer Handoff Protocol | The Task Protocol governs an Engineering Ticket's lifecycle across roles (Planning Agent, Coding Agent, Review Agent, Human Approver); the Continuity Layer's Handoff Protocol governs one in-progress task's working state moving between AI agent sessions. See [CODING_AGENT_TASK_PROTOCOL.md](CODING_AGENT_TASK_PROTOCOL.md#relationship-to-the-ai-continuity-layer-handoff-protocol). |
 
 ## Terminology Change Process
 

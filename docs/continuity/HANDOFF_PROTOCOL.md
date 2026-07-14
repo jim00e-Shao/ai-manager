@@ -206,3 +206,7 @@ Record:
 - [Continuity Architecture](CONTINUITY_ARCHITECTURE.md)
 - [Context Continuity](../architecture/CONTEXT_CONTINUITY.md)
 - [Knowledge Manager / Hermes](../architecture/COMPONENT_CONTRACTS.md)
+- [Coding Agent Task Protocol](../architecture/CODING_AGENT_TASK_PROTOCOL.md) —
+  a distinct protocol governing an engineering ticket's lifecycle across
+  Planning Agent, Coding Agent, Review Agent, and Human Approver roles; not a
+  replacement for this document's mid-task AI-to-AI continuity handoff.

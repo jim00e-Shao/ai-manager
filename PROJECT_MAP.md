@@ -169,6 +169,15 @@ Every affected authoritative document must be identified before work begins.
 47. Decision records — understand accepted, superseded, or rejected decisions.
 48. [CONTRIBUTING.md](CONTRIBUTING.md) — follow collaboration and review rules.
 49. [CHANGELOG.md](CHANGELOG.md) — review notable changes.
+50. [CODING_AGENT_TASK_PROTOCOL.md](docs/architecture/CODING_AGENT_TASK_PROTOCOL.md) —
+    understand the Planning Agent ↔ Coding Agent ticket lifecycle, state
+    machine, and human-approval boundary; distinct from
+    [HANDOFF_PROTOCOL.md](docs/continuity/HANDOFF_PROTOCOL.md).
+51. [ENGINEERING_TICKET_TEMPLATE.md](docs/templates/ENGINEERING_TICKET_TEMPLATE.md)
+    and
+    [COMPLETION_REPORT_TEMPLATE.md](docs/templates/COMPLETION_REPORT_TEMPLATE.md)
+    — use the fixed ticket and report formats when dispatching work to a
+    Coding Agent.
 
 ## Role-Based Reading Paths
 
@@ -302,6 +311,14 @@ authority for:
 | [QUOTA_MANAGER.md](docs/research/QUOTA_MANAGER.md) | Defines quota research and constraints. |
 | [MODEL_ROUTER.md](docs/research/MODEL_ROUTER.md) | Captures model-routing research as an AI Router subtopic. |
 | [PROMPT_BUILDER.md](docs/research/PROMPT_BUILDER.md) | Captures prompt composition research. |
+
+### Coding Agent Task Protocol
+
+| Document | Purpose |
+| --- | --- |
+| [CODING_AGENT_TASK_PROTOCOL.md](docs/architecture/CODING_AGENT_TASK_PROTOCOL.md) | Defines the Planning Agent ↔ Coding Agent ticket lifecycle, state machine, and human-approval boundary; distinct from the AI Continuity Layer's Handoff Protocol. |
+| [ENGINEERING_TICKET_TEMPLATE.md](docs/templates/ENGINEERING_TICKET_TEMPLATE.md) | Fixed, agent-neutral engineering ticket format. |
+| [COMPLETION_REPORT_TEMPLATE.md](docs/templates/COMPLETION_REPORT_TEMPLATE.md) | Fixed, agent-neutral completion report format. |
 
 ### Decisions
 
