@@ -48,6 +48,17 @@ pre-release.
   commit/Issue correlation rules, and a minimum audit-trail data contract.
   Explicitly distinguished from the AI Continuity Layer's Handoff Protocol.
   No runner, GitHub API integration, or automation implemented.
+- Deterministic-First principle, formalized as an AI Manager architecture
+  decision within the Coding Agent Task Protocol: an explicit boundary
+  between deterministic-code responsibilities (Issue/label I/O, schema and
+  scope validation, state-transition legality, timeout/retry/idempotency
+  checks, audit persistence) and AI-invocation responsibilities (ticket
+  authoring, ambiguity/conflict judgment, code/doc changes, complex
+  diagnosis, semantic review). Adds per-call audit fields (`model`,
+  `call_reason`, `usage_cost_metadata`) and constrains Orchestrator/Runner
+  context to the minimum needed per call, never a full conversation replay.
+  Data contract only — no usage tracker or model-dispatch policy
+  implemented.
 
 ### Changed
 

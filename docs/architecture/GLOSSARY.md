@@ -128,6 +128,17 @@ Within ai-manager, MCP is one possible Plugin integration mechanism. It does not
 define the entire product architecture, and an MCP server is not trusted merely
 because it is protocol-compatible.
 
+## Deterministic-First
+
+The principle that ordinary deterministic code handles work that does not
+require semantic understanding or content generation, and that AI is invoked
+only when it is actually required. See
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md#deterministic-first-code-vs-ai-boundary).
+
+Deterministic-First applies to AI Manager, any Orchestrator/Runner, and
+Hermes: none of them may invoke an AI model merely to move data, relabel a
+record, evaluate a timestamp, or reformat already-structured data.
+
 ## Coding Agent
 
 An external Agent (Claude Code, Codex, Gemini CLI, or a successor) that

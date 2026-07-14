@@ -40,6 +40,9 @@ v1 does not:
 - create a scheduler, background service, or database;
 - build a UI or dashboard;
 - implement quota-aware dispatch or agent selection logic;
+- implement a usage/cost tracker or an automated model-dispatch policy (see
+  Deterministic-First: Code vs. AI Boundary — this document defines the
+  principle and the data fields only);
 - implement automated review;
 - perform an automatic `git push`, merge, or deployment;
 - select which Coding Agent should run a given ticket (that is a Decision
@@ -81,6 +84,11 @@ Continuity Layer's Handoff Package format.
 | Human Approver | The accountable human. | Sole role permitted to trigger `merge-approved`, to approve `push`, merge, deployment, cloud-resource changes, migrations against shared/cloud databases, secrets/production/real-data operations, paid operations, remote deletions, and scope expansions. |
 | GitHub Issue / PR | The task's system-of-record artifact, not an actor. | Holds the current ticket, its status, and its event history. A PR references its Issue; it does not replace it. |
 
+AI Manager and any Orchestrator/Runner must apply the Deterministic-First
+boundary defined below before invoking any Agent — most of the actions in
+this table's "Responsibility" column are deterministic-code operations, not
+AI calls.
+
 ## GitHub Issue as the Single Task Source
 
 - Every engineering ticket corresponds to exactly one GitHub Issue. The Issue
@@ -109,6 +117,76 @@ Continuity Layer's Handoff Package format.
   authority over this protocol.
 - State names use `ready-for-agent`, not `ready-for-codex` or any
   tool-specific label, precisely to keep the state machine tool-neutral.
+
+## Deterministic-First: Code vs. AI Boundary
+
+This is a formal architecture decision for AI Manager, not an implementation
+detail: **ordinary deterministic code handles what ordinary code can handle;
+AI is invoked only when semantic understanding or content generation is
+actually required.**
+
+Reducing manual copy-paste (this protocol's stated Purpose) must not be
+achieved by adding an Orchestrator/Runner or Hermes layer that consumes more
+model calls and tokens than the manual process it replaces. An
+Orchestrator/Runner that calls an AI model to move a ticket between states,
+check a timestamp, or reformat already-structured data has violated this
+protocol, even if every other rule in this document is satisfied.
+
+### Must Be Deterministic Code — Never an AI Call
+
+- Reading and updating the GitHub Issue and its labels.
+- Required-field and schema validation of tickets and reports (see
+  Engineering Ticket Format, Completion Report Format).
+- Repository, branch, and Base SHA comparison.
+- Legality checks for state-machine transitions (see State Transition
+  Table) — whether a requested transition is defined at all.
+- `lastActivityAt` evaluation and timeout detection.
+- Retry-count tracking and enforcement of the declared attempt limit.
+- Duplicate-dispatch detection (see Idempotency / Avoiding Duplicate
+  Dispatch).
+- Mechanical path matching against declared Allowed/Forbidden changes.
+- Persisting commits, verification results, and audit events.
+- Fixed-format notifications (e.g., posting a templated status comment).
+
+### May Invoke AI — Only for Semantic Understanding or Generation
+
+- Understanding a goal and decomposing it into an engineering ticket.
+- Judging ambiguity, missing evidence, or an architectural conflict.
+- Modifying code or documentation.
+- Diagnosing a complex failure.
+- Semantic code review (as opposed to the mechanical scope/verification
+  checks a Review Agent also performs).
+- Producing a summary or recommendation that fixed rules cannot produce.
+
+### Constraints on AI Invocation
+
+- Every AI call must have an explicit purpose and must be attributable to a
+  specific ticket. A call with no ticket to attribute to should not happen.
+- AI must not be invoked solely to move data, relabel an Issue, evaluate a
+  timestamp, or reformat data that is already structured — those are
+  deterministic-code responsibilities listed above.
+- An Orchestrator/Runner must never replay a full conversation history to a
+  different Agent. Each Coding Agent invocation receives only: the
+  engineering ticket, the specific documents it references, the relevant
+  diff, and the minimum context the task requires — never a full chat
+  transcript from a prior agent or session.
+- Hermes, or any future Orchestrator/Runner, must remain a replaceable
+  executor (see Provider-Neutral / Agent-Neutral Design above). It must not
+  become an AI-inference layer invoked on every state transition. Most state
+  transitions in this protocol (see Task State Machine) are deterministic by
+  construction and require no model call; only the roles marked as invoking
+  judgment (Planning Agent's ticket authoring, Coding Agent's work, Review
+  Agent's semantic review, Human Approver's decision) involve understanding
+  rather than mechanical evaluation.
+
+### Audit Trail Additions for AI Calls
+
+Every AI call an Orchestrator/Runner makes should be attributable in the
+audit trail defined below (see Audit Trail / Minimum Event Log Contract),
+including which model was called and why. This is a data-contract addition
+only — v1 does not implement a usage tracker, cost dashboard, or
+model-dispatch policy; those remain a future Resource Manager / AI Router
+concern.
 
 ## Task State Machine
 
@@ -391,6 +469,16 @@ Minimum fields per ticket:
 | `exit_reason` | Why the current attempt ended (completed, blocked, timeout, retry-limit, rejected). |
 | `commit_sha` | Final commit SHA associated with the current attempt. |
 | `verification_summary` | Pass/fail summary against Required verification. |
+
+Additional fields per AI call (see Deterministic-First: Code vs. AI Boundary
+— these apply only to calls that actually invoke an AI model, not to
+deterministic-code actions):
+
+| Field | Description |
+| --- | --- |
+| `model` | The specific model invoked for this call, when known. |
+| `call_reason` | Why this AI call was made; must map to one of the "May Invoke AI" categories in Deterministic-First: Code vs. AI Boundary. |
+| `usage_cost_metadata` | Token usage / cost metadata, when obtainable from the provider. Absence must remain visible as "unknown," never silently treated as zero cost. |
 
 ## v1 Boundary and Future Versions
 
