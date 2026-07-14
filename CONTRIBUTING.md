@@ -83,4 +83,11 @@ merge only after review and required checks pass.
 - [ ] The diff contains no unrelated files.
 - [ ] Links and the project map remain accurate.
 - [ ] Relevant validation passed.
+- [ ] Deterministic-First checked: ordinary code handles mechanical
+      state/data movement; any AI call is attributable, named, minimally
+      scoped, and justified by understanding, judgment, code/document
+      writing, complex diagnosis, semantic review, or non-rule-based
+      summarization. See
+      [Principle 17](docs/product/PRINCIPLES.md#17-deterministic-first-ordinary-code-moves-state-by-default)
+      and [ADR-0002](docs/decisions/ADR-0002-deterministic-first.md).
 - [ ] Review is complete before merge.

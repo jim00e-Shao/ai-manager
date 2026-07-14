@@ -99,3 +99,5 @@ pre-release.
   warnings, agent reassignment confirmation controls, and Resume state
   confirmation.
 - Added AI Continuity Layer as Component 13 in COMPONENT_CONTRACTS.md.
+- Added a Deterministic-First compliance item to CONTRIBUTING.md's Pull
+  Request Checklist, linking to Principle 17 and ADR-0002.
