@@ -120,10 +120,14 @@ AI calls.
 
 ## Deterministic-First: Code vs. AI Boundary
 
-This is a formal architecture decision for AI Manager, not an implementation
-detail: **ordinary deterministic code handles what ordinary code can handle;
-AI is invoked only when semantic understanding or content generation is
-actually required.**
+This is a repo-wide architecture principle for AI Manager, not an
+implementation detail — recorded as
+[Principle 17](../product/PRINCIPLES.md#17-deterministic-first-ordinary-code-moves-state-by-default)
+in `PRINCIPLES.md` and as
+[ADR-0002](../decisions/ADR-0002-deterministic-first.md), and applied here to
+the Coding Agent task lifecycle specifically: **ordinary deterministic code
+handles what ordinary code can handle; AI is invoked only when semantic
+understanding or content generation is actually required.**
 
 Reducing manual copy-paste (this protocol's stated Purpose) must not be
 achieved by adding an Orchestrator/Runner or Hermes layer that consumes more
@@ -506,6 +510,9 @@ described in [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ## Related Documents
 
+- [Product Principles](../product/PRINCIPLES.md) — Principle 17 records
+  Deterministic-First as a repo-wide rule.
+- [ADR-0002: Deterministic-First](../decisions/ADR-0002-deterministic-first.md)
 - [Handoff Protocol (AI Continuity Layer)](../continuity/HANDOFF_PROTOCOL.md)
 - [Continuity Architecture](../continuity/CONTINUITY_ARCHITECTURE.md)
 - [Component Contracts](COMPONENT_CONTRACTS.md)

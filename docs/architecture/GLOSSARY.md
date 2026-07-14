@@ -132,8 +132,14 @@ because it is protocol-compatible.
 
 The principle that ordinary deterministic code handles work that does not
 require semantic understanding or content generation, and that AI is invoked
-only when it is actually required. See
-[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md#deterministic-first-code-vs-ai-boundary).
+only when it is actually required.
+
+Recorded as a repo-wide architecture principle in
+[Principle 17](../product/PRINCIPLES.md#17-deterministic-first-ordinary-code-moves-state-by-default)
+and [ADR-0002](../decisions/ADR-0002-deterministic-first.md).
+[Coding Agent Task Protocol](CODING_AGENT_TASK_PROTOCOL.md#deterministic-first-code-vs-ai-boundary)
+remains the detailed operational authority for its application to the
+Coding Agent task lifecycle.
 
 Deterministic-First applies to AI Manager, any Orchestrator/Runner, and
 Hermes: none of them may invoke an AI model merely to move data, relabel a

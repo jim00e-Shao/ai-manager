@@ -325,6 +325,7 @@ authority for:
 | Document | Purpose |
 | --- | --- |
 | [ADR-0001](docs/decisions/ADR-0001-documentation-first.md) | Establishes documentation as the single source of truth. |
+| [ADR-0002](docs/decisions/ADR-0002-deterministic-first.md) | Establishes Deterministic-First as a repo-wide architecture principle. |
 
 ## Document Relationships
 
