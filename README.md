@@ -68,6 +68,10 @@ See [VISION.md](docs/product/VISION.md) for the long-term direction.
 - **Hermes** — preserves authoritative project knowledge and context continuity.
 - **Scheduler and AI Router** — sequence approved work and select governed
   execution paths.
+- **Coding Agent Task Protocol** — governs the Planning Agent ↔ Coding Agent
+  engineering-ticket lifecycle, state machine, and human-approval boundary
+  (distinct from the AI Continuity Layer's mid-task Handoff Protocol). See
+  [CODING_AGENT_TASK_PROTOCOL.md](docs/architecture/CODING_AGENT_TASK_PROTOCOL.md).
 
 Start with
 [START_HERE.md](START_HERE.md), then

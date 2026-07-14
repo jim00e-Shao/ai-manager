@@ -32,6 +32,7 @@ ADR before implementation.
 | Decision Governance | [DECISION_GOVERNANCE.md](../architecture/DECISION_GOVERNANCE.md) | [STRATEGY_COUNCIL.md](../architecture/STRATEGY_COUNCIL.md), [ADVISOR_MODEL.md](../architecture/ADVISOR_MODEL.md), [CONFLICT_RESOLUTION.md](../architecture/CONFLICT_RESOLUTION.md) |
 | Roadmap | [ROADMAP.md](../roadmap/ROADMAP.md) | [CHANGELOG.md](../../CHANGELOG.md), PR descriptions |
 | Contribution rules | [CONTRIBUTING.md](../../CONTRIBUTING.md) | [AI_AGENT_ONBOARDING.md](AI_AGENT_ONBOARDING.md), [PROJECT_MAP.md](../../PROJECT_MAP.md) |
+| Coding Agent Task Protocol | [CODING_AGENT_TASK_PROTOCOL.md](../architecture/CODING_AGENT_TASK_PROTOCOL.md) | [ENGINEERING_TICKET_TEMPLATE.md](../templates/ENGINEERING_TICKET_TEMPLATE.md), [COMPLETION_REPORT_TEMPLATE.md](../templates/COMPLETION_REPORT_TEMPLATE.md), [HANDOFF_PROTOCOL.md](../continuity/HANDOFF_PROTOCOL.md) |
 | ADR | [docs/decisions/](../decisions/) | Topic-specific source-of-truth documents |
 
 ## Source-of-Truth Responsibilities
@@ -99,6 +100,16 @@ PRs may advance the roadmap only by updating this file.
 [CONTRIBUTING.md](../../CONTRIBUTING.md) governs contributor and AI-agent
 workflow. Onboarding documents can explain the workflow but must not weaken
 contribution rules.
+
+### Coding Agent Task Protocol
+
+[CODING_AGENT_TASK_PROTOCOL.md](../architecture/CODING_AGENT_TASK_PROTOCOL.md)
+governs the engineering-ticket state machine, ticket/report formats, and
+human-approval boundary for dispatching work to a Coding Agent (Claude Code,
+Codex, Gemini CLI, or a successor). It is distinct from
+[HANDOFF_PROTOCOL.md](../continuity/HANDOFF_PROTOCOL.md), which governs
+mid-task AI-to-AI continuity within the AI Continuity Layer; see the task
+protocol's relationship section for the boundary between the two.
 
 ### ADRs
 
