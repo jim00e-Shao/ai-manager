@@ -126,8 +126,19 @@ try {
     "--write-date",
   );
   assert(existsSync(writePath), "--write-date should create the expected snapshot");
+  const writtenSnapshot = readFileSync(writePath, "utf8");
   assertIncludes(
-    readFileSync(writePath, "utf8"),
+    writtenSnapshot,
+    `# Daily Brief — ${writeDate}`,
+    "written snapshot date header",
+  );
+  assertIncludes(
+    writtenSnapshot,
+    `- 日期：${writeDate}`,
+    "written snapshot overview date",
+  );
+  assertIncludes(
+    writtenSnapshot,
     "Alpha Project",
     "written snapshot",
   );
