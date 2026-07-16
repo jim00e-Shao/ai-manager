@@ -1,4 +1,5 @@
-import { readFile } from "node:fs/promises";
+import { constants } from "node:fs";
+import { access, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -8,17 +9,94 @@ const DEFAULT_STATUS_PATH = path.join(
   "project-status",
   "current-projects.md",
 );
+const DAILY_BRIEFS_DIR = path.join(process.cwd(), "docs", "daily-briefs");
 
 function parseArgs(argv) {
-  if (argv.length === 0) {
-    return { statusPath: DEFAULT_STATUS_PATH };
+  const args = { statusPath: DEFAULT_STATUS_PATH, writeDate: null };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+
+    if (arg === "--status-file") {
+      const value = argv[index + 1];
+      if (!value || value.startsWith("--")) {
+        fail("missing value for --status-file");
+      }
+      args.statusPath = path.resolve(process.cwd(), value);
+      index += 1;
+      continue;
+    }
+
+    if (arg === "--write-date") {
+      const value = argv[index + 1];
+      if (!value || value.startsWith("--")) {
+        fail("missing value for --write-date");
+      }
+      args.writeDate = validateWriteDate(value);
+      index += 1;
+      continue;
+    }
+
+    if (arg === "--output" || arg === "--overwrite") {
+      fail(`${arg} is not supported`);
+    }
+
+    fail(`unsupported argument ${arg}`);
   }
 
-  if (argv.length === 2 && argv[0] === "--status-file") {
-    return { statusPath: path.resolve(process.cwd(), argv[1]) };
+  return args;
+}
+
+function validateWriteDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    fail("--write-date must use YYYY-MM-DD");
   }
 
-  fail("usage: node scripts/render-daily-brief.mjs [--status-file path/to/file.md]");
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  const normalized = date.toISOString().slice(0, 10);
+
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day ||
+    normalized !== value
+  ) {
+    fail("--write-date must be a valid calendar date");
+  }
+
+  return value;
+}
+
+function snapshotPathForDate(writeDate) {
+  const snapshotPath = path.join(DAILY_BRIEFS_DIR, `${writeDate}.md`);
+  const relative = path.relative(DAILY_BRIEFS_DIR, snapshotPath);
+
+  if (
+    relative === "" ||
+    relative.startsWith("..") ||
+    path.isAbsolute(relative)
+  ) {
+    fail("--write-date resolved outside docs/daily-briefs");
+  }
+
+  return snapshotPath;
+}
+
+function repoPath(filePath) {
+  return path.relative(process.cwd(), filePath).replace(/\\/g, "/");
+}
+
+async function fileExists(filePath) {
+  try {
+    await access(filePath, constants.F_OK);
+    return true;
+  } catch (error) {
+    if (error && error.code === "ENOENT") {
+      return false;
+    }
+    throw error;
+  }
 }
 
 const REQUIRED_FIELDS = [
@@ -400,10 +478,23 @@ function renderBrief(records) {
 }
 
 try {
-  const { statusPath } = parseArgs(process.argv.slice(2));
+  const { statusPath, writeDate } = parseArgs(process.argv.slice(2));
   const markdown = await readFile(statusPath, "utf8");
   const records = extractRecords(markdown);
-  process.stdout.write(renderBrief(records));
+  const brief = renderBrief(records);
+
+  if (!writeDate) {
+    process.stdout.write(brief);
+  } else {
+    const snapshotPath = snapshotPathForDate(writeDate);
+
+    if (await fileExists(snapshotPath)) {
+      fail(`snapshot already exists: ${repoPath(snapshotPath)}`);
+    }
+
+    await writeFile(snapshotPath, brief, { encoding: "utf8", flag: "wx" });
+    process.stdout.write(`wrote ${repoPath(snapshotPath)}\n`);
+  }
 } catch (error) {
   fail(error instanceof Error ? error.message : String(error));
 }
