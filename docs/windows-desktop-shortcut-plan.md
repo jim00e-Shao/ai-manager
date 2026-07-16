@@ -2,12 +2,16 @@
 
 ## Status
 
-H4.1 planning only. This document plans Windows `.bat` wrappers and desktop
-shortcuts for non-engineering users. It does not implement the batch files,
-change the renderer, add npm scripts, add CLI/bin entries, create schedules,
-send notifications, change Project Status records, create Daily Brief
-snapshots, change app code, change databases, change deployments, change GitHub
-Actions, or integrate external services.
+H4.2 implemented the first two Windows `.bat` wrappers planned here:
+
+- `scripts/windows/preview-daily-brief.bat`
+- `scripts/windows/validate-renderer.bat`
+
+The generate-snapshot shortcut remains unimplemented and requires separate
+approval. This document does not change the renderer, add npm scripts, add
+CLI/bin entries, create schedules, send notifications, change Project Status
+records, create Daily Brief snapshots, change app code, change databases,
+change deployments, change GitHub Actions, or integrate external services.
 
 ## Goal
 
@@ -30,11 +34,11 @@ Reasons:
 - makes the wrappers discoverable without changing `package.json`;
 - keeps the H4 boundary clear: desktop convenience, not automation.
 
-## Planned Batch Files
+## Batch Files
 
 ### Preview Daily Brief
 
-Recommended future path:
+Implemented path:
 
 ```text
 scripts/windows/preview-daily-brief.bat
@@ -46,7 +50,7 @@ Purpose:
 - keep the window open so a non-engineering user can read errors or output;
 - avoid writing any files.
 
-Planned command behavior:
+Command behavior:
 
 ```bat
 @echo off
@@ -60,7 +64,7 @@ the renderer behavior changes in a separate approved task.
 
 ### Validate Renderer
 
-Recommended future path:
+Implemented path:
 
 ```text
 scripts/windows/validate-renderer.bat
@@ -72,7 +76,7 @@ Purpose:
 - show success or failure in a persistent window;
 - confirm validation cleanup does not leave generated snapshots behind.
 
-Planned command behavior:
+Command behavior:
 
 ```bat
 @echo off
@@ -81,13 +85,13 @@ node scripts/validate-render-daily-brief.mjs
 pause
 ```
 
-This wrapper should be available before any snapshot-generation shortcut,
-because validation is the basic safety check for the renderer workflow.
+This wrapper is available before any snapshot-generation shortcut because
+validation is the basic safety check for the renderer workflow.
 
 ### Generate Snapshot
 
-A generate-snapshot `.bat` file should not be the first desktop shortcut unless
-the user explicitly approves snapshot creation from a shortcut.
+A generate-snapshot `.bat` file is not implemented in H4.2. It should not be
+added unless the user explicitly approves snapshot creation from a shortcut.
 
 If approved later, recommended future path:
 
@@ -172,6 +176,12 @@ AI Manager - Preview Daily Brief
 
 ```text
 AI Manager - Validate Renderer
+```
+
+The validation shortcut target should point to:
+
+```text
+C:\Users\jim00\dev\ai-manager\scripts\windows\validate-renderer.bat
 ```
 
 If a snapshot shortcut is approved later, name it with an explicit warning:
