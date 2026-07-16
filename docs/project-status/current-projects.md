@@ -60,18 +60,18 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 
 ```yaml
 project_name: "AI 特助 / AI Manager"
-current_phase: "Documentation-first foundation; Project Status MVP"
-latest_done: "Added the Deterministic-First PR checklist according to the latest local main commit."
-latest_pr: "PR #14, from local commit subject; GitHub state not reverified in this record."
-latest_commit: "d16f2a5 docs(ai-manager): add Deterministic-First PR checklist (#14)"
+current_phase: "H2.3 Daily Brief template"
+latest_done: "H2.1/H2.2 Project Status MVP schema and initial project records merged."
+latest_pr: "PR #15 docs: add project status MVP records"
+latest_commit: "bd992eb docs: add project status MVP records (#15)"
 waiting_for:
-  - "Review of the Project Status MVP schema and initial records."
-next_action: "Review and refine the Project Status MVP records, then decide whether they should become an authoritative source-of-truth topic in a later PR."
+  - "Human approval of the H2.3 Daily Brief template scope before creating the next documentation record."
+next_action: "Define the H2.3 Daily Brief template as a documentation-only MVP that can summarize project status, waiting items, next actions, and do-not-do guardrails from the Project Status records."
 blocked: false
 do_not_do:
-  - "Do not modify application code for H2.1 or H2.2."
+  - "Do not modify application code for H2.3."
   - "Do not create a CLI, database schema, GitHub Actions workflow, deployment, or external-service integration."
-  - "Do not update roadmap authority in this PR unless explicitly requested."
-  - "Do not merge this Draft PR without human approval."
-handoff_prompt: "Continue AI Manager H2 Project Status work by reviewing docs/project-status-schema.md and docs/project-status/current-projects.md, then propose the smallest documentation-only refinement. Do not add code, CLI behavior, database work, GitHub Actions, deployment, or external-service integrations."
+  - "Do not generate automated daily brief delivery or scheduling behavior."
+  - "Do not update roadmap authority unless explicitly requested."
+handoff_prompt: "Continue AI Manager H2.3 by drafting a Daily Brief template that reads from the Project Status record shape and produces a compact human-readable summary. Keep the work documentation-only. Do not add code, CLI behavior, automation, database work, GitHub Actions, deployment, or external-service integrations."
 ```
