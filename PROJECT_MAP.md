@@ -246,6 +246,7 @@ authority for:
 | [daily-brief-template.md](docs/daily-brief-template.md) | Defines the manual Daily Brief template generated from Project Status records. |
 | [daily-brief-update-protocol.md](docs/daily-brief-update-protocol.md) | Defines when Project Status and Daily Brief records are updated and which document governs conflicts. |
 | [daily-briefs/](docs/daily-briefs/) | Stores dated Daily Brief examples generated from Project Status records. |
+| [tool-mvp-plan.md](docs/tool-mvp-plan.md) | Plans the first read-only Project Status to Daily Brief tool MVP before implementation. |
 
 ### Prototypes
 
