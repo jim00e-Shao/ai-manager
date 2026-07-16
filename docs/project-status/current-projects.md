@@ -60,13 +60,13 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 
 ```yaml
 project_name: "AI 特助 / AI Manager"
-current_phase: "H3 snapshot polish and first official snapshot decision"
-latest_done: "H3.7 controlled Daily Brief snapshot write merged"
-latest_pr: "PR #27 feat: add controlled daily brief snapshot write"
-latest_commit: "a1dc6db feat: add controlled daily brief snapshot write (#27)"
+current_phase: "H3 first official Daily Brief snapshot"
+latest_done: "H3.9 write-date header polish merged"
+latest_pr: "PR #29 fix: align daily brief write date header"
+latest_commit: "e688209 fix: align daily brief write date header (#29)"
 waiting_for:
-  - "Human decision on whether to polish write-date header behavior before producing the first official snapshot"
-next_action: "Decide whether to first align the rendered Daily Brief header date with --write-date, or proceed directly to creating the first official Daily Brief snapshot with the current controlled write behavior."
+  - "Human approval to create the first official Daily Brief snapshot after this status update merges"
+next_action: "After this status update merges, create the first official Daily Brief snapshot at docs/daily-briefs/2026-07-17.md using the controlled write command node scripts/render-daily-brief.mjs --write-date 2026-07-17."
 blocked: false
 do_not_do:
   - "Do not create an official Daily Brief snapshot from this status update."
@@ -74,5 +74,5 @@ do_not_do:
   - "Do not add npm scripts, CLI, bin entries, scheduling, or automatic notifications."
   - "Do not add database, deployment, GitHub Actions, or external-service integrations."
   - "Do not change CareTide or Harmony Home from this AI Manager status update."
-handoff_prompt: "Continue AI Manager after H3.7 by deciding whether to polish --write-date so the rendered Daily Brief header date matches the snapshot filename before producing the first official snapshot. Keep this status update documentation-only. Do not create snapshots, modify renderer behavior, add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
+handoff_prompt: "Continue AI Manager after H3.9 by creating the first official Daily Brief snapshot only after this status update PR has merged. Use node scripts/render-daily-brief.mjs --write-date 2026-07-17 to create docs/daily-briefs/2026-07-17.md. Keep this status update documentation-only. Do not create snapshots, modify renderer behavior, add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
 ```
