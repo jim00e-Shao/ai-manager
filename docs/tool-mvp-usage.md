@@ -32,6 +32,10 @@ This writes only to:
 docs/daily-briefs/YYYY-MM-DD.md
 ```
 
+The `--write-date` value controls both the snapshot filename and the rendered
+Daily Brief content date, including the `# Daily Brief — YYYY-MM-DD` header and
+the `今日總覽` date line.
+
 To render an alternate Project Status file into a dated snapshot for testing or
 controlled review:
 

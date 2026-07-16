@@ -277,8 +277,7 @@ function tableRow(cells) {
   return `| ${cells.map((cell) => String(cell).replace(/\n/g, " ")).join(" | ")} |`;
 }
 
-function renderBrief(records) {
-  const today = new Date().toISOString().slice(0, 10);
+function renderBrief(records, briefDate = new Date().toISOString().slice(0, 10)) {
   const ready = records.filter(
     (record) => !record.blocked && record.next_action.trim() !== "",
   );
@@ -289,11 +288,11 @@ function renderBrief(records) {
 
   const lines = [];
 
-  lines.push(`# Daily Brief — ${today}`);
+  lines.push(`# Daily Brief — ${briefDate}`);
   lines.push("");
   lines.push("## 今日總覽");
   lines.push("");
-  lines.push(`- 日期：${today}`);
+  lines.push(`- 日期：${briefDate}`);
   lines.push("- 產生者：scripts/render-daily-brief.mjs");
   lines.push("- 使用的 Project Status records：");
   records.forEach((record) => lines.push(`  - ${record.project_name}`));
@@ -481,7 +480,7 @@ try {
   const { statusPath, writeDate } = parseArgs(process.argv.slice(2));
   const markdown = await readFile(statusPath, "utf8");
   const records = extractRecords(markdown);
-  const brief = renderBrief(records);
+  const brief = renderBrief(records, writeDate || undefined);
 
   if (!writeDate) {
     process.stdout.write(brief);
