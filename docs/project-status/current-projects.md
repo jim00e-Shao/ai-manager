@@ -60,18 +60,18 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 
 ```yaml
 project_name: "AI 特助 / AI Manager"
-current_phase: "H3 renderer validation and controlled snapshot planning"
-latest_done: "H3.2 read-only Daily Brief renderer merged"
-latest_pr: "PR #22 feat: add read-only daily brief renderer"
-latest_commit: "10ff095 feat: add read-only daily brief renderer (#22)"
+current_phase: "H3 controlled snapshot write decision"
+latest_done: "H3.4 renderer validation fixtures merged"
+latest_pr: "PR #24 test: add daily brief renderer validation fixtures"
+latest_commit: "241c038 test: add daily brief renderer validation fixtures (#24)"
 waiting_for:
-  - "Human decision on whether to validate the renderer further or plan controlled Daily Brief snapshot writing"
-next_action: "Choose the next H3 follow-up: either add focused renderer validation fixtures or plan a separately approved controlled snapshot write flow. Keep the current renderer stdout-only until a new scope is approved."
+  - "Human decision on whether the Daily Brief renderer should remain stdout-only or proceed to controlled snapshot write planning"
+next_action: "Decide whether to keep the renderer stdout-only for now or plan a separate controlled snapshot write flow that can create dated Daily Brief files only under explicit scope."
 blocked: false
 do_not_do:
-  - "Do not make the renderer write files without a separately approved scope."
+  - "Do not make the renderer write files without a separately approved controlled snapshot scope."
   - "Do not add npm scripts, CLI, bin entries, scheduling, or automatic notifications from this status update."
   - "Do not add database, deployment, GitHub Actions, or external-service integrations."
   - "Do not change CareTide or Harmony Home from this AI Manager status update."
-handoff_prompt: "Continue AI Manager after H3.2 by choosing the next H3 follow-up. First confirm whether the user wants renderer validation fixtures or controlled snapshot write planning. Keep the existing renderer stdout-only unless a separate scope explicitly approves file writes. Do not add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
+handoff_prompt: "Continue AI Manager after H3.4 by deciding whether the renderer should stay stdout-only or move into controlled snapshot write planning. Keep the existing renderer read-only/stdout-only unless a separate scope explicitly approves file writes. Do not add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
 ```
