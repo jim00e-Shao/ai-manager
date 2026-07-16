@@ -253,6 +253,7 @@ authority for:
 | [windows-desktop-shortcut-plan.md](docs/windows-desktop-shortcut-plan.md) | Plans Windows desktop shortcuts and batch wrappers for manual Daily Brief preview and validation. |
 | [render-daily-brief.mjs](scripts/render-daily-brief.mjs) | Read-only Node script that renders Project Status records to Daily Brief Markdown on stdout. |
 | [validate-render-daily-brief.mjs](scripts/validate-render-daily-brief.mjs) | Manual validation script for Daily Brief renderer fixtures. |
+| [windows batch shortcuts](scripts/windows/) | Windows `.bat` wrappers for manual Daily Brief preview and renderer validation. |
 | [project-status fixtures](test-fixtures/project-status/) | Fixture Project Status records for renderer validation. |
 
 ### Prototypes
