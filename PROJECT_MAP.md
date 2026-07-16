@@ -250,6 +250,7 @@ authority for:
 | [tool-mvp-usage.md](docs/tool-mvp-usage.md) | Documents manual use and boundaries for the read-only Daily Brief renderer. |
 | [controlled-snapshot-write-plan.md](docs/controlled-snapshot-write-plan.md) | Plans a future explicit Daily Brief snapshot write mode without implementing it. |
 | [h3-closeout-h4-decision-memo.md](docs/h3-closeout-h4-decision-memo.md) | Summarizes the completed H3 manual Daily Brief workflow and H4 automation decision options. |
+| [windows-desktop-shortcut-plan.md](docs/windows-desktop-shortcut-plan.md) | Plans Windows desktop shortcuts and batch wrappers for manual Daily Brief preview and validation. |
 | [render-daily-brief.mjs](scripts/render-daily-brief.mjs) | Read-only Node script that renders Project Status records to Daily Brief Markdown on stdout. |
 | [validate-render-daily-brief.mjs](scripts/validate-render-daily-brief.mjs) | Manual validation script for Daily Brief renderer fixtures. |
 | [project-status fixtures](test-fixtures/project-status/) | Fixture Project Status records for renderer validation. |
