@@ -60,18 +60,19 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 
 ```yaml
 project_name: "AI 特助 / AI Manager"
-current_phase: "H3 controlled snapshot write decision"
-latest_done: "H3.4 renderer validation fixtures merged"
-latest_pr: "PR #24 test: add daily brief renderer validation fixtures"
-latest_commit: "241c038 test: add daily brief renderer validation fixtures (#24)"
+current_phase: "H3 snapshot polish and first official snapshot decision"
+latest_done: "H3.7 controlled Daily Brief snapshot write merged"
+latest_pr: "PR #27 feat: add controlled daily brief snapshot write"
+latest_commit: "a1dc6db feat: add controlled daily brief snapshot write (#27)"
 waiting_for:
-  - "Human decision on whether the Daily Brief renderer should remain stdout-only or proceed to controlled snapshot write planning"
-next_action: "Decide whether to keep the renderer stdout-only for now or plan a separate controlled snapshot write flow that can create dated Daily Brief files only under explicit scope."
+  - "Human decision on whether to polish write-date header behavior before producing the first official snapshot"
+next_action: "Decide whether to first align the rendered Daily Brief header date with --write-date, or proceed directly to creating the first official Daily Brief snapshot with the current controlled write behavior."
 blocked: false
 do_not_do:
-  - "Do not make the renderer write files without a separately approved controlled snapshot scope."
-  - "Do not add npm scripts, CLI, bin entries, scheduling, or automatic notifications from this status update."
+  - "Do not create an official Daily Brief snapshot from this status update."
+  - "Do not modify renderer behavior from this status update."
+  - "Do not add npm scripts, CLI, bin entries, scheduling, or automatic notifications."
   - "Do not add database, deployment, GitHub Actions, or external-service integrations."
   - "Do not change CareTide or Harmony Home from this AI Manager status update."
-handoff_prompt: "Continue AI Manager after H3.4 by deciding whether the renderer should stay stdout-only or move into controlled snapshot write planning. Keep the existing renderer read-only/stdout-only unless a separate scope explicitly approves file writes. Do not add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
+handoff_prompt: "Continue AI Manager after H3.7 by deciding whether to polish --write-date so the rendered Daily Brief header date matches the snapshot filename before producing the first official snapshot. Keep this status update documentation-only. Do not create snapshots, modify renderer behavior, add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
 ```
