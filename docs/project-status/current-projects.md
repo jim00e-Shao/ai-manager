@@ -60,18 +60,18 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 
 ```yaml
 project_name: "AI 特助 / AI Manager"
-current_phase: "H3 tool MVP planning"
-latest_done: "H2.5 Daily Brief Update Protocol merged"
-latest_pr: "PR #19 docs: add daily brief update protocol"
-latest_commit: "4321498 docs: add daily brief update protocol (#19)"
+current_phase: "H3 renderer validation and controlled snapshot planning"
+latest_done: "H3.2 read-only Daily Brief renderer merged"
+latest_pr: "PR #22 feat: add read-only daily brief renderer"
+latest_commit: "10ff095 feat: add read-only daily brief renderer (#22)"
 waiting_for:
-  - "Human approval to begin H3 tool MVP planning"
-next_action: "Plan the smallest tool MVP that can read Project Status records and produce a Daily Brief without adding scheduling, notifications, databases, deployments, GitHub Actions, or external-service integrations."
+  - "Human decision on whether to validate the renderer further or plan controlled Daily Brief snapshot writing"
+next_action: "Choose the next H3 follow-up: either add focused renderer validation fixtures or plan a separately approved controlled snapshot write flow. Keep the current renderer stdout-only until a new scope is approved."
 blocked: false
 do_not_do:
-  - "Do not implement a CLI before H3 scope is approved."
-  - "Do not add scheduling or automatic notifications."
+  - "Do not make the renderer write files without a separately approved scope."
+  - "Do not add npm scripts, CLI, bin entries, scheduling, or automatic notifications from this status update."
   - "Do not add database, deployment, GitHub Actions, or external-service integrations."
   - "Do not change CareTide or Harmony Home from this AI Manager status update."
-handoff_prompt: "Continue AI Manager by planning H3 tool MVP. First define the smallest read-only path from Project Status records to Daily Brief output. Keep the first H3 task scoped to planning unless implementation is explicitly approved. Do not add scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
+handoff_prompt: "Continue AI Manager after H3.2 by choosing the next H3 follow-up. First confirm whether the user wants renderer validation fixtures or controlled snapshot write planning. Keep the existing renderer stdout-only unless a separate scope explicitly approves file writes. Do not add npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
 ```
