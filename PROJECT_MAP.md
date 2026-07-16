@@ -249,6 +249,8 @@ authority for:
 | [tool-mvp-plan.md](docs/tool-mvp-plan.md) | Plans the first read-only Project Status to Daily Brief tool MVP before implementation. |
 | [tool-mvp-usage.md](docs/tool-mvp-usage.md) | Documents manual use and boundaries for the read-only Daily Brief renderer. |
 | [render-daily-brief.mjs](scripts/render-daily-brief.mjs) | Read-only Node script that renders Project Status records to Daily Brief Markdown on stdout. |
+| [validate-render-daily-brief.mjs](scripts/validate-render-daily-brief.mjs) | Manual validation script for Daily Brief renderer fixtures. |
+| [project-status fixtures](test-fixtures/project-status/) | Fixture Project Status records for renderer validation. |
 
 ### Prototypes
 

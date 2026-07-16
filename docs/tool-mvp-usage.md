@@ -12,6 +12,12 @@ Run the renderer manually from the repository root:
 node scripts/render-daily-brief.mjs
 ```
 
+To render a controlled fixture or alternate Project Status file:
+
+```sh
+node scripts/render-daily-brief.mjs --status-file test-fixtures/project-status/valid-multiple-projects.md
+```
+
 ## Behavior
 
 The renderer:
@@ -41,3 +47,19 @@ tool writes to `docs/daily-briefs/YYYY-MM-DD.md`.
 
 Manual shell redirection is outside the renderer's behavior. Do not treat this
 script as authorization to create or update a Daily Brief snapshot.
+
+## Manual Validation
+
+Run the validation fixtures from the repository root:
+
+```sh
+node scripts/validate-render-daily-brief.mjs
+```
+
+The validation script checks:
+
+- valid multiple-project records render successfully;
+- missing required fields fail with stderr;
+- malformed list fields fail with stderr;
+- blocked projects appear in the blocked section;
+- renderer execution does not create files in `docs/daily-briefs/`.
