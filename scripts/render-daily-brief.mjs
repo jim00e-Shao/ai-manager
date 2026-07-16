@@ -2,12 +2,24 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
-const STATUS_PATH = path.join(
+const DEFAULT_STATUS_PATH = path.join(
   process.cwd(),
   "docs",
   "project-status",
   "current-projects.md",
 );
+
+function parseArgs(argv) {
+  if (argv.length === 0) {
+    return { statusPath: DEFAULT_STATUS_PATH };
+  }
+
+  if (argv.length === 2 && argv[0] === "--status-file") {
+    return { statusPath: path.resolve(process.cwd(), argv[1]) };
+  }
+
+  fail("usage: node scripts/render-daily-brief.mjs [--status-file path/to/file.md]");
+}
 
 const REQUIRED_FIELDS = [
   "project_name",
@@ -388,7 +400,8 @@ function renderBrief(records) {
 }
 
 try {
-  const markdown = await readFile(STATUS_PATH, "utf8");
+  const { statusPath } = parseArgs(process.argv.slice(2));
+  const markdown = await readFile(statusPath, "utf8");
   const records = extractRecords(markdown);
   process.stdout.write(renderBrief(records));
 } catch (error) {
