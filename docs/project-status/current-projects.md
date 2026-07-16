@@ -60,18 +60,18 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 
 ```yaml
 project_name: "AI 特助 / AI Manager"
-current_phase: "H2.3 Daily Brief template"
-latest_done: "H2.1/H2.2 Project Status MVP schema and initial project records merged."
-latest_pr: "PR #15 docs: add project status MVP records"
-latest_commit: "bd992eb docs: add project status MVP records (#15)"
+current_phase: "H3 tool MVP planning"
+latest_done: "H2.5 Daily Brief Update Protocol merged"
+latest_pr: "PR #19 docs: add daily brief update protocol"
+latest_commit: "4321498 docs: add daily brief update protocol (#19)"
 waiting_for:
-  - "Human approval of the H2.3 Daily Brief template scope before creating the next documentation record."
-next_action: "Define the H2.3 Daily Brief template as a documentation-only MVP that can summarize project status, waiting items, next actions, and do-not-do guardrails from the Project Status records."
+  - "Human approval to begin H3 tool MVP planning"
+next_action: "Plan the smallest tool MVP that can read Project Status records and produce a Daily Brief without adding scheduling, notifications, databases, deployments, GitHub Actions, or external-service integrations."
 blocked: false
 do_not_do:
-  - "Do not modify application code for H2.3."
-  - "Do not create a CLI, database schema, GitHub Actions workflow, deployment, or external-service integration."
-  - "Do not generate automated daily brief delivery or scheduling behavior."
-  - "Do not update roadmap authority unless explicitly requested."
-handoff_prompt: "Continue AI Manager H2.3 by drafting a Daily Brief template that reads from the Project Status record shape and produces a compact human-readable summary. Keep the work documentation-only. Do not add code, CLI behavior, automation, database work, GitHub Actions, deployment, or external-service integrations."
+  - "Do not implement a CLI before H3 scope is approved."
+  - "Do not add scheduling or automatic notifications."
+  - "Do not add database, deployment, GitHub Actions, or external-service integrations."
+  - "Do not change CareTide or Harmony Home from this AI Manager status update."
+handoff_prompt: "Continue AI Manager by planning H3 tool MVP. First define the smallest read-only path from Project Status records to Daily Brief output. Keep the first H3 task scoped to planning unless implementation is explicitly approved. Do not add scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
 ```
