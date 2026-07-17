@@ -45,10 +45,16 @@ scripts/windows/preview-daily-brief.bat
 ```
 
 Purpose:
-
 - run the current stdout-only preview command;
 - keep the window open so a non-engineering user can read errors or output;
 - avoid writing any files.
+
+The Windows desktop button is recommended to point at this preview batch file.
+It shows the H4.3 preview banner (`AI Manager 每日簡報（預覽）`) and the
+"does not write to docs/daily-briefs" reminder, so the user inspects the output
+first and then decides whether to create a formal Daily Brief snapshot through
+a separate approved `--write-date` step. The preview button must not create a
+snapshot on its own.
 
 Command behavior:
 

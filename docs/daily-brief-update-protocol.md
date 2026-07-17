@@ -32,6 +32,22 @@ records.
 `docs/project-status-schema.md` governs the Project Status record fields.
 `docs/daily-brief-template.md` governs the shape of generated Daily Briefs.
 
+## Preview Banner Behavior (H4.3)
+
+The stdout-only preview command now begins with a preview banner so a human or
+AI agent does not mistake a preview for a written Daily Brief:
+
+- The first line shows `AI Manager 每日簡報（預覽）— <date>`.
+- The banner reminds the reader that the preview does **not** write to
+  `docs/daily-briefs`.
+- A formal dated snapshot is only created when the scope explicitly approves a
+  `--write-date YYYY-MM-DD` write.
+
+Purpose: avoid the mistaken impression that running the preview already updated
+the official Daily Brief. The banner is display-only; it does not change the
+renderer's write rules or the current-state authority of
+`docs/project-status/current-projects.md`.
+
 ## Execution Authority
 
 A Daily Brief does not authorize:
