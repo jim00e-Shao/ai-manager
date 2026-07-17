@@ -288,6 +288,12 @@ function renderBrief(records, briefDate = new Date().toISOString().slice(0, 10))
 
   const lines = [];
 
+  lines.push(`# AI Manager 每日簡報（預覽）— ${briefDate}`);
+  lines.push("");
+  lines.push("> 這是預覽輸出，不會寫入 docs/daily-briefs。");
+  lines.push("> 若要產出正式 snapshot，需另行使用 --write-date，這次不要執行。");
+  lines.push("");
+
   lines.push(`# Daily Brief — ${briefDate}`);
   lines.push("");
   lines.push("## 今日總覽");
