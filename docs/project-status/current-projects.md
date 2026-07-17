@@ -33,7 +33,7 @@ do_not_do:
   - "Do not publish, deploy, or change external services."
   - "Do not treat local untracked demo files as accepted product state."
   - "Do not merge or mark any PR ready without explicit human approval."
-handoff_prompt: "Continue CareTide from the latest verified project status. First inspect the CareTide repo state, confirm the user's chosen beta follow-up, and keep the task scoped to that approved next action. Do not deploy, modify external services, or merge without approval."
+handoff_prompt: "下一步：維持 Beta 穩定化，依實測證據處理收案、通知與上架前缺口。限制：不要改動部署、資料庫或外部整合，除非另有明確授權。"
 ```
 
 ## Harmony Home 線上打卡
@@ -53,7 +53,7 @@ do_not_do:
   - "Do not change authentication, deployment, database, or external integrations from this status record."
   - "Do not create GitHub Actions or automation work unless separately requested."
   - "Do not merge or mark any PR ready without explicit human approval."
-handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, confirming the user's selected next item, and preparing only the narrow approved follow-up. Do not implement auth, database, deployment, GitHub Actions, or external integration changes without explicit approval."
+handoff_prompt: "下一步：閱讀管理後台 roadmap，確認下一張小票。限制：不要實作 auth、database、deployment、GitHub Actions 或外部服務。"
 ```
 
 ## AI 特助 / AI Manager
@@ -74,5 +74,5 @@ do_not_do:
   - "Do not add automatic notifications from this status update."
   - "Do not change database, deployment, GitHub Actions, or external services from this status update."
   - "Do not change CareTide or Harmony Home from this AI Manager status update."
-handoff_prompt: "Continue AI Manager after H3.10 by deciding whether to keep Daily Brief generation as a manual controlled workflow or start H4 automation-boundary planning. Keep this status update documentation-only. Do not add automation, npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
+handoff_prompt: "下一步：H4 維持手動 Daily Brief，先觀察幾個週期再決定是否自動化。限制：不要新增 automation、notification、database、deployment、GitHub Actions 或外部整合。"
 ```
