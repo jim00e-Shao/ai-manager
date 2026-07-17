@@ -61,17 +61,18 @@ handoff_prompt: "Continue Harmony Home by reading the admin management roadmap, 
 ```yaml
 project_name: "AI 特助 / AI Manager"
 current_phase: "H4 manual workflow vs automation planning"
-latest_done: "H3.10 first official Daily Brief snapshot merged"
-latest_pr: "PR #32 docs: add first official daily brief snapshot"
-latest_commit: "726df4b docs: add first official daily brief snapshot (#32)"
+latest_done: "H4.2 Windows Daily Brief batch shortcuts merged"
+latest_pr: "PR #36 feat: add Windows Daily Brief batch shortcuts"
+latest_commit: "a6f56ae feat: add Windows Daily Brief batch shortcuts (#36)"
 waiting_for:
   - "Human decision on whether to keep Daily Brief generation manual or plan H4 automation boundaries"
-next_action: "Decide whether AI Manager should remain a manual controlled Daily Brief workflow for now, or begin H4 planning for limited automation boundaries such as npm script naming, scheduling policy, and notification rules."
+next_action: "H4.3 preview output usability polish — make the \"今日簡報\" desktop button output easier to read; for example add a clear title, operating hints, or evaluate writing output to a text/Markdown file then opening it. Do not implement H4.3 in this update."
 blocked: false
 do_not_do:
-  - "Do not add automation from this status update."
-  - "Do not add npm scripts, CLI, bin entries, scheduling, or automatic notifications from this status update."
-  - "Do not add database, deployment, GitHub Actions, or external-service integrations."
+  - "Do not add a snapshot button from this status update."
+  - "Do not add scheduling from this status update."
+  - "Do not add automatic notifications from this status update."
+  - "Do not change database, deployment, GitHub Actions, or external services from this status update."
   - "Do not change CareTide or Harmony Home from this AI Manager status update."
 handoff_prompt: "Continue AI Manager after H3.10 by deciding whether to keep Daily Brief generation as a manual controlled workflow or start H4 automation-boundary planning. Keep this status update documentation-only. Do not add automation, npm scripts, CLI, bin entries, scheduling, notifications, database work, deployment, GitHub Actions, external-service integrations, or changes to CareTide/Harmony Home."
 ```
