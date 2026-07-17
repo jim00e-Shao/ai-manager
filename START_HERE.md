@@ -158,6 +158,19 @@ Read these first, in order:
 Do not rely on prior conversation history as the source of truth. Use the
 repository documents.
 
+## VPS Hermes 工作流程測試紀錄
+
+本節記錄透過 VPS 上的 Hermes Agent 連線並讀取本專案的測試情況，供後續交接與環境確認參考。
+
+- **測試日期**：2026-07-17
+- **連線方式**：透過 LINE Messaging API 連接到架設在 VPS 上的 Hermes Agent（default profile）。
+- **已驗證能力**：
+  - 由 LINE 傳送指令，Hermes 可讀取並解析 `/root/ai-manager` 倉庫結構。
+  - 可列出專案重要檔案（START_HERE.md、PROJECT_MAP.md、docs/ 系列、bin/ 雛形、scripts/ 渲染器等）。
+  - 可讀取 `docs/project-status/current-projects.md` 與 `docs/daily-briefs/` 日報，產出專案狀態摘要與下一步建議。
+- **溝通語言**：測試中以繁體中文回覆（Hermes 已記錄此偏好）。
+- **注意事項**：此為只讀觀測用途，未在本測試中對專案做任何程式碼或文件變更以外的操作；實際開發仍須遵循本檔「What Not to Do Right Now」與各專案的 `do_not_do` 守則。
+
 ## What Not to Do Right Now
 
 - Do not directly start writing UI.
